@@ -15,3 +15,7 @@ module.exports = {
     ],
   },
 };
+
+nextConfig.experiments = { topLevelAwait: true };
+
+module.exports = nextConfig;
