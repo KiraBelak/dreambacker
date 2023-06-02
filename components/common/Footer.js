@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
         </nav>
         <div className="mt-8 flex justify-center space-x-6">
-          <a
+          <Link
             href="https://www.facebook.com/negocioslocalesmexico"
             className="text-gray-400 hover:text-gray-500"
           >
@@ -46,9 +46,9 @@ const Footer = () => {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="https://www.instagram.com/todoenminutos/"
             className="text-gray-400 hover:text-gray-500"
           >
@@ -65,7 +65,7 @@ const Footer = () => {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
         </div>
         <p className="mt-8 text-center text-base text-white">
           &copy; 2023 DreamBacker{" "}
