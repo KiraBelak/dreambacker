@@ -18,15 +18,6 @@ export function ConnectWallet(){
   const {publicKey, setPublicKey} = useContext(WalletContext);
   const router = useRouter();
   const [balance, setBalance] = useState(0);
-  const [receiver, setReceiver] = useState(null);
-  const [amount, setAmount] = useState(null);
-  const [explorerLink, setExplorerLink] = useState(null);
-  const [uploadUrl, setUploadUrl] = useState(null);
-  const [url, setUrl] = useState(null);
-  const [statusText, setStatusText] = useState('');
-
-
-
 
   useEffect(() => {
     let key = window?.localStorage?.getItem("publicKey"); //obtener la key del localstorage
