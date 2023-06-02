@@ -1,6 +1,7 @@
 const { toast, Toaster } = require("react-hot-toast");
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { WalletContext } from "../src/wallet";
 import {
   Connection,
   SystemProgram,
@@ -14,7 +15,7 @@ import {
 const SOLANA_NETWORK ="devnet"
 
 export function ConnectWallet(){
-  const [publicKey, setPublicKey] = useState(null);
+  const {publicKey, setPublicKey} = useContext(WalletContext);
   const router = useRouter();
   const [balance, setBalance] = useState(0);
   const [receiver, setReceiver] = useState(null);
@@ -81,18 +82,6 @@ export function ConnectWallet(){
 
     }
 
-    const handleReceiverChange = (e) => {
-      setReceiver(e.target.value);
-    }
-
-    const handleAmountChange = (e) => {
-      setAmount(e.target.value);
-    }
-
-
-    const handleUrlChange = (e) => {
-      setUrl(e.target.value);
-    }
 
 
    
