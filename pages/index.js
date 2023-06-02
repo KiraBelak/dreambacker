@@ -1,16 +1,15 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import { ConnectWallet } from "../components/connectwallet";
+import MainLayout from "@/components/layouts/MainLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main
+    <MainLayout
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
       <ConnectWallet />
-    </main>
+    </MainLayout>
   );
 }
