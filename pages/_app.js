@@ -1,12 +1,12 @@
-import "../styles/globals.css";
-import MainLayout from "../components/layouts/MainLayout";
+import '@/styles/globals.css'
+import { WalletProvider } from '@/src/wallet'
 
-function MyApp({ Component, pageProps }) {
-  return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
-  );
+export default function App({ Component, pageProps }) {
+  return(
+    <WalletProvider>
+      <Component {...pageProps} />      
+    </WalletProvider>
+  )
 }
 
 export default MyApp;
