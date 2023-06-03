@@ -40,7 +40,7 @@ export function ConnectWallet(props) {
         window.open("https://phantom.app/", "_blank");
       }, 2000);
       return;
-    }
+  }
     //si phantom esta instalado
     let phantom;
     if (provider?.isPhantom) phantom = provider;
@@ -90,8 +90,7 @@ export function ConnectWallet(props) {
   return (
     <>
       <Toaster position="bottom-center" />
-      <div className="flex flex-col h-full">
-        <div className="flex flex-col place-items-center justify-center">
+      
           {publicKey ? (
             <div className="flex flex-col place-items-center justify-center">
               <div
@@ -131,7 +130,7 @@ export function ConnectWallet(props) {
           ) : (
             <button
               type="submit"
-              className="inline-flex py=4 h-8 flex-col items-center  w-52 justify-center bg-purple-500 font-bold text-white"
+              className={"px-4 py-2 rounded-md items-cente bg-purple-500 font-manrope text-white " + props.className}
               onClick={() => {
                 connectWallet();
               }}
@@ -139,8 +138,6 @@ export function ConnectWallet(props) {
               Conectar tu wallet 👻
             </button>
           )}
-        </div>
-      </div>
     </>
   );
 }
