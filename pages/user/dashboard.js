@@ -78,7 +78,7 @@ export default function Example() {
 
         <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
           {features.map((feature) => (
-            <div key={feature.title} className="flex flex-col-reverse">
+            <div key={feature._id} className="flex flex-col-reverse">
               <div className="mt-6">
                 <h3 className="text-sm font-medium text-gray-900">
                   {feature.title}
