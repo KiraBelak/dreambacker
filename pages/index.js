@@ -15,23 +15,20 @@ export default function Home() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
-
   //funcion asincrona para obtener el perfil del usuario
   const getProfile = async (publicKey) => {
-    const wallet = publicKey
+    const wallet = publicKey;
     toast.loading("Cargando perfil...");
     try {
-      const response = await axios.get(
-        `/api/user/${wallet}`
-      );
+      const response = await axios.get(`/api/user/${wallet}`);
       console.log(response.data);
-      if (response.data.profile!=0) {
+      if (response.data.profile != 0) {
         toast.dismiss();
         toast.success("Perfil cargado");
         router.push("/user/dashboard");
       } else {
         toast.dismiss();
-        toast.success("Crea tu perfil")
+        toast.success("Crea tu perfil");
         router.push("/createprofile");
       }
     } catch (error) {
@@ -39,14 +36,11 @@ export default function Home() {
     }
   };
 
-
-
-  useEffect(()=> {
+  useEffect(() => {
     if (publicKey) {
-     getProfile(publicKey);
+      getProfile(publicKey);
     }
   }, [publicKey]);
-  
 
   return (
     <div>
