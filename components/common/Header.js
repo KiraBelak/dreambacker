@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ConnectWallet } from "../connectwallet";
+import { ConnectWallet } from "../ConnectWallet";
 
 const Header = () => {
   return (
@@ -19,12 +19,9 @@ const Header = () => {
               />
             </Link>
             <div className="hidden ml-16 space-x-8 lg:block">
-             <div
-                className="text-base font-medium  text-white hover:text-primary-50"
-              >
+              <div className="text-base font-medium  text-white hover:text-primary-50">
                 {" "}
-                <ConnectWallet />
-                {" "}
+                <ConnectWallet />{" "}
               </div>
             </div>
           </div>
