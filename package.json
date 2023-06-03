@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@solana/web3.js": "^1.77.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "autoprefixer": "10.4.14",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
