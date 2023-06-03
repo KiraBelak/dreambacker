@@ -1,0 +1,36 @@
+{
+    "_id":"unique_id",
+    "user_id":"user_object_id",
+    "title":"title",
+    "description":"description",
+    "main_goal": "0.00005 SOL", 
+    "benefits": [
+        {
+            "type": 1,
+            "nft_prompt": "Frase para generar NFT",
+            "price": 0.001,
+            "perks": [
+                "Bronce jelly time"
+            ]
+        },
+        {
+            "type": 2,
+            "nft_prompt": "Frase para generar NFT",
+            "price": 0.002,
+            "perks": [
+                "Plata jelly time"
+            ]
+        },
+        {
+            "type": 3,
+            "nft_prompt": "Frase para generar NFT",
+            "price": 0.003,
+            "perks": [
+                "Oro jelly time"
+            ]
+        }
+    ],
+    "deadline": "2021-12-31T23:59:59.999Z",
+    "created_at": "2021-12-31T23:59:59.999Z",
+    "updated_at": "2021-12-31T23:59:59.999Z"
+}
