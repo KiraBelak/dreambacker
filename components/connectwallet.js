@@ -10,6 +10,7 @@ import {
   clusterApiUrl,
   SendTransactionError,
 } from "@solana/web3.js";
+import Link from "next/link";
 
 const { toast, Toaster } = require("react-hot-toast");
 
@@ -17,6 +18,7 @@ const SOLANA_NETWORK = "devnet";
 
 export function ConnectWallet() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
   const [balance, setBalance] = useState(0);
@@ -57,7 +59,7 @@ export function ConnectWallet() {
       setPublicKey(null);
       solana.disconnect();
       toast.success("Wallet disconnected 👻");
-      router.reload(window?.location?.pathname);
+      router.push("/");
     }
   };
 
@@ -92,7 +94,12 @@ export function ConnectWallet() {
         <div className="flex flex-col place-items-center justify-center">
           {publicKey ? (
             <div className="flex flex-col place-items-center justify-center">
-              <div className="flex flex-row place-items-center justify-center">
+              <div
+                className="flex flex-row place-items-center justify-center"
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
                 <p className="text-2xl font-bold text-purple-500">
                   Tu wallet: {"  "}
                 </p>
@@ -102,6 +109,24 @@ export function ConnectWallet() {
                     publicKey.substring(publicKey.length - 7, publicKey.length)}
                 </p>
               </div>
+              {open ? (
+                <div className="absolute top-10 mt-12 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                  <Link
+                    href="/user/dashboard"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Dashboard
+                  </Link>
+                  <button
+                    onClick={() => {
+                      signOut();
+                    }}
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Desconectar wallet 🥲
+                  </button>
+                </div>
+              ) : null}
             </div>
           ) : (
             <button
