@@ -5,7 +5,8 @@ import MovingGallery from "@/components/MovingGallery";
 import Link from "next/link";
 import { WalletContext } from "../src/wallet";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import axios from "axios";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,11 +14,31 @@ export default function Home() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
+  //funcion asincrona para obtener el perfil del usuario
+  const getProfile = async (publicKey) => {
+    const wallet = publicKey
+    try {
+      const response = await axios.get(
+        `/api/user/${wallet}`
+      );
+      console.log(response.data);
+      if (response.data.profile>0) {
+        router.push("/profile");
+      } else {
+        router.push("/createprofile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  if (publicKey) {
-    console.log("the public",publicKey);
-    router.push("/user/dashboard");
-  }
+
+
+  useEffect(()=> {
+    if (publicKey) {
+     getProfile(publicKey);
+    }
+  }, [publicKey]);
   
 
 
