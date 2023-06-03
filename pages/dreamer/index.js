@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {WalletContext} from '../../context/WalletContext';
+import {WalletContext} from '../../src/wallet';
 
 
 
