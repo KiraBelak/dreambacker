@@ -40,7 +40,7 @@ export function ConnectWallet(props) {
         window.open("https://phantom.app/", "_blank");
       }, 2000);
       return;
-    }
+  }
     //si phantom esta instalado
     let phantom;
     if (provider?.isPhantom) phantom = provider;
