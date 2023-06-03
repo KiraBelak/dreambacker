@@ -28,9 +28,12 @@ export default async function handler(req, res) {
                 const {dream} = query;
                 const newDream = { 
                     user_id: body.user_id, //id del objeto del usuario
-                    title: body.nickname, // nombre del proyecto
+                    title: body.title, // nombre del proyecto
+                    thumbnail: body.thumbnail, // imagen del proyecto
                     description: body.description, //descripcion del proyecto
                     main_goal: body.main_goal, //meta de soles del proyecto
+                    collected: 0, // soles recaudados
+                    wallet: body.wallet, // direccion de la billetera
                     benefits: body.benefits, // beneficios del proyecto
                     deadline: body.deadline, // fecha limite del proyecto                    
                     created_at: date, // fecha de creacion del proyecto

@@ -3,7 +3,9 @@
     "user_id":"user_object_id",
     "title":"title",
     "description":"description",
-    "main_goal": "0.00005 SOL", 
+    "main_goal": 0.00005, 
+    "collected": 0.00001,
+    "wallet": "wallet_address",
     "thumbnail": "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
     "benefits": [
         {
