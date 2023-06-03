@@ -10,11 +10,15 @@ export default async function handler(req, res) {
     switch (method) {
         case "GET":
             // Retrieve the dream's information with it's id
-            {
-                // res.status(200).json({ message: "GET" });
+            {   
                 const {user_id} = query;
-                const result = await dreams.find({user_id:user_id}).toArray();
-                res.status(200).json({ dreams: result });
+                if(user_id == undefined){
+                    const result = await dreams.find().toArray();
+                    res.status(200).json({ dreams: result });
+                }else{
+                    const result = await dreams.find({user_id:user_id}).toArray();
+                    res.status(200).json({ dreams: result });
+                }
             }
             break;       
     }
