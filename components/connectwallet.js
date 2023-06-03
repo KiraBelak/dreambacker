@@ -16,7 +16,7 @@ const { toast, Toaster } = require("react-hot-toast");
 
 const SOLANA_NETWORK = "devnet";
 
-export function ConnectWallet() {
+export function ConnectWallet(props) {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const [open, setOpen] = useState(false);
 
@@ -90,7 +90,7 @@ export function ConnectWallet() {
   return (
     <>
       <Toaster position="bottom-center" />
-      <div className="flex flex-col h-full bg-white">
+      <div className="flex flex-col h-full">
         <div className="flex flex-col place-items-center justify-center">
           {publicKey ? (
             <div className="flex flex-col place-items-center justify-center">
