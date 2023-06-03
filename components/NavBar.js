@@ -1,19 +1,39 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
-
+import { WalletContext } from "../src/wallet";
+import { ConnectWallet } from "./ConnectWallet";
+import { useRouter } from "next/router";
+import { toast,Toaster } from "react-hot-toast";
+import {IoIosPerson} from "react-icons/io";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+  const { publicKey, setPublicKey } = useContext(WalletContext);
+  const router = useRouter();
+
+  const signOut = () => {
+    if (window) {
+      const { solana } = window;
+      window.localStorage.removeItem("publicKey");
+      setPublicKey(null);
+      solana.disconnect();
+      toast.success("Wallet disconnected 👻");
+      router.push("/");
+    }
+  };
+
   return (
     <Disclosure as="nav" className="bg-black shadow">
       {({ open }) => (
         <>
+              <Toaster position="bottom-center" reverseOrder={false} />
+
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex">
@@ -92,13 +112,14 @@ export default function Example() {
                     <div>
                       <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <IoIosPerson className="h-8 w-8 rounded-full text-black" />
+                        {/* <img
                           className="h-8 w-8 rounded-full"
                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                           alt=""
                           width={40}
                           height={40}
-                        />
+                        /> */}
                       </Menu.Button>
                     </div>
                     <Transition
@@ -113,41 +134,39 @@ export default function Example() {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link href="/user/dashboard"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Perfil{" "}
-                            </a>
+                              Dashboard{" "}
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link href="/projects"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Configuración
-                            </a>
+                              Proyecto
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <p
+                              onClick={() => signOut()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Sign out
-                            </a>
+                              Salir 👻 
+                            </p>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -157,6 +176,9 @@ export default function Example() {
               </div>
             </div>
           </div>
+          <div className="hidden">
+          <ConnectWallet/>
+        </div>
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 pb-3 pt-2">
