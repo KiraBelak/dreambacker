@@ -11,19 +11,20 @@ export default async function handler(req, res) {
         case "GET":
             // Retrieve the user's profile with their wallet address
             {
-                const {id} = query;
-                return res.status(200).json({ id: id });
-                const profile = await users.find({address:id}).toArray();
+                const {wallet} = query;                
+                const profile = await users.find({wallet:wallet}).toArray();
                 res.status(200).json({ profile: profile });
             }
             break;
         case "POST":
             // Create a new profile
             {
+                // console.log(body);
+                // console.log(query);
                 const date = new Date();
-                const {id} = query;
+                const {wallet} = query;
                 const newProfile = { 
-                    address: id,
+                    wallet: wallet,
                     nickname: body.nickname,                
                     created_at: date,
                     updated_at: date,
@@ -36,13 +37,13 @@ export default async function handler(req, res) {
         case "PUT":
             // Update the user's profile
             {
-                const {id} = query;
+                const {wallet} = query;
                 const updatedProfile = {
                     nickname: body.nickname,
                     updated_at: new Date(),
                 }
 
-                const result = await users.updateOne({address:id}, {$set: updatedProfile});
+                const result = await users.updateOne({wallet:wallet}, {$set: updatedProfile});
 
                 res.status(201).json({message:"Profile updated", profile: updatedProfile});
             }
