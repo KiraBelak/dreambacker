@@ -12,6 +12,7 @@ export default async function handler(req, res) {
             // Retrieve the user's profile with their wallet address
             {
                 const {id} = query;
+                return res.status(200).json({ id: id });
                 const profile = await users.find({address:id}).toArray();
                 res.status(200).json({ profile: profile });
             }
