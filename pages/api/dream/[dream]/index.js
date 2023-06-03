@@ -22,15 +22,14 @@ export default async function handler(req, res) {
                 const date = new Date();
                 const {dream} = query;
                 const newDream = { 
-                    id: dream,
-                    user_id: body.user_id,
-                    title: body.nickname,
-                    description: body.description,
-                    main_goal: body.main_goal,
-                    goals: body.goals,
-                    deadline: body.deadline,
-                    created_at: date,
-                    updated_at: date,
+                    user_id: body.user_id, //id del objeto del usuario
+                    title: body.nickname, // nombre del proyecto
+                    description: body.description, //descripcion del proyecto
+                    main_goal: body.main_goal, //meta de soles del proyecto
+                    benefits: body.benefits, // beneficios del proyecto
+                    deadline: body.deadline, // fecha limite del proyecto
+                    created_at: date, // fecha de creacion del proyecto
+                    updated_at: date, // fecha de actualizacion del proyecto
                 }
     
                 const result = await dreams.insertOne(newDream);
@@ -46,7 +45,7 @@ export default async function handler(req, res) {
                     title: body.nickname,
                     description: body.description,
                     main_goal: body.main_goal,
-                    goals: body.goals,
+                    benefits: body.benefits,
                     deadline: body.deadline,
                     created_at: date,
                     updated_at: date,
