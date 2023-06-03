@@ -15,8 +15,21 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      animation: {
-        "scroll-slow": "scroll 5s linear infinite",
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateY(0%)' },
+          '100%': { transform: 'translateY(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0%)' },
+        },
+      },
+      animation : {
+        'scroll-slow-90': 'scroll 90s linear infinite',
+        'scroll-slow-80': 'scroll 80s linear infinite',
+        'scroll-slow-50': 'scroll 50s linear infinite',
+        'marquee-infinite' : 'marquee 100s linear infinite',
       },
     },
   },
