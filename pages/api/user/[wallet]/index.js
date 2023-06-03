@@ -19,6 +19,8 @@ export default async function handler(req, res) {
         case "POST":
             // Create a new profile
             {
+                // console.log(body);
+                // console.log(query);
                 const date = new Date();
                 const {wallet} = query;
                 const newProfile = { 
