@@ -33,8 +33,8 @@ const MovingGallery = () => {
               <Image
                 src={project.image}
                 alt={project.title}
-                width={300}
-                height={200}
+                width={200}
+                height={100}
               />
             </div>
             <div className="content">
@@ -56,8 +56,8 @@ const MovingGallery = () => {
               <Image
                 src={project.image}
                 alt={project.title}
-                width={300}
-                height={200}
+                width={200}
+                height={100}
               />
             </div>
             <div className="content">
