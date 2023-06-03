@@ -10,6 +10,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Bars3Icon, MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import Image from "next/image";
 
 const navigation = [
   { name: "Projects", href: "#", icon: FolderIcon, current: false },
