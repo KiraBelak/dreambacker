@@ -14,15 +14,17 @@ export default async function handler(req, res) {
                 const {user_id, wallet} = query;
                 if(user_id == undefined && wallet == undefined){
                     const result = await dreams.find().toArray();
+                    res.status(200).json({ dreams: result });
                 }
                 if(wallet){
                     const result = await dreams.find({wallet:wallet}).toArray();
+                    res.status(200).json({ dreams: result });
                 }
                 if(user_id){
                     const result = await dreams.find({user_id:user_id}).toArray();
+                    res.status(200).json({ dreams: result });
                 }
                     
-                res.status(200).json({ dreams: result });
                 
                 
             }
@@ -47,7 +49,7 @@ export default async function handler(req, res) {
                 }
     
                 const result = await dreams.insertOne(newDream);
-                res.status(201).json({message:"Dream created", profile: result.ops});
+                res.status(201).json({message:"Dream created", profile: result});
             }            
             break;
     }
