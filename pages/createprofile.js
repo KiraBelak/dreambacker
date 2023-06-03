@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { ConnectWallet } from '@/components/connectwallet';
+import { ConnectWallet } from '@/components/ConnectWallet';
 import { WalletContext } from '@/src/wallet';
 import { Toaster, toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
