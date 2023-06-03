@@ -13,32 +13,33 @@ export default function Home() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
+
   if (publicKey) {
-    console.log("the public", publicKey);
+    console.log("the public",publicKey);
     router.push("/dreamer");
   }
+  
 
   return (
     <div>
       <MainLayout>
         <div className="page-container">
           <div className="hero-section">
-            <div className="mx-auto max-w-2xl lg:mx-0">
+            <div className="mx-auto flex flex-col max-w-2xl lg:mx-0">
               <h1 className="mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
                 One liner
               </h1>
               <p className="mt-6 text-lg leading-8 text-indigo-600"> Frase. </p>
-
+              <div className="mt-10 ml-5 flex justify-center items-center content-center">
+              <div href="/" className="mr-10">
+                <ConnectWallet className=''/>
+              </div>
               <Link href="/" className="">
-                <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-2xl  w-full text-center">
-                  Conectar Wallet?
+                <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-xl  w-full text-center">
+                  Explorar
                 </button>
               </Link>
-              <Link href="/" className="">
-                <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-2xl  w-full text-center">
-                  Conectar Wallet?
-                </button>
-              </Link>
+              </div>
             </div>
           </div>
           <div className="moving-gallery-container">
