@@ -26,9 +26,11 @@ export default async function handler(req, res) {
             {
                 const date = new Date();
                 const {dream} = query;
+                // console.log(body);
                 const newDream = { 
                     user_id: body.user_id, //id del objeto del usuario
-                    title: body.nickname, // nombre del proyecto
+                    title: body.title, // nombre del proyecto
+                    thumbnail: body.thum, // imagen del proyecto
                     description: body.description, //descripcion del proyecto
                     main_goal: body.main_goal, //meta de soles del proyecto
                     benefits: body.benefits, // beneficios del proyecto
@@ -38,7 +40,8 @@ export default async function handler(req, res) {
                 }
     
                 const result = await dreams.insertOne(newDream);
-                res.status(201).json({message:"Dream created", profile: result.ops});
+                // console.log("resu",result);
+                res.status(201).json({message:"Dream created", res: result});
             }            
             break;
     }

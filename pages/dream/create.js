@@ -2,19 +2,125 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/common/Footer";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { WalletContext } from "@/src/wallet";
+import { useStorageUpload } from "@thirdweb-dev/react";
+import { set } from "react-hook-form";
+import { Toaster, toast } from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/router";
+
 
 export default function Example() {
   const {publicKey} = useContext(WalletContext);
+  const [user, setUser] = useState({}); //user data
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [main_goal, setMainGoal] = useState("");
+  const [deadline, setDeadline] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+  const [bronze, setBronze] = useState("");
+  const [silver, setSilver] = useState("");
+  const [gold, setGold] = useState("");
+  const [files, setFile] = useState(null);
+  const router = useRouter();
+
+  
+  const {mutateAsync:upload} = useStorageUpload();
+
+  const uploadToIpfs = async (file) => {
+    toast.loading("Subiendo imagen a IPFS");
+    console.log("file", file);
+    const uploadUrl= await upload({
+      data: [file],
+      options:{
+        uploadWithGatewayUrl:true,
+        uploadWithoutDirectory:true,
+      }
+    });
+    toast.dismiss();
+    toast.success("Imagen subida a IPFS");
+    console.log(uploadUrl);
+    return uploadUrl[0];
+  }
+  const getProfile = async (publicKey) => {
+    const wallet = publicKey;
+    toast.loading("Cargando perfil...");
+    try {
+      const response = await axios.get(`/api/user/${wallet}`);
+      console.log(response.data);
+      if (response.data.profile != 0) {
+        toast.dismiss();
+        toast.success("Perfil cargado");
+        console.log(response.data.profile);
+        setUser(response.data.profile);
+        
+        
+      } else {
+        toast.dismiss();
+        toast.success("Crea tu perfil");
+        router.push("/createprofile");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(()=> {
+    if (publicKey && !(user == null || user == {})) {
+      getProfile(publicKey);
+    }
+  }, [publicKey]);
+
+ //funcion para manejar el envio del formulario
+  const handleSubmit = async (e, file) => {
+    e.preventDefault();
+    const wallet =  publicKey;
+    const benefits = {
+      bronze,
+      silver,
+      gold,
+    };
+    toast.loading("Convirtiendo URL a Blob...");
+        await fetch(thumbnail)
+        .then((res) => res.blob())
+        .then((myblob) => {
+           myblob.name = "blob.png";
+           file = new File([myblob], "image.png", {type: myblob.type,});
+        });
+        toast.dismiss();
+        const uploadUrl = await uploadToIpfs(file);
+        console.log(uploadUrl);
+        const thum = uploadUrl;
+        const user_id = user._id;
+
+        console.log("user_id", user);
+    const data = {
+      title,
+      description,
+      user_id,
+      main_goal,
+      wallet,
+      benefits,
+      deadline,
+      thum,
+    };
+    console.log(data);
+    try {
+      const response = await axios.post("/api/dream", data);
+      console.log(response.data);
+      toast.success("Proyecto creado");
+      router.push("/user/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   return (
     <div>
       <NavBar />
+      <Toaster position="bottom-center" />
         <form>
           <div className="space-y-12 m-6">
             <div className="border-b border-white/10 pb-12">
@@ -38,9 +144,11 @@ export default function Example() {
                     <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
                       <input
                         type="text"
-                        name="username"
-                        id="username"
-                        autoComplete="username"
+                        name="title"
+                        id="title"
+                        autoComplete="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                         className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
                         placeholder="Mi Proyecto"
                       />
@@ -57,8 +165,10 @@ export default function Example() {
                   </label>
                   <div className="mt-2">
                     <textarea
-                      id="about"
-                      name="about"
+                      id="description"
+                      name="description"
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                       rows={3}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                       defaultValue={""}
@@ -68,38 +178,63 @@ export default function Example() {
                 </div>
 
                 <div className="col-span-full">
-                  <label
-                    htmlFor="cover-photo"
-                    className="block text-sm font-medium leading-6 text-white"
-                  >
-                    Portada{" "}
-                  </label>
-                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10">
-                    <div className="text-center">
-                      <PhotoIcon
-                        className="mx-auto h-12 w-12 text-white"
-                        aria-hidden="true"
-                      />
-                      <div className="mt-4 flex text-sm leading-6 text-white">
-                        <label
-                          htmlFor="file-upload"
-                          className="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-gray-900 hover:text-indigo-500"
-                        >
-                          <span>Sube un archivo</span>
-                          <input
-                            id="file-upload"
-                            name="file-upload"
-                            type="file"
-                            className="sr-only"
-                          />
-                        </label>
-                        <p className="pl-1">o arrastra y suelta aquí</p>
-                      </div>
-                      <p className="text-xs leading-5 text-white">
-                        PNG, JPG, GIF hasta 10MB
-                      </p>
+                {thumbnail ? (
+                  <div className="flex justify-center">
+                    <img
+                      src={thumbnail}
+                      alt="thumbnail"
+                      className="w-1/2 h-1/2"
+                    />
                     </div>
+                ):(
+                  <>
+                  <label
+                  htmlFor="cover-photo"
+                  className="block text-sm font-medium leading-6 text-white"
+                >
+                  Portada{" "}
+                </label>
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10">
+                  <div className="text-center">
+                    <PhotoIcon
+                      className="mx-auto h-12 w-12 text-white"
+                      aria-hidden="true"
+                    />
+                    <div className="mt-4 flex text-sm leading-6 text-white">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-gray-900 hover:text-indigo-500"
+                      >
+                        <span>Sube un archivo</span>
+                        <input
+                          id="file-upload"
+                          name="file-upload"
+                          type="file"
+                          className="sr-only"
+                          onChange={(e) => {
+                            const file = e.target.files[0];
+                            console.log(file);
+                           //crear blob
+                            const blob = new Blob([file], { type: file.type });
+                            console.log(blob);
+                            //crear url
+                            const url = URL.createObjectURL(blob);
+                            setThumbnail(url);
+                            setFile(blob);
+                          }
+                          }
+                           value={thumbnail}
+                        />
+                      </label>
+                      <p className="pl-1">o arrastra y suelta aquí</p>
+                    </div>
+                    <p className="text-xs leading-5 text-white">
+                      PNG, JPG, GIF hasta 10MB
+                    </p>
                   </div>
+                </div>
+                </>
+                )}
                 </div>
               </div>
             </div>
@@ -119,11 +254,13 @@ export default function Example() {
                   </label>
                   <div className="mt-2">
                     <input
-                      type="text"
-                      name="first-name"
-                      id="first-name"
+                      type="number"
+                      name="meta"
+                      id="meta"
+                      value={main_goal}
+                      onChange={(e) => setMainGoal(e.target.value)}
                       placeholder="En SOL"
-                      autoComplete="given-name"
+                      autoComplete="meta"
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
                   </div>
@@ -161,6 +298,8 @@ export default function Example() {
                     type="date"
                       name="date"
                       id="date"
+                      value={deadline}
+                      onChange={(e) => setDeadline(e.target.value)}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
                     </div>
@@ -172,13 +311,15 @@ export default function Example() {
                     htmlFor="city"
                     className="block text-sm font-medium leading-6 text-white"
                   >
-                    Oro{" "}
+                    Bronce{" "}
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
                       name="city"
                       id="city"
+                      value={bronze}
+                      onChange={(e) => setBronze(e.target.value)}
                       autoComplete="address-level2"
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
@@ -196,6 +337,8 @@ export default function Example() {
                     <input
                       type="text"
                       name="region"
+                      value={silver}
+                      onChange={(e) => setSilver(e.target.value)}
                       id="region"
                       autoComplete="address-level1"
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -208,12 +351,14 @@ export default function Example() {
                     htmlFor="postal-code"
                     className="block text-sm font-medium leading-6 text-white"
                   >
-                    Bronce{" "}
+                    Oro{" "}
                   </label>
                   <div className="mt-2">
                     <input
                       type="text"
                       name="postal-code"
+                      value={gold}
+                      onChange={(e) => setGold(e.target.value)}
                       id="postal-code"
                       autoComplete="postal-code"
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
@@ -366,7 +511,7 @@ export default function Example() {
               Cancelar
             </button>
             <button
-              type="submit"
+             onClick={handleSubmit}
               className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
               Guardar y Publicar
