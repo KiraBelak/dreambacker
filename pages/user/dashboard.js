@@ -1,44 +1,62 @@
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const features = [
-  {
-    name: "Three card types",
-    description:
-      "Today, Next, and Someday cards allow you to defer your dreams into the future.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
-    imageAlt: "Green cardstock box containing white, beige, and brown cards.",
-  },
-  {
-    name: "The perfect mix",
-    description:
-      "Each refill pack contains plenty of cards to last you a month of procrastination.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
-    imageAlt: "Green cardstock box open with 50 cards inside.",
-  },
-  {
-    name: "Dot grid backs",
-    description:
-      "Flip a card over to doodle during meetings when you should be listening.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
-    imageAlt:
-      "Detail of white today card, beige next card, and brown someday card with dot grid.",
-  },
-  {
-    name: "Refill packs",
-    description:
-      "Subscribe and save on routine refill packs to keep you productive all year long.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
-    imageAlt:
-      "Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.",
-  },
-];
+// const features = [
+
+//   {
+//     name: "Three card types",
+//     description:
+//       "Today, Next, and Someday cards allow you to defer your dreams into the future.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+//     imageAlt: "Green cardstock box containing white, beige, and brown cards.",
+//   },
+//   {
+//     name: "The perfect mix",
+//     description:
+//       "Each refill pack contains plenty of cards to last you a month of procrastination.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+//     imageAlt: "Green cardstock box open with 50 cards inside.",
+//   },
+//   {
+//     name: "Dot grid backs",
+//     description:
+//       "Flip a card over to doodle during meetings when you should be listening.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
+//     imageAlt:
+//       "Detail of white today card, beige next card, and brown someday card with dot grid.",
+//   },
+//   {
+//     name: "Refill packs",
+//     description:
+//       "Subscribe and save on routine refill packs to keep you productive all year long.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
+//     imageAlt:
+//       "Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.",
+//   },
+// ];
+
 
 export default function Example() {
+  const [features, setFeatures] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/dream")
+      .then((res) => {
+        setFeatures(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
   return (
     <div className="bg-white">
       <NavBar></NavBar>
@@ -72,6 +90,7 @@ export default function Example() {
                 <Image
                   src={feature.imageSrc}
                   alt={feature.imageAlt}
+                  unoptimized
                   className="object-cover object-center"
                   width={500}
                   height={500}
