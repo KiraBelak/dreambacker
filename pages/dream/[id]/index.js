@@ -290,7 +290,10 @@ export default function Example() {
             dream == null ?
             (
               <div className="flex justify-center items-center h-screen">
-                <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+                <div className="grid grid-cols-1 justify-items-center space-y-4">
+                  <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
+                  <span>Cargando datos del servidor...</span>
+                </div>
               </div>
             ) :
             (
