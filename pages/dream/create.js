@@ -1,10 +1,17 @@
-import MainLayout from "@/components/layouts/MainLayout";
+// import MainLayout from "@/components/layouts/MainLayout";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/common/Footer";
+import { useContext } from "react";
+import { WalletContext } from "@/src/wallet";
 
 export default function Example() {
+  const {publicKey} = useContext(WalletContext);
+
+
   return (
     <div>
-      <MainLayout>
+      <NavBar />
         <form>
           <div className="space-y-12 m-6">
             <div className="border-b border-white/10 pb-12">
@@ -155,6 +162,8 @@ export default function Example() {
                       name="email"
                       type="email"
                       autoComplete="email"
+                      disabled
+                      value={publicKey}
                       className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     />
                   </div>
@@ -255,7 +264,7 @@ export default function Example() {
               </div>
             </div>
 
-            <div className="border-b border-white/10 pb-12 m-4">
+            {/* <div className="border-b border-white/10 pb-12 m-4">
               <h2 className="text-base font-semibold leading-7 text-white">
                 Notifications
               </h2>
@@ -387,7 +396,7 @@ export default function Example() {
                   </div>
                 </fieldset>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="mt-6 mr-6 flex items-center justify-end gap-x-6">
@@ -405,7 +414,7 @@ export default function Example() {
             </button>
           </div>
         </form>
-      </MainLayout>
+        <Footer />
     </div>
   );
 }
