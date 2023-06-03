@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export default async function handler(req, res) {
     const { method, body, query } = req;
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
             // Retrieve the user's profile with their wallet address
             {
                 const {wallet} = query;                
-                const profile = await users.find({wallet:wallet}).toArray();
+                const profile = await users.findOne({wallet:wallet});
                 res.status(200).json({ profile: profile });
             }
             break;
