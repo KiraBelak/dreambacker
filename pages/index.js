@@ -46,26 +46,29 @@ export default function Home() {
     <div>
       <Toaster position="bottom-center" reverseOrder={false} />
       <MainLayout>
-        <div className="page-container">
+        <div className="page-container mx-0 md:mx-60">
           <div className="hero-section">
             <div className="mx-auto flex flex-col max-w-2xl lg:mx-0">
-              <h1 className="mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
-                Dream-Backer
+              <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
+                ¿quieres ayudar a construir sueños de la web3?
               </h1>
-              <p className="mt-6 text-lg leading-8 text-indigo-600"> Frase. </p>
-              <div className="mt-10 ml-5 flex justify-center items-center content-center">
-                <div href="/" className="mr-10">
-                  <ConnectWallet className="" />
+              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600"> 
+                apoya a proyectos de la web3 y gana recompensas, con una simple donación de SOL
+              </p>
+              <div className="flex w-full justify-center items-center">
+                <div className="mt-10 flex justify-between items-center w-2/3">
+                  <div href="/">
+                    <ConnectWallet  />
+                  </div>
+                  <Link href="/" className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope">                  
+                      Explorar                  
+                  </Link>
                 </div>
-                <Link href="/" className="">
-                  <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-xl  w-full text-center">
-                    Explorar
-                  </button>
-                </Link>
+
               </div>
             </div>
           </div>
-          <div className="moving-gallery-container">
+          <div className="h-40 absolute right-6">
             <MovingGallery />
           </div>
         </div>
