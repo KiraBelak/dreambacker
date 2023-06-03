@@ -36,7 +36,7 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
+  useEffect(()=> {
     if (publicKey) {
       getProfile(publicKey);
     }

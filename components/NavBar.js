@@ -74,38 +74,28 @@ export default function Example() {
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 
-                  <a
-                    href="#"
+                  <Link
+                    href="/dream/index"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-indigo-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     Proyectos
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Calendar
-                  </a>
+                  </Link>
+                  
                 </div>
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
-                  <button
+                  <Link
+                    href={"/dream/create"}
                     type="button"
                     className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                     Crear Proyecto{" "}
-                  </button>
+                  </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                  <button
-                    type="button"
-                    className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">Notificaciones</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                 
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -204,13 +194,7 @@ export default function Example() {
               >
                 Projects
               </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 sm:pl-5 sm:pr-6"
-              >
-                Calendar
-              </Disclosure.Button>
+              
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4 sm:px-6">
