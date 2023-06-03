@@ -8,21 +8,22 @@ const Footer = () => {
           <div className="px-5 py-2">
             <Link
               href="/contacto"
-              className="text-base text-white hover:text-white"
+              className="text-base text-white hover:text-white mr-6"
             >
               {" "}
               Contacto{" "}
             </Link>
-          </div>
 
-          <div className="px-2 py-2">
             <Link
               href="/productos"
-              className="text-base text-gray-500 hover:text-gray-900"
+              className="text-base text-white hover:text-gray-900"
             >
               {" "}
-              Productos{" "}
+              FAQs{" "}
             </Link>
+            <p className="text-center text-base text-white">
+              &copy; 2023 DreamBacker{" "}
+            </p>
           </div>
         </nav> */}
         {/* <div className="mt-8  justify-center space-x-6">
