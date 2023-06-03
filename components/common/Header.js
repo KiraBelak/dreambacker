@@ -10,8 +10,8 @@ const Header = () => {
             <Link href="/">
               <span className="sr-only">Workflow</span>
               <Image
-                className="h-10 w-auto"
-                src=""
+                className="h-20 w-auto"
+                src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
                 alt="logo"
                 width={500}
                 height={500}
@@ -23,31 +23,7 @@ const Header = () => {
                 className="text-base font-medium text-white hover:text-primary-50"
               >
                 {" "}
-                Productos{" "}
-              </Link>
-
-              <Link
-                href="/acercade"
-                className="text-base font-medium text-white hover:text-primary-50"
-              >
-                {" "}
-                ¿Quiénes Somos?{" "}
-              </Link>
-
-              <Link
-                href="soyproductor"
-                className="text-base font-medium text-white hover:text-primary-50"
-              >
-                {" "}
-                Soy Productor{" "}
-              </Link>
-
-              <Link
-                href="/carrito"
-                className="text-base font-medium text-white hover:text-primary-50"
-              >
-                {" "}
-                Carrito{" "}
+                Aquí qué{" "}
               </Link>
             </div>
           </div>
@@ -58,31 +34,7 @@ const Header = () => {
             className="text-base font-medium text-white hover:text-primary-50"
           >
             {" "}
-            Productos{" "}
-          </Link>
-
-          <Link
-            href="/acercade"
-            className="text-base font-medium text-white hover:text-primary-50"
-          >
-            {" "}
-            Acerca de{" "}
-          </Link>
-
-          <Link
-            href="/soyproductor"
-            className="text-base font-medium text-white hover:text-primary-50"
-          >
-            {" "}
-            Soy Productor{" "}
-          </Link>
-
-          <Link
-            href="/carrito"
-            className="text-base font-medium text-white hover:text-primary-50"
-          >
-            {" "}
-            Carrito{" "}
+            Aquí qué{" "}
           </Link>
         </div>
       </nav>

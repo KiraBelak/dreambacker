@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import { ConnectWallet } from "../components/connectwallet";
+import MainLayout from "@/components/layouts/MainLayout";
+import MovingGallery from "@/components/MovingGallery";
 
 
 
@@ -10,16 +10,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <ConnectWallet />
-    
-    <Link href="/demo" className="inline-flex py=4 h-8 flex-col items-center  w-52 justify-center bg-purple-500 font-bold text-white">
-      
-        Demo
-    </Link>
-
-    </main>
+    <div>
+      <MainLayout>
+        <ConnectWallet />
+        <div>
+          <MovingGallery />
+        </div>
+      </MainLayout>
+    </div>
+  
   );
 }
