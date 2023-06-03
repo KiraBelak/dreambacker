@@ -37,21 +37,27 @@ export default async function handler(req, res) {
                 res.status(201).json({message:"Dream created", profile: result.ops});
             }            
             break;
-        // case "PUT":
-        //     // Actualizar el perfil del usuario
-        //     {
-        //         const {id} = query;
-        //         const updatedProfile = {
-        //             nickname: body.nickname,
-        //             updated_at: new Date(),
-        //         }
+        case "PUT":
+            // Update the users dream project information
+            {
+                const date = new Date();
+                const {dream} = query;
+                const updatedDream = {
+                    title: body.nickname,
+                    description: body.description,
+                    main_goal: body.main_goal,
+                    goals: body.goals,
+                    deadline: body.deadline,
+                    created_at: date,
+                    updated_at: date,
+                }
 
-        //         const result = await users.updateOne({address:id}, {$set: updatedProfile});
+                const result = await dreams.updateOne({id:dream}, {$set: updatedDream});
 
-        //         res.status(201).json({message:"Perfil actualizado", profile: updatedProfile});
-        //     }
+                res.status(201).json({message:"Dream updated", dream: result});
+            }
 
-        //     break;
+            break;
     }
     client.close();
 }
