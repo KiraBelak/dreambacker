@@ -1,5 +1,4 @@
 import { MongoClient } from "mongodb";
-import BreadCrumbJsonLd from "next-seo/lib/jsonld/breadcrumb";
 
 export default async function handler(req, res) {
     const { method, body, query } = req;
