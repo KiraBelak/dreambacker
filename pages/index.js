@@ -13,10 +13,35 @@ export default function Home() {
     <div>
       <MainLayout>
         <ConnectWallet />
-        <div>
-          <MovingGallery />
+        <div className="page-container">
+          <div className="hero-section">
+            {/* Your hero section content goes here */}
+            <h1>Bienvenido a mi sitio!</h1>
+            <p>Aquí va la info.</p>
+          </div>
+          <div className="moving-gallery-container">
+            <MovingGallery />
+          </div>
         </div>
       </MainLayout>
+
+      <style jsx>{`
+        .page-container {
+          display: flex;
+        }
+
+        .hero-section {
+          flex: 1;
+          padding: 20px;
+        }
+
+        .moving-gallery-container {
+          flex: 1;
+          display: flex;
+          justify-content: flex-end;
+          padding: 20px;
+        }
+      `}</style>
     </div>
   
   );
