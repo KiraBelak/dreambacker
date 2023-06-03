@@ -13,8 +13,8 @@ export default function Home() {
         <div className="page-container">
           <div className="hero-section">
             {/* Your hero section content goes here */}
-            <h1>Welcome to my website!</h1>
-            <p>This is the hero section content.</p>
+            <h1>Bienvenido a mi sitio!</h1>
+            <p>Aquí va la info.</p>
           </div>
           <div className="moving-gallery-container">
             <MovingGallery />
