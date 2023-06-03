@@ -333,7 +333,7 @@ export default function Example() {
                               className="group relative text-sm"
                             >
                               <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                <Image
+                                <img
                                   src={item.imageSrc}
                                   alt={item.imageAlt}
                                   className="object-cover object-center"
@@ -420,7 +420,7 @@ export default function Example() {
 
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="#" className="-m-2 flex items-center p-2">
-                    <Image
+                    <img
                       src="https://tailwindui.com/img/flags/flag-canada.svg"
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
@@ -461,7 +461,7 @@ export default function Example() {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <Image
+                  <img
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                     alt=""
@@ -515,7 +515,7 @@ export default function Example() {
                                           className="group relative text-base sm:text-sm"
                                         >
                                           <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
-                                            <Image
+                                            <img
                                               src={item.imageSrc}
                                               alt={item.imageAlt}
                                               className="object-cover object-center"
@@ -615,7 +615,7 @@ export default function Example() {
                     href="#"
                     className="flex items-center text-gray-700 hover:text-gray-800"
                   >
-                    <Image
+                    <img
                       src="https://tailwindui.com/img/flags/flag-canada.svg"
                       alt=""
                       className="block h-auto w-5 flex-shrink-0"
@@ -661,7 +661,7 @@ export default function Example() {
           {/* Product image */}
           <div className="lg:col-span-4 lg:row-end-1">
             <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
-              <Image
+              <img
                 src={product.imageSrc}
                 alt={product.imageAlt}
                 className="object-cover object-center"
@@ -865,7 +865,7 @@ export default function Example() {
                       className="flex space-x-4 text-sm text-gray-500"
                     >
                       <div className="flex-none py-10">
-                        <Image
+                        <img
                           src={review.avatarSrc}
                           alt=""
                           className="h-10 w-10 rounded-full bg-gray-100"
@@ -959,7 +959,7 @@ export default function Example() {
             {relatedProducts.map((product) => (
               <div key={product.id} className="group relative">
                 <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
-                  <Image
+                  <img
                     src={product.imageSrc}
                     alt={product.imageAlt}
                     className="object-cover object-center"
@@ -997,7 +997,7 @@ export default function Example() {
           <div className="grid grid-cols-1 py-20 md:grid-flow-col md:auto-rows-min md:grid-cols-12 md:gap-x-8 md:gap-y-16">
             {/* Image section */}
             <div className="col-span-1 md:col-span-2 lg:col-start-1 lg:row-start-1">
-              <Image
+              <img
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt=""
                 className="h-8 w-auto"
