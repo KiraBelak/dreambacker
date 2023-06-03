@@ -4,8 +4,8 @@ export const WalletContext = createContext();
 
 export const WalletProvider = ({ children }) => {
     const [publicKey, setPublicKey] = useState(null);
-    console.log("desde context");
-    console.log("wallet", publicKey);
+    // console.log("desde context");
+    // console.log("wallet", publicKey);
     
     return (
         <WalletContext.Provider value={{ publicKey, setPublicKey }}>
