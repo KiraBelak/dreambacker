@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import BreadCrumbJsonLd from "next-seo/lib/jsonld/breadcrumb";
 
 export default async function handler(req, res) {
     const { method, body, query } = req;
@@ -7,7 +8,20 @@ export default async function handler(req, res) {
     const db = client.db();
     const dreams = db.collection("dreams");
     
-    switch (method) {  
+    switch (method) {
+        case "GET":
+            // Retrieve the dream's information with it's id
+            {   
+                const {user_id} = query;
+                if(user_id == undefined){
+                    const result = await dreams.find().toArray();
+                    res.status(200).json({ dreams: result });
+                }else{
+                    const result = await dreams.find({user_id:user_id}).toArray();
+                    res.status(200).json({ dreams: result });
+                }
+            }
+            break; 
         case "POST":
             // Create a new dream project
             {
