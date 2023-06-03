@@ -1,51 +1,70 @@
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const features = [
-  {
-    name: "Three card types",
-    description:
-      "Today, Next, and Someday cards allow you to defer your dreams into the future.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
-    imageAlt: "Green cardstock box containing white, beige, and brown cards.",
-  },
-  {
-    name: "The perfect mix",
-    description:
-      "Each refill pack contains plenty of cards to last you a month of procrastination.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
-    imageAlt: "Green cardstock box open with 50 cards inside.",
-  },
-  {
-    name: "Dot grid backs",
-    description:
-      "Flip a card over to doodle during meetings when you should be listening.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
-    imageAlt:
-      "Detail of white today card, beige next card, and brown someday card with dot grid.",
-  },
-  {
-    name: "Refill packs",
-    description:
-      "Subscribe and save on routine refill packs to keep you productive all year long.",
-    imageSrc:
-      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
-    imageAlt:
-      "Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.",
-  },
-];
+// const features = [
+
+//   {
+//     name: "Three card types",
+//     description:
+//       "Today, Next, and Someday cards allow you to defer your dreams into the future.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+//     imageAlt: "Green cardstock box containing white, beige, and brown cards.",
+//   },
+//   {
+//     name: "The perfect mix",
+//     description:
+//       "Each refill pack contains plenty of cards to last you a month of procrastination.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+//     imageAlt: "Green cardstock box open with 50 cards inside.",
+//   },
+//   {
+//     name: "Dot grid backs",
+//     description:
+//       "Flip a card over to doodle during meetings when you should be listening.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
+//     imageAlt:
+//       "Detail of white today card, beige next card, and brown someday card with dot grid.",
+//   },
+//   {
+//     name: "Refill packs",
+//     description:
+//       "Subscribe and save on routine refill packs to keep you productive all year long.",
+//     imageSrc:
+//       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/3_vqya96.png",
+//     imageAlt:
+//       "Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.",
+//   },
+// ];
+
 
 export default function Example() {
+  const [features, setFeatures] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/dream")
+      .then((res) => {
+        console.log(res.data.dreams);
+        setFeatures(res.data.dreams);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+
   return (
     <div className="bg-white">
       <NavBar></NavBar>
       <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
         <div className="max-w-3xl">
           <h2 id="features-heading" className="font-medium text-gray-500">
-            Focus
+            Dr.B
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Simple productivity
@@ -59,10 +78,10 @@ export default function Example() {
 
         <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
           {features.map((feature) => (
-            <div key={feature.name} className="flex flex-col-reverse">
+            <div key={feature._id} className="flex flex-col-reverse">
               <div className="mt-6">
                 <h3 className="text-sm font-medium text-gray-900">
-                  {feature.name}
+                  {feature.title}
                 </h3>
                 <p className="mt-2 text-sm text-gray-500">
                   {feature.description}
@@ -70,8 +89,9 @@ export default function Example() {
               </div>
               <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                 <Image
-                  src={feature.imageSrc}
-                  alt={feature.imageAlt}
+                  src={feature.thumbnail}
+                  alt={feature.title}
+                  unoptimized
                   className="object-cover object-center"
                   width={500}
                   height={500}
