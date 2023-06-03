@@ -49,7 +49,8 @@ export default function Example() {
     axios
       .get("/api/dream")
       .then((res) => {
-        setFeatures(res.data);
+        console.log(res.data.dreams);
+        setFeatures(res.data.dreams);
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +64,7 @@ export default function Example() {
       <div className="mx-auto max-w-2xl px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
         <div className="max-w-3xl">
           <h2 id="features-heading" className="font-medium text-gray-500">
-            Focus
+            Dr.B
           </h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Simple productivity
@@ -77,10 +78,10 @@ export default function Example() {
 
         <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
           {features.map((feature) => (
-            <div key={feature.name} className="flex flex-col-reverse">
+            <div key={feature.title} className="flex flex-col-reverse">
               <div className="mt-6">
                 <h3 className="text-sm font-medium text-gray-900">
-                  {feature.name}
+                  {feature.title}
                 </h3>
                 <p className="mt-2 text-sm text-gray-500">
                   {feature.description}
@@ -88,8 +89,8 @@ export default function Example() {
               </div>
               <div className="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                 <Image
-                  src={feature.imageSrc}
-                  alt={feature.imageAlt}
+                  src={feature.thumbnail}
+                  alt={feature.title}
                   unoptimized
                   className="object-cover object-center"
                   width={500}
