@@ -1,5 +1,4 @@
 //switch for attendees
-import classNames from "classnames";
 import { Switch } from "@headlessui/react";
 
 const SwitchComponent = ({

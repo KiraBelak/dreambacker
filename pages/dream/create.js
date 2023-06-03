@@ -6,7 +6,7 @@ import { Input, TextArea } from "@/components/forms/fields";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
 
-const ChayanneFormPage = () => {
+const CreateFormPage = () => {
   const {
     register,
     handleSubmit,
@@ -21,7 +21,7 @@ const ChayanneFormPage = () => {
     try {
       const response = await axios.post("/api/chayannehello", data);
       toast.success("Todo OK");
-      router.push("/chayannegracias");
+      router.push("/");
     } catch (error) {
       toast.error("Ocurrió un error mandando tu información");
     }
@@ -29,7 +29,7 @@ const ChayanneFormPage = () => {
   };
 
   return (
-    <div className="ml-3 mr-3 pt-20 w-full flex justify-center  min-h-screen bg-pink-200">
+    <div className="ml-3 mr-3 pt-20 w-full flex justify-center  min-h-screen bg-black">
       <Toaster position="top-center" reverseOrder={false} />
       <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm">
         <div className="ml-3 mr-6">
@@ -84,4 +84,4 @@ const ChayanneFormPage = () => {
   );
 };
 
-export default ChayanneFormPage;
+export default CreateFormPage;

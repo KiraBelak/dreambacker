@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import MainLayout from "@/components/layouts/MainLayout";
 import MovingGallery from "@/components/MovingGallery";
-
+import { ConnectWallet } from "@/components/ConnectWallet";
 import Link from "next/link";
 import { WalletContext } from "../src/wallet";
 import { useRouter } from "next/router";
@@ -13,12 +13,10 @@ export default function Home() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
-
   if (publicKey) {
-    console.log("the public",publicKey);
+    console.log("the public", publicKey);
     router.push("/dreamer");
   }
-  
 
   return (
     <div>
@@ -31,14 +29,14 @@ export default function Home() {
               </h1>
               <p className="mt-6 text-lg leading-8 text-indigo-600"> Frase. </p>
               <div className="mt-10 ml-5 flex justify-center items-center content-center">
-              <div href="/" className="mr-10">
-                <ConnectWallet className=''/>
-              </div>
-              <Link href="/" className="">
-                <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-xl  w-full text-center">
-                  Explorar
-                </button>
-              </Link>
+                <div href="/" className="mr-10">
+                  <ConnectWallet className="" />
+                </div>
+                <Link href="/" className="">
+                  <button className="px-2 py-1 mt-4 bg-indigo-600 text-white rounded-md text-xl  w-full text-center">
+                    Explorar
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
