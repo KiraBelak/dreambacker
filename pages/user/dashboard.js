@@ -31,8 +31,11 @@ export default function Example() {
           dreams.length == 0 ? 
           (
             <div className="flex justify-center items-center h-screen">
-              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
-            </div>
+                <div className="grid grid-cols-1 justify-items-center space-y-4">
+                  <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-black"></div>
+                  <span className="text-black">Cargando datos del servidor...</span>
+                </div>
+              </div>
           ) :
           (
             <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">        
