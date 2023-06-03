@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import styles from "../styles/movingGallery.module.css";
 
 const projects = [
   {
@@ -42,8 +43,8 @@ const projects = [
 
 const MovingGallery = () => {
   return (
-    <div className="moving-gallery">
-      <div className="column moving-down">
+    <div className={styles["moving-gallery"]}>
+      <div className={`${styles.column} ${styles["moving-down"]}`}>
         {projects.map((project, index) => (
           <div
             key={project.id}
@@ -66,7 +67,7 @@ const MovingGallery = () => {
         ))}
       </div>
 
-      <div className="column moving-up">
+      <div className={`${styles.column} ${styles["moving-up"]}`}>
         {projects.map((project, index) => (
           <div
             key={project.id}
@@ -88,73 +89,6 @@ const MovingGallery = () => {
           </div>
         ))}
       </div>
-
-      <style jsx>{`
-        .moving-gallery {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .column {
-          display: flex;
-          flex-direction: column;
-          flex: 1;
-          align-items: center;
-          gap: 20px;
-          overflow: hidden;
-        }
-
-        .moving-down {
-          flex-direction: column;
-          animation: moveDown 5s infinite;
-        }
-
-        .moving-up {
-          flex-direction: column-reverse;
-          animation: moveUp 5s infinite;
-        }
-
-        @keyframes moveDown {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes moveUp {
-          0% {
-            transform: translateY(100%);
-          }
-          100% {
-            transform: translateY(0);
-          }
-        }
-
-        .project-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          opacity: 0;
-          animation: fadeIn 1s ease-in-out forwards;
-        }
-
-        @keyframes fadeIn {
-          0% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-
-        .image-container {
-          width: 300px;
-          height: 200px;
-        }
-      `}</style>
     </div>
   );
 };

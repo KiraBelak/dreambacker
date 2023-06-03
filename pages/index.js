@@ -52,45 +52,32 @@ export default function Home() {
               <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
                 ¿quieres ayudar a construir sueños de la web3?
               </h1>
-              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600"> 
-                apoya a proyectos de la web3 y gana recompensas, con una simple donación de SOL
+              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600">
+                apoya a proyectos de la web3 y gana recompensas, con una simple
+                donación de SOL
               </p>
               <div className="flex w-full justify-center items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
                   <div href="/">
-                    <ConnectWallet  />
+                    <ConnectWallet />
                   </div>
-                  <Link href="/" className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope">                  
-                      Explorar                  
+                  <Link
+                    href="/"
+                    className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope"
+                  >
+                    Explorar
                   </Link>
                 </div>
-
               </div>
             </div>
           </div>
-          <div className="h-40 absolute right-6">
-            <MovingGallery />
-          </div>
         </div>
       </MainLayout>
-
-      <style jsx>{`
-        .page-container {
-          display: flex;
-        }
-
-        .hero-section {
-          flex: 1;
-          padding: 20px;
-        }
-
-        .moving-gallery-container {
-          flex: 1;
-          display: flex;
-          justify-content: flex-end;
-          padding: 20px;
-        }
-      `}</style>
+      <div className="moving-gallery-container">
+        <div className="moving-gallery-content">
+          <MovingGallery />
+        </div>
+      </div>
     </div>
   );
 }
