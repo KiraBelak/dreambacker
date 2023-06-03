@@ -10,7 +10,7 @@ const Header = () => {
             <Link href="/">
               <span className="sr-only">Workflow</span>
               <Image
-                className="h-20 mr-96 w-auto"
+                className="h-20 w-auto"
                 src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
                 alt="logo"
                 width={500}
