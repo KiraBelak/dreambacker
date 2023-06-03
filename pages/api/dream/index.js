@@ -11,14 +11,20 @@ export default async function handler(req, res) {
         case "GET":
             // Retrieve the dream's information with it's id
             {   
-                const {user_id} = query;
-                if(user_id == undefined){
+                const {user_id, wallet} = query;
+                if(user_id == undefined && wallet == undefined){
                     const result = await dreams.find().toArray();
-                    res.status(200).json({ dreams: result });
-                }else{
-                    const result = await dreams.find({user_id:user_id}).toArray();
-                    res.status(200).json({ dreams: result });
                 }
+                if(wallet){
+                    const result = await dreams.find({wallet:wallet}).toArray();
+                }
+                if(user_id){
+                    const result = await dreams.find({user_id:user_id}).toArray();
+                }
+                    
+                res.status(200).json({ dreams: result });
+                
+                
             }
             break; 
         case "POST":
@@ -33,6 +39,8 @@ export default async function handler(req, res) {
                     thumbnail: body.thum, // imagen del proyecto
                     description: body.description, //descripcion del proyecto
                     main_goal: body.main_goal, //meta de soles del proyecto
+                    collected: 0, // soles recaudados
+                    wallet: body.wallet, // direccion de la billetera
                     benefits: body.benefits, // beneficios del proyecto
                     deadline: body.deadline, // fecha limite del proyecto                    
                     created_at: date, // fecha de creacion del proyecto

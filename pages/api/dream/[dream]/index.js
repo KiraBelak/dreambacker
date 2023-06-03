@@ -25,7 +25,7 @@ export default async function handler(req, res) {
                 const updatedDream = {
                     title: body.nickname,
                     description: body.description,
-                    main_goal: body.main_goal,
+                    main_goal: body.main_goal,                    
                     benefits: body.benefits,
                     deadline: body.deadline,
                     nft_prompt: body.nft_prompt, 
