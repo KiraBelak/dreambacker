@@ -16,6 +16,27 @@ const projects = [
     image:
       "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
   },
+  {
+    id: 3,
+    title: "Project 3",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image:
+      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+  },
+  {
+    id: 4,
+    title: "Project 4",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image:
+      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+  },
+  {
+    id: 5,
+    title: "Project 5",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    image:
+      "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1685750833/DreamBacker/2_jl8shc.png",
+  },
   // Add more projects as needed
 ];
 
