@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {WalletContext} from '../../src/wallet';
+import MainLayout from "@/components/layouts/MainLayout";
 
 
 
@@ -12,7 +13,7 @@ export default function Dreamer(){
 
     
     return(
-        <div>
+        <MainLayout>
         {project ? (
             <div>
                 <h1> 
@@ -25,6 +26,6 @@ export default function Dreamer(){
                 <h1>no hay proyecto</h1>
                 </div>
         )}
-        </div>
+        </MainLayout>
     )
 }
