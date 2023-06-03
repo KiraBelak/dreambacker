@@ -28,6 +28,7 @@ export default async function handler(req, res) {
                     main_goal: body.main_goal, //meta de soles del proyecto
                     benefits: body.benefits, // beneficios del proyecto
                     deadline: body.deadline, // fecha limite del proyecto
+                    nft_prompt: body.nft_prompt, // prompt del nft
                     created_at: date, // fecha de creacion del proyecto
                     updated_at: date, // fecha de actualizacion del proyecto
                 }
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
                     main_goal: body.main_goal,
                     benefits: body.benefits,
                     deadline: body.deadline,
+                    nft_prompt: body.nft_prompt, 
                     created_at: date,
                     updated_at: date,
                 }
