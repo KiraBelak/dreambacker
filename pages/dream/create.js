@@ -1,87 +1,414 @@
-import axios from "axios";
-import LoadingCircle from "@/components/common/LoadingCircle";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { Input, TextArea } from "@/components/forms/fields";
-import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import MainLayout from "@/components/layouts/MainLayout";
+import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 
-const CreateFormPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-
-  const onSubmit = async (data) => {
-    setLoading(true);
-    try {
-      const response = await axios.post("/api/chayannehello", data);
-      toast.success("Todo OK");
-      router.push("/");
-    } catch (error) {
-      toast.error("Ocurrió un error mandando tu información");
-    }
-    setLoading(false);
-  };
-
+export default function Example() {
   return (
-    <div className="ml-3 mr-3 pt-20 w-full flex justify-center  min-h-screen bg-black">
-      <Toaster position="top-center" reverseOrder={false} />
-      <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm">
-        <div className="ml-3 mr-6">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">
-            Información Personal
-          </h2>
-          <p className="mt-1 text-sm leading-6 text-gray-600">
-            Comparte tu correo electrónico para acceder a la descarga
-          </p>
+    <div>
+      <MainLayout>
+        <form>
+          <div className="space-y-12 m-6">
+            <div className="border-b border-white/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-white">
+                Información sobre el proyecto{" "}
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-white">
+                Esta información será mostrada publicamente así que toma tu
+                precaución con la información que compartes aquí.
+              </p>
 
-          <Input
-            placeholder="ejemplo@email.com"
-            name="email"
-            type="email"
-            register={{
-              ...register("email", {
-                required: {
-                  value: true,
-                  message: "Por favor ingresa un email válido",
-                },
-              }),
-            }}
-            errorMessage={errors?.email?.message}
-          />
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-4">
+                  <label
+                    htmlFor="username"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Nombre del Proyecto
+                  </label>
+                  <div className="mt-2">
+                    <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
+                      <input
+                        type="text"
+                        name="username"
+                        id="username"
+                        autoComplete="username"
+                        className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
+                        placeholder="Mi Proyecto"
+                      />
+                    </div>
+                  </div>
+                </div>
 
-          <TextArea
-            className="mt-1 text-base leading-6 text-gray-600"
-            label="¿Te gustaría recibir actualizaciones de nuevos libros para colorear en el futuro?"
-            placeholder="Si es así, ¿cómo te gustaría recibirlas (por correo electrónico, redes sociales, etc.)?"
-            name="about"
-            register={{
-              ...register("about", {
-                required: {
-                  value: true,
-                  message: "Este campo es obligatorio",
-                },
-              }),
-            }}
-            errorMessage={errors?.about?.message}
-          />
-          <div className="mt-6 flex items-center justify-end gap-x-6">
+                <div className="col-span-full">
+                  <label
+                    htmlFor="about"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Descripción
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="about"
+                      name="about"
+                      rows={3}
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                      defaultValue={""}
+                      placeholder="Describe claramente tu proyecto y lo que quieres lograr."
+                    />
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label
+                    htmlFor="photo"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Foto de Perfil
+                  </label>
+                  <div className="mt-2 flex items-center gap-x-3">
+                    <UserCircleIcon
+                      className="h-12 w-12 text-white"
+                      aria-hidden="true"
+                    />
+                    <button
+                      type="button"
+                      className="rounded-md bg-white/10 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-white/20"
+                    >
+                      Cambiar
+                    </button>
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label
+                    htmlFor="cover-photo"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Portada{" "}
+                  </label>
+                  <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10">
+                    <div className="text-center">
+                      <PhotoIcon
+                        className="mx-auto h-12 w-12 text-white"
+                        aria-hidden="true"
+                      />
+                      <div className="mt-4 flex text-sm leading-6 text-white">
+                        <label
+                          htmlFor="file-upload"
+                          className="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-gray-900 hover:text-indigo-500"
+                        >
+                          <span>Sube un archivo</span>
+                          <input
+                            id="file-upload"
+                            name="file-upload"
+                            type="file"
+                            className="sr-only"
+                          />
+                        </label>
+                        <p className="pl-1">o arrastra y suelta aquí</p>
+                      </div>
+                      <p className="text-xs leading-5 text-white">
+                        PNG, JPG, GIF hasta 10MB
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-b border-white/10 pb-12">
+              <h2 className="text-base font-semibold leading-7 text-white">
+                Información del Proyecto{" "}
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-white">
+                Utiliza una cartera que pueda recibir soles.
+              </p>
+
+              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="first-name"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Meta Monetaria{" "}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="first-name"
+                      id="first-name"
+                      autoComplete="given-name"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-4">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Dirección de Wallet{" "}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-3">
+                  <label
+                    htmlFor="country"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Fecha Límite /Duración de Campaña
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      id="country"
+                      name="country"
+                      autoComplete="country-name"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 [&_*]:text-black"
+                    >
+                      <option>United States</option>
+                      <option>Canada</option>
+                      <option>Mexico</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label
+                    htmlFor="street-address"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Street address
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="street-address"
+                      id="street-address"
+                      autoComplete="street-address"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2 sm:col-start-1">
+                  <label
+                    htmlFor="city"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Oro{" "}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      autoComplete="address-level2"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="region"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Plata{" "}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="region"
+                      id="region"
+                      autoComplete="address-level1"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label
+                    htmlFor="postal-code"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    Bronce{" "}
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      name="postal-code"
+                      id="postal-code"
+                      autoComplete="postal-code"
+                      className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-b border-white/10 pb-12 m-4">
+              <h2 className="text-base font-semibold leading-7 text-white">
+                Notifications
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-gray-400">
+                We'll always let you know about important changes, but you pick
+                what else you want to hear about.
+              </p>
+
+              <div className="mt-10 space-y-10">
+                <fieldset>
+                  <legend className="text-sm font-semibold leading-6 text-white">
+                    By Email
+                  </legend>
+                  <div className="mt-6 space-y-6">
+                    <div className="relative flex gap-x-3">
+                      <div className="flex h-6 items-center">
+                        <input
+                          id="comments"
+                          name="comments"
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                        />
+                      </div>
+                      <div className="text-sm leading-6">
+                        <label
+                          htmlFor="comments"
+                          className="font-medium text-white"
+                        >
+                          Comments
+                        </label>
+                        <p className="text-gray-400">
+                          Get notified when someones posts a comment on a
+                          posting.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative flex gap-x-3">
+                      <div className="flex h-6 items-center">
+                        <input
+                          id="candidates"
+                          name="candidates"
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                        />
+                      </div>
+                      <div className="text-sm leading-6">
+                        <label
+                          htmlFor="candidates"
+                          className="font-medium text-white"
+                        >
+                          Candidates
+                        </label>
+                        <p className="text-gray-400">
+                          Get notified when a candidate applies for a job.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="relative flex gap-x-3">
+                      <div className="flex h-6 items-center">
+                        <input
+                          id="offers"
+                          name="offers"
+                          type="checkbox"
+                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                        />
+                      </div>
+                      <div className="text-sm leading-6">
+                        <label
+                          htmlFor="offers"
+                          className="font-medium text-white"
+                        >
+                          Offers
+                        </label>
+                        <p className="text-gray-400">
+                          Get notified when a candidate accepts or rejects an
+                          offer.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset>
+                  <legend className="text-sm font-semibold leading-6 text-white">
+                    Push Notifications
+                  </legend>
+                  <p className="mt-1 text-sm leading-6 text-gray-400">
+                    These are delivered via SMS to your mobile phone.
+                  </p>
+                  <div className="mt-6 space-y-6">
+                    <div className="flex items-center gap-x-3">
+                      <input
+                        id="push-everything"
+                        name="push-notifications"
+                        type="radio"
+                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                      />
+                      <label
+                        htmlFor="push-everything"
+                        className="block text-sm font-medium leading-6 text-white"
+                      >
+                        Everything
+                      </label>
+                    </div>
+                    <div className="flex items-center gap-x-3">
+                      <input
+                        id="push-email"
+                        name="push-notifications"
+                        type="radio"
+                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                      />
+                      <label
+                        htmlFor="push-email"
+                        className="block text-sm font-medium leading-6 text-white"
+                      >
+                        Same as email
+                      </label>
+                    </div>
+                    <div className="flex items-center gap-x-3">
+                      <input
+                        id="push-nothing"
+                        name="push-notifications"
+                        type="radio"
+                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+                      />
+                      <label
+                        htmlFor="push-nothing"
+                        className="block text-sm font-medium leading-6 text-white"
+                      >
+                        No push notifications
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 mr-6 flex items-center justify-end gap-x-6">
+            <button
+              type="button"
+              className="text-sm font-semibold leading-6 text-white"
+            >
+              Cancelar
+            </button>
             <button
               type="submit"
-              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              {loading ? <LoadingCircle color="#ffffff" /> : "Guardar y enviar"}
+              Guardar y Publicar
             </button>
           </div>
-        </div>
-      </form>
+        </form>
+      </MainLayout>
     </div>
   );
-};
-
-export default CreateFormPage;
+}
