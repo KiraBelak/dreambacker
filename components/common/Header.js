@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ConnectWallet } from "../ConnectWallet";
+import { ConnectWallet } from "../../ConnectWallet";
 
 const Header = () => {
   return (
