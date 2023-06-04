@@ -76,11 +76,26 @@ export default function Example() {
   const handleSubmit = async (e, file) => {
     e.preventDefault();
     const wallet =  publicKey;
-    const benefits = {
-      bronze,
-      silver,
-      gold,
-    };
+    const benefits = [
+      {bronze,
+       price: 0.001,
+       "perks": [
+        "Bronce jelly time"
+    ] },
+       
+      {silver,
+      price: 0.01,
+            "perks": [
+                "Plata jelly time"
+            ]
+      },
+      {gold,
+      price: 0.1,
+      "perks": [
+        "Oro jelly time"
+    ]
+    },
+    ];
     toast.loading("Convirtiendo URL a Blob...");
         await fetch(thumbnail)
         .then((res) => res.blob())
