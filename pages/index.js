@@ -38,7 +38,7 @@ export default function Home() {
     }
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     if (publicKey) {
       getProfile(publicKey);
     }
@@ -48,7 +48,6 @@ export default function Home() {
     <div>
       <Toaster position="bottom-center" reverseOrder={false} />
       <MainLayout header={false}>
-        
         <div className="page-container mx-0 md:mx-60">
           <div className="hero-section">
             <Header />
@@ -56,24 +55,27 @@ export default function Home() {
               <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
                 ¿quieres ayudar a construir sueños de la web3?
               </h1>
-              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600"> 
-                apoya a proyectos de la web3 y gana recompensas, con una simple donación de SOL
+              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600">
+                apoya a proyectos de la web3 y gana recompensas, con una simple
+                donación de SOL
               </p>
               <div className="flex w-full justify-center items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
                   <div href="/">
-                    <ConnectWallet  />
+                    <ConnectWallet />
                   </div>
-                  <Link href="/" className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope">                  
-                      Explorar                  
+                  <Link
+                    href="/user/dashboard"
+                    className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope"
+                  >
+                    Explorar
                   </Link>
                 </div>
-
               </div>
             </div>
           </div>
           <div className="h-screen absolute right-6">
-            <ImageCarousel/>
+            <ImageCarousel />
           </div>
         </div>
       </MainLayout>
