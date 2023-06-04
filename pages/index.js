@@ -24,7 +24,7 @@ export default function Home() {
     try {
       const response = await axios.get(`/api/user/${wallet}`);
       console.log(response.data);
-      if (response.data.profile != 0) {
+      if (response.data.profile != null) {
         toast.dismiss();
         toast.success("Perfil cargado");
         router.push("/user/dashboard");
