@@ -48,8 +48,8 @@ export default function Example() {
     toast.loading("Cargando perfil...");
     try {
       const response = await axios.get(`/api/user/${wallet}`);
-      console.log(response.data);
-      if (response.data.profile != 0) {
+      // console.log("response");
+      if (response.data != null) {
         toast.dismiss();
         toast.success("Perfil cargado");
         console.log(response.data.profile);
