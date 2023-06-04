@@ -28,7 +28,7 @@ const SOLANA_NETWORK ="devnet"
 
 export default function Example() {
   const { publicKey } = useContext(WalletContext);
-  const [dream, setDream] = useState({});
+  const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -267,7 +267,7 @@ const getBenefitPerks = (dream, amount) => {
 }
 
 
-if (!dream) {
+if (dream === null) {
   return <div>Loading...</div>;
 }
 
