@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/20/solid";
@@ -9,6 +9,8 @@ import { ConnectWallet } from "./ConnectWallet";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { IoIosPerson } from "react-icons/io";
+import axios from "axios";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -27,6 +29,25 @@ export default function Example() {
       router.push("/");
     }
   };
+
+  const [hasProjectToEdit, setHasProjectToEdit] = useState(false);
+
+  useEffect(() => {
+    const checkProjectToEdit = async () => {
+      try {
+        // Lógica para verificar si el usuario tiene un proyecto para editar
+        const response = await axios.get("/api/dream?wallet=" + publicKey);
+        const hasProject = response.data.hasProject;
+
+        setHasProjectToEdit(hasProject);
+      } catch (error) {
+        console.error("Error al verificar el proyecto:", error);
+        // Manejar el error según corresponda
+      }
+    };
+
+    checkProjectToEdit();
+  }, []);
 
   return (
     <Disclosure as="nav" className="bg-black shadow">
@@ -80,23 +101,20 @@ export default function Example() {
                   >
                     Proyectos
                   </Link>
-                  
                 </div>
               </div>
               <div className="flex items-center">
                 <div className="flex-shrink-0">
                   <Link
-                    href={"/dream/create"}
+                    href={hasProjectToEdit ? "/dream/edit" : "/dream/create"}
                     type="button"
                     className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                    Crear Proyecto{" "}
+                    {hasProjectToEdit ? "Editar Proyecto" : "Crear Proyecto"}
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                 
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
@@ -196,7 +214,6 @@ export default function Example() {
               >
                 Projects
               </Disclosure.Button>
-              
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4 sm:px-6">
