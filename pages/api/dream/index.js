@@ -12,6 +12,7 @@ export default async function handler(req, res) {
             // Retrieve the dream's information with it's id
             {   
                 const {user_id, wallet} = query;
+                
                 if(user_id == undefined && wallet == undefined){
                     const result = await dreams.find().toArray();
                     res.status(200).json({ dreams: result });
