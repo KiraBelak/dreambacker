@@ -22,18 +22,21 @@ export default async function handler(req, res) {
             {
                 const date = new Date();
                 const {dream} = query;
+                console.log("the dream",dream)
+                const resulta = await dreams.findOne({_id:new ObjectId(dream)})
+
+
                 const updatedDream = {
-                    title: body.nickname,
-                    description: body.description,
-                    main_goal: body.main_goal,                    
-                    benefits: body.benefits,
-                    deadline: body.deadline,
-                    nft_prompt: body.nft_prompt, 
-                    created_at: date,
+                    title: body.title || resulta.title,
+                    description: body.description || resulta.description,
+                    main_goal: body.main_goal || resulta.main_goal,                    
+                    benefits: body.benefits || resulta.benefits,
+                    deadline: body.deadline || resulta.deadline,
                     updated_at: date,
                 }
 
-                const result = await dreams.updateOne({id:dream}, {$set: updatedDream});
+                const result = await dreams.updateOne({_id:new ObjectId(dream)}, {$set: updatedDream});
+                console.log("result",result)
 
                 res.status(201).json({message:"Dream updated", dream: result});
             }
