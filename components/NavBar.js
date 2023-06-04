@@ -18,6 +18,14 @@ function classNames(...classes) {
 export default function Example() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
+  console.log("publicKey navbar", publicKey);
+  
+  //si la publikey es null, redirigir a la pagina principal
+  useEffect(() => {
+    if (publicKey == null) {
+      router.push("/");
+    }
+  }, [publicKey]);
 
   const signOut = () => {
     if (window) {
