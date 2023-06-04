@@ -47,10 +47,9 @@ export default function Home() {
   return (
     <div>
       <Toaster position="bottom-center" reverseOrder={false} />
-      <MainLayout header={false}>
+      <MainLayout>
         <div className="page-container mx-0 md:mx-60">
           <div className="hero-section">
-            <Header />
             <div className="mx-auto flex flex-col max-w-2xl lg:mx-0">
               <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
                 ¿quieres ayudar a construir sueños de la web3?
@@ -79,24 +78,6 @@ export default function Home() {
           </div>
         </div>
       </MainLayout>
-
-      <style jsx>{`
-        .page-container {
-          display: flex;
-        }
-
-        .hero-section {
-          flex: 1;
-          padding: 20px;
-        }
-
-        .moving-gallery-container {
-          flex: 1;
-          display: flex;
-          justify-content: flex-end;
-          padding: 20px;
-        }
-      `}</style>
     </div>
   );
 }
