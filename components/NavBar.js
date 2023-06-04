@@ -9,6 +9,7 @@ import { ConnectWallet } from "./ConnectWallet";
 import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { IoIosPerson } from "react-icons/io";
+import axios from "axios";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
