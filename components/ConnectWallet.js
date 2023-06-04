@@ -122,7 +122,7 @@ export function ConnectWallet(props) {
                 }}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                Desconectar wallet
+                Desconectar Wallet
               </button>
             </div>
           ) : null}
@@ -138,7 +138,7 @@ export function ConnectWallet(props) {
             connectWallet();
           }}
         >
-          Conectar tu wallet
+          Conecta tu Wallet
         </button>
       )}
     </>

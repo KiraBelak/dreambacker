@@ -4,12 +4,12 @@ import Seo from "@/components/common/Seo";
 
 const MainLayout = ({ children, header = true }) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Seo />
       {header && <Header />}
-      {children}
+      <main className="flex-grow">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 };
 
