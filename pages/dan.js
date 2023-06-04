@@ -7,7 +7,7 @@ export default function Dan() {
     const {publicKey} = useContext(WalletContext);
     const [dream, setDream] = useState(null);
     const [statusText, setStatusText] = useState("");
-    const quantity = 0.001;
+    const amount = 0.001;
 
     const shyft_api_key = "q4OzU_8-cc89oq-R"
     const network = process.env.CHAIN_NETWORK ?? "devnet"
@@ -64,7 +64,7 @@ export default function Dan() {
             setStatusText("dream obtained")
             // Build SHYFT's bodyParams with the information provided
 
-            const benefits = getBenefitPerks(dream, quantity);
+            const benefits = getBenefitPerks(dream, amount);
 
             //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
             setStatusText("beneficios obtenidos "+JSON.stringify(benefits));
@@ -76,7 +76,7 @@ export default function Dan() {
             const benefitsString = JSON.stringify({
                 benefits: benefits,
                 dream: dream,
-                quantity: quantity,
+                amount: amount,
                 backed_at: new Date().toISOString()
             });
 
@@ -92,7 +92,7 @@ export default function Dan() {
             formdata.append("description", dream.description);
             formdata.append("attributes", benefitsString);
             formdata.append("external_url", "https://shyft.to");
-            formdata.append("receiver", "B3ooUEwR86WmshDUXnX3iS5DYiAjyjNvmt1opkgP3kPW");
+            formdata.append("receiver", publicKey);
             // formdata.append("max_supply", "0");
             // formdata.append("royalty", "5");
             // formdata.append("file", fileInput.files[0], "index.png");
@@ -138,15 +138,15 @@ export default function Dan() {
         }
     }        
     
-    const getBenefitPerks = (dream, quantity) => {
+    const getBenefitPerks = (dream, amount) => {
         const {benefits} = dream;
     
         // order benefits by price ascending
         benefits.sort((a, b) => a.price - b.price);
     
-        // loop through benefits and compare the quantity against price, if quantity is higher than price then return the price object
+        // loop through benefits and compare the amount against price, if amount is higher than price then return the price object
         for(let i = 0; i < benefits.length; i++) {
-            if(quantity >= benefits[i].price) {
+            if(amount >= benefits[i].price) {
                 return benefits[i];
             }
         }    
