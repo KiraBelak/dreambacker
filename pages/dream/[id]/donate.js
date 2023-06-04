@@ -28,7 +28,7 @@ const SOLANA_NETWORK ="devnet"
 
 export default function Example() {
   const { publicKey } = useContext(WalletContext);
-  const [dream, setDream] = useState({});
+  const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
@@ -170,6 +170,7 @@ export default function Example() {
             return;
         }
         
+        toast.success("beneficios obtenidos");
         const benefitsString = JSON.stringify({
             benefits: benefits,
             dream: dream,
@@ -196,11 +197,13 @@ export default function Example() {
         // formdata.append('service_charge', '{ "receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe",  "token": "DjMA5cCK95X333t7SgkpsG5vC9wMk7u9JV4w8qipvFE8",  "amount": 0.01}');
         
         // create a blob from dream.thumbnail which is a URL for an IPFS image
+        toast.success("generando NFT");
         await fetch(dream.thumbnail)
         .then(res => res.blob())
         .then(blob => {
             formdata.append("file", blob);
         })
+        toast.success("NFT generado");
         setStatusText("Generando NFT")
         const result = await axios.post("https://api.shyft.to/sol/v1/nft/create_detach", formdata, {
             headers: {
@@ -264,7 +267,7 @@ const getBenefitPerks = (dream, amount) => {
 }
 
 
-if (!dream) {
+if (dream === null) {
   return <div>Loading...</div>;
 }
 
