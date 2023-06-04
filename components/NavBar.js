@@ -170,7 +170,7 @@ export default function Example() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Proyecto
+                              Proyectos
                             </Link>
                           )}
                         </Menu.Item>
@@ -183,7 +183,7 @@ export default function Example() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Salir 👻
+                              Salir/Desconectar Wallet
                             </p>
                           )}
                         </Menu.Item>
