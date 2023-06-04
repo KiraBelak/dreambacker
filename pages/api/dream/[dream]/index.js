@@ -14,6 +14,7 @@ export default async function handler(req, res) {
                 const {dream} = query;
                 
                 const result = await dreams.findOne({_id:new ObjectId(dream)})
+                console.log(result)
                 res.status(200).json({ dream: result });
             }
             break;        
