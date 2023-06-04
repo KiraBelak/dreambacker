@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export default async function handler(req, res) {
     const { method, body, query } = req;
@@ -12,7 +12,8 @@ export default async function handler(req, res) {
             // Retrieve the dream's information with it's id
             {
                 const {dream} = query;
-                const result = await dreams.find({id:dream}).toArray();
+                
+                const result = await dreams.findOne({_id:new ObjectId(dream)})
                 res.status(200).json({ dream: result });
             }
             break;        
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
                 const updatedDream = {
                     title: body.nickname,
                     description: body.description,
-                    main_goal: body.main_goal,
+                    main_goal: body.main_goal,                    
                     benefits: body.benefits,
                     deadline: body.deadline,
                     nft_prompt: body.nft_prompt, 

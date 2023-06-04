@@ -26,13 +26,7 @@ const Header = () => {
           </div>
         </div>
         <div className="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          <Link
-            href="/productos"
-            className="text-base font-medium text-white hover:text-primary-50"
-          >
-            {" "}
-            wenas{" "}
-          </Link>
+          
         </div>
       </nav>
     </header>
