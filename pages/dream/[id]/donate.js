@@ -138,15 +138,10 @@ export default function Example() {
       const {slot} = confirmation.value;
       console.info(`Transaction ${txid} confirmed in block ${slot}`);
       const solanaExplorerLink= `https://explorer.solana.com/tx/${txid}?cluster=${SOLANA_NETWORK}`;
-      let collected = dream.collected + amount;
-      await  axios.put(`/api/dream/${id}`,
-      { 
-        collected: collected,
-      });
+      
       await getNFT();
 
       toast.success("Transaccion confirmada 👏");
-      setAmount(null);
       setExplorerLink(solanaExplorerLink);
       getBalance(publicKey);
        return;
@@ -163,7 +158,10 @@ export default function Example() {
         setStatusText("dream obtained")
         // Build SHYFT's bodyParams with the information provided
 
+        toast.loading("generando NFT")
+
         const benefits = getBenefitPerks(dream, amount);
+
 
         //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
         setStatusText("beneficios obtenidos "+JSON.stringify(benefits));
@@ -203,7 +201,6 @@ export default function Example() {
         .then(blob => {
             formdata.append("file", blob);
         })
-        toast.loading("generando NFT")
         setStatusText("Generando NFT")
         const result = await axios.post("https://api.shyft.to/sol/v1/nft/create_detach", formdata, {
             headers: {
@@ -232,6 +229,11 @@ const signNFT = async (nft) => {
      });
       console.log(result);
       toast.success("Transaccion enviada y NFT recibido 👏");
+      let collected = dream.collected + amount;
+      await  axios.put(`/api/dream/${id}`,
+      { 
+        collected: collected,
+      });
      //esperamos 3 segundos y router push a la pagina de nft
       setTimeout(() => {
           router.push("/user/dashboard");
