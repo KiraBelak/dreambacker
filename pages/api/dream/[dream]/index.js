@@ -25,6 +25,23 @@ export default async function handler(req, res) {
                 const {dream} = query;
                 console.log("the dream",dream)
                 const resulta = await dreams.findOne({_id:new ObjectId(dream)})
+                const {collected} =body;
+                if (collected) {
+                    const updatedDream = {
+                        title: body.title || resulta.title,
+                    description: body.description || resulta.description,
+                    main_goal: body.main_goal || resulta.main_goal,                    
+                    benefits: body.benefits || resulta.benefits,
+                    deadline: body.deadline || resulta.deadline,
+                    updated_at: date,
+                    collected: collected,
+                }
+                const result = await dreams.updateOne({_id:new ObjectId(dream)}, {$set: updatedDream});
+                console.log("result",result)
+                res.status(201).json({message:"lDream updated", dream: result});
+            }
+            
+
 
 
                 const updatedDream = {
@@ -39,7 +56,7 @@ export default async function handler(req, res) {
                 const result = await dreams.updateOne({_id:new ObjectId(dream)}, {$set: updatedDream});
                 console.log("result",result)
 
-                res.status(201).json({message:"Dream updated", dream: result});
+                res.status(201).json({message:"lDream updated", dream: result});
             }
 
             break;
