@@ -33,6 +33,9 @@ export default function Example() {
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
+  const [statusText, setStatusText] = useState("");
+  const shyft_api_key = "q4OzU_8-cc89oq-R"
+  const network = process.env.CHAIN_NETWORK ?? "devnet"
 
   const router = useRouter();
   const { id } = router.query;
@@ -87,7 +90,9 @@ export default function Example() {
       return;
     }
     
-    sendTransaction(publicKey, receiver, amount);
+    await sendTransaction(publicKey, receiver, amount);
+
+
 
   }
 
@@ -133,7 +138,7 @@ export default function Example() {
       const {slot} = confirmation.value;
       console.info(`Transaction ${txid} confirmed in block ${slot}`);
       const solanaExplorerLink= `https://explorer.solana.com/tx/${txid}?cluster=${SOLANA_NETWORK}`;
-
+    await getNFT();
 
       toast.success("Transaccion confirmada 👏");
       setAmount(null);
@@ -145,6 +150,112 @@ export default function Example() {
       toast.error("error al enviar la transaccion");
     }
   }
+
+  
+
+  const getNFT = async () => {
+    try {
+        setStatusText("dream obtained")
+        // Build SHYFT's bodyParams with the information provided
+
+        const benefits = getBenefitPerks(dream, amount);
+
+        //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
+        setStatusText("beneficios obtenidos "+JSON.stringify(benefits));
+        if(!benefits) {
+            setStatusText("user has not reached any benefits")
+            return;
+        }
+        
+        const benefitsString = JSON.stringify({
+            benefits: benefits,
+            dream: dream,
+            amount: amount,
+            backed_at: new Date().toISOString()
+        });
+
+        var myHeaders = new Headers();
+        myHeaders.append("x-api-key", shyft_api_key);
+        myHeaders.append("Content-Type", "multipart/form-data");
+        
+        var formdata = new FormData();
+        formdata.append("network", network);
+        formdata.append("wallet", "7APHQNvmRUXGto4PGZWmdW72wZ1DD17MaBmhhz9vt7Sp");
+        formdata.append("name", dream.title);
+        formdata.append("symbol", "DrB");
+        formdata.append("description", dream.description);
+        formdata.append("attributes", benefitsString);
+        formdata.append("external_url", "https://shyft.to");
+        formdata.append("receiver", publicKey);
+        // formdata.append("max_supply", "0");
+        // formdata.append("royalty", "5");
+        // formdata.append("file", fileInput.files[0], "index.png");
+        // formdata.append('service_charge', '{ "receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe",  "token": "DjMA5cCK95X333t7SgkpsG5vC9wMk7u9JV4w8qipvFE8",  "amount": 0.01}');
+        
+        // create a blob from dream.thumbnail which is a URL for an IPFS image
+        await fetch(dream.thumbnail)
+        .then(res => res.blob())
+        .then(blob => {
+            formdata.append("file", blob);
+        })
+        toast.loading("generando NFT")
+        setStatusText("Generando NFT")
+        const result = await axios.post("https://api.shyft.to/sol/v1/nft/create_detach", formdata, {
+            headers: {
+                "x-api-key": shyft_api_key,
+                "Content-Type": "multipart/form-data"
+                }
+            })
+          toast.dismiss();
+        console.log("result",result)
+        setStatusText("Minteo Exitoso, firmando NFT")
+        toast.success("Minteo Exitoso, firmando NFT");
+        signNFT(result.data.result.encoded_transaction);
+        // console.log('data', response.data); // displaying the response
+        
+    } catch (error) {
+        console.log(error);
+        setStatusText(JSON.stringify(error));
+    }         
+}
+
+const signNFT = async (nft) => {
+  try {
+     const result = await axios.post("/api/signnft",{                
+          network:network,
+          nft:nft
+     });
+      console.log(result);
+      toast.success("Transaccion enviada y NFT recibido 👏");
+     //esperamos 3 segundos y router push a la pagina de nft
+      setTimeout(() => {
+          router.push("/user/dashboard");
+      }, 3000);
+
+
+      setStatusText(`NFT Firmado exitosamente https://solscan.io/tx/${result.data.result}?cluster=devnet`)
+
+  }catch(error) {
+      console.log(error);
+  }
+}        
+
+const getBenefitPerks = (dream, amount) => {
+  const {benefits} = dream;
+
+  // order benefits by price ascending
+  benefits.sort((a, b) => a.price - b.price);
+
+  // loop through benefits and compare the amount against price, if amount is higher than price then return the price object
+  for(let i = 0; i < benefits.length; i++) {
+      if(amount >= benefits[i].price) {
+          return benefits[i];
+      }
+  }    
+  
+  return null;
+}
+
 
 
 
