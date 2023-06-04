@@ -39,7 +39,7 @@ const relatedProducts = [
 export default function DreamPage() {
   const router = useRouter();
   const [dream, setDream] = useState(null);
-  const [isBacker, setIsBacker] = useState(false)
+  const [isBacker, setIsBacker] = useState(false);
 
   const { id } = router.query;
   const { publicKey } = useContext(WalletContext);
@@ -55,15 +55,16 @@ export default function DreamPage() {
   };
 
   const getIsBacker = async () => {
-    try{
-      const response = await axios.get(`/api/dream/${id}/isbacker?publicKey=${publicKey}`)
-      console.log("is_backer",response.data.is_backer);
+    try {
+      const response = await axios.get(
+        `/api/dream/${id}/isbacker?publicKey=${publicKey}`
+      );
+      console.log("is_backer", response.data.is_backer);
       setIsBacker(response.data.is_backer);
-      
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
 
   const getOwner = async () => {
     try {
@@ -95,8 +96,7 @@ export default function DreamPage() {
   return (
     <>
       <NavBar />
-      <h1>{dream.title}</h1>
-      <p>{dream.description}</p>
+
       <div className="bg-black">
         <div className="p-6">
           {dream == null ? (
@@ -185,7 +185,7 @@ export default function DreamPage() {
                         type="button"
                         className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                       >
-                        Donar SOL {"0.03"}
+                        Donar SOL
                       </button>
                     </Link>
                     <button
@@ -220,11 +220,13 @@ export default function DreamPage() {
                   </div>
                 </div>
 
-                { isBacker > 0 &&
-                  <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">                    
-                    <h3 className="font-bold text-xl">Ya eres un backer de este proyecto 😎</h3>
+                {isBacker > 0 && (
+                  <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
+                    <h3 className="font-bold text-xl">
+                      Ya eres un backer de este proyecto 😎
+                    </h3>
                   </div>
-                }
+                )}
               </div>
 
               {/* Related products */}
