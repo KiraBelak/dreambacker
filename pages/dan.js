@@ -65,7 +65,7 @@ export default function Dan() {
             // Build SHYFT's bodyParams with the information provided
 
             const benefits = getBenefitPerks(dream, quantity);
-            
+
             //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
             setStatusText("beneficios obtenidos "+JSON.stringify(benefits));
             if(!benefits) {
@@ -92,10 +92,10 @@ export default function Dan() {
             formdata.append("description", dream.description);
             formdata.append("attributes", benefitsString);
             formdata.append("external_url", "https://shyft.to");
+            formdata.append("receiver", "B3ooUEwR86WmshDUXnX3iS5DYiAjyjNvmt1opkgP3kPW");
             // formdata.append("max_supply", "0");
             // formdata.append("royalty", "5");
             // formdata.append("file", fileInput.files[0], "index.png");
-            formdata.append("receiver", "B3ooUEwR86WmshDUXnX3iS5DYiAjyjNvmt1opkgP3kPW");
             // formdata.append('service_charge', '{ "receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe",  "token": "DjMA5cCK95X333t7SgkpsG5vC9wMk7u9JV4w8qipvFE8",  "amount": 0.01}');
             
             // create a blob from dream.thumbnail which is a URL for an IPFS image
@@ -105,16 +105,6 @@ export default function Dan() {
                 formdata.append("file", blob);
             })
             
-            
-            var requestOptions = {
-                method: 'POST',
-                headers: myHeaders,
-                body: formdata,
-                redirect: 'follow'
-            };
-
-     
-
             setStatusText("Generando NFT")
             const result = await axios.post("https://api.shyft.to/sol/v1/nft/create_detach", formdata, {
                 headers: {
@@ -131,18 +121,17 @@ export default function Dan() {
         } catch (error) {
             console.log(error);
             setStatusText(JSON.stringify(error));
-        }
-         
+        }         
     }
 
     const signNFT = async (nft) => {
         try {
            const result = await axios.post("/api/signnft",{                
-                network,
-                nft
+                network:network,
+                nft:nft
            });
             console.log(result);
-            setStatusText("NFT Firmado exitosamente")
+            setStatusText(`NFT Firmado exitosamente https://solscan.io/tx/${result.data.result}?cluster=devnet`)
 
         }catch(error) {
             console.log(error);
@@ -163,16 +152,6 @@ export default function Dan() {
         }    
         
         return null;
-    }
-
-    const createNFT = async () => {
-        try{
-            const res = await axios.post(`/api/dream/${dream._id}/createnft?quantity=${quantity}&publicKey=${publicKey}`);
-            const data = await res.json();
-            console.log("nft",data);
-        }catch(err){
-            console.log(err);
-        }
     }
 
     return (
