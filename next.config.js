@@ -16,6 +16,11 @@ module.exports = {
         protocol: "https",
         hostname: "images.unsplash.com",
         port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "ipfs-2.thirdwebcdn.com",
+        port: ""
       }
     ],
   },

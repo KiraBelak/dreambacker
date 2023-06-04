@@ -6,42 +6,50 @@ import { MongoClient } from "mongodb";
 // const { publicKey, setPublicKey } = useContext(WalletContext);
 export default async function handler(req, res) {
     const { method, body, query } = req;
-    const { publicKey, quantity } = body;
-    const { dreamId } = query;
+    
+    const { dream, publicKey, quantity } = query;
+
+    // return res.status(200).json({ message: query });
 
     if(!publicKey) {
-        res.status(400).json({ message: "No public key provided" });
+        res.status(400).json({ message: "No public key provided", query:query});
         return;
     }
 
-    if(!dreamId) {
-        res.status(400).json({ message: "No dream id provided" });
+    if(!dream) {
+        res.status(400).json({ message: "No dream id provided", query:query});
         return;
     }
 
     if(!quantity) {
-        res.status(400).json({ message: "No quantity provided" });
+        res.status(400).json({ message: "No quantity provided", query:query});
         return;
     }
+
+    console.log("query received",query);
 
     const client = await MongoClient.connect(process.env.MONGODB_URI);
     const db = client.db();
     const dreamCollection = db.collection("dreams");
+    console.log("obtained dreams collection...");
     switch (method) {
         case "POST":
+            console.log("post method");
             try {
-                // check if dream exists with the provided dreamId
-                const dream = dreamCollection.findOne({ _id: dreamId });
-                if(!dream) {
+                // check if dream exists with the provided dream
+                console.log("fetching dream");
+                const dreamObj = dreamCollection.findOne({ _id: dream });
+                console.log("dream", dreamObj)
+                if(!dreamObj) {
                     res.status(404).json({ message: "Dream not found" });
                     return;
                 }
-
                 // Build SHYFT's bodyParams with the information provided
 
-                const benefits = getBenefitPerks(dream, quantity);
-
+                const benefits = getBenefitPerks(dreamObj, quantity);
+                
                 //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
+                console.log("benefits",benefits);
                 if(!benefits) {
                     res.status(200).json({ message: "User has not reached any benefits" });
                     return;
@@ -49,7 +57,7 @@ export default async function handler(req, res) {
                 
                 const benefitsString = JSON.stringify({
                     benefits: benefits,
-                    dreamId: dreamId,
+                    dream: dreamObj,
                     quantity: quantity,
                     backed_at: new Date().toISOString()
                 });
@@ -61,15 +69,15 @@ export default async function handler(req, res) {
                 
                 formdata.append("network", process.env.CHAIN_NETWORK ?? "devnet");
                 formdata.append("creator_wallet", process.env.DRB_WALLET_ADDRESS);
-                formdata.append("name", dream.title);
+                formdata.append("name", dreamObj.title);
                 formdata.append("symbol", "DRB");
-                formdata.append("description", dream.description);
+                formdata.append("description", dreamObj.description);
                 formdata.append("attributes", benefitsString);
                 formdata.append("receiver", publicKey);
                 
                 
-                // create a blob from dream.thumbnail which is a URL for an IPFS image
-                await fetch(dream.thumbnail)
+                // create a blob from dreamObj.thumbnail which is a URL for an IPFS image
+                await fetch(dreamObj.thumbnail)
                 .then(res => res.blob())
                 .then(blob => {
                     formdata.append("image", blob);
@@ -105,7 +113,7 @@ export default async function handler(req, res) {
 
                 const nftCollection = db.collection("nfts");
                 const registry = {
-                    dreamId: dreamId,
+                    dream: dream,
                     token: result.result.mint
                 }
                 await nftCollection.insertOne(registry);
