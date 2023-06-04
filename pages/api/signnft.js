@@ -1,28 +1,33 @@
+import {
+    clusterApiUrl,
+    Connection,
+    Keypair,
+    Transaction,
+  } from "@solana/web3.js";
+  import { NodeWallet } from "@metaplex/js";
+  import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+  import { decode } from "bs58";
+  import { Buffer } from "buffer";
+
+const privateKey = "5Bhtz8KYJd2vXbSz1q5SxpZzMa6pjduADoTT5Z2gMjXUL7GzFnRctnSobXRjQ4DHQPhM8WsDj8WQddr9Gp8VTShv"
+
 export default async function handler(req, res) {
-    const {publicKey, nft} = req.query;
-    console.log("publicKey",publicKey);
-    console.log("dream",nft);
+    const {nft, network} = req.query;
     try {
-        const web3 = require('@solana/web3.js');
-        const connection = new Connection(
-            clusterApiUrl(process.env.CHAIN_NETWORK),
-            "confirmed",
-            );
-    
-        const secret = process.env.PAYER_PRIVATE_KEY;
-        const from = web3.Keypair.fromSecretKey(new Uint8Array(secret))
-    
-        const to = web3.Keypair.fromPublicKey(new Uint8Array(publicKey))
-    
-        const signature = await web3.sendAndConfirmTransaction(
-            connection,
-            tx,
-            [from],
-        );
-    
-        return res.status(200).json({signature});
+        const result = await confirmTransactionFromBackend(network,nft,privateKey);
+        return res.status(200).json({result});
     }catch(error) {
         console.log(error);
         return res.status(500).json({error});
     }
+}
+
+export async function confirmTransactionFromBackend(network, encodedTransaction, privateKey) {
+    const connection = new Connection(clusterApiUrl(network), "confirmed");
+    const feePayer = Keypair.fromSecretKey(decode(privateKey));
+    const wallet = new NodeWallet(feePayer);
+    const recoveredTransaction = Transaction.from(Buffer.from(encodedTransaction, "base64"));
+    const signedTx = await wallet.signTransaction(recoveredTransaction);
+    const confirmTransaction = await connection.sendRawTransaction(signedTx.serialize());
+    return confirmTransaction;
 }
