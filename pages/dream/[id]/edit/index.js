@@ -11,6 +11,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 
+
 export default function Example() {
   const {publicKey} = useContext(WalletContext);
   const [user, setUser] = useState({}); //user data
@@ -24,6 +25,60 @@ export default function Example() {
   const [gold, setGold] = useState("");
   const [files, setFile] = useState(null);
   const router = useRouter();
+  const [isOwner, setIsOwner] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  
+  //traer el [id] del proyecto
+  const { id } = router.query;
+  // console.log(id);
+  
+  const getDream = async() => {
+    try {      
+      const response = await axios.get(`/api/dream/${id}`);
+      console.log("the dream",response.data.dream);
+      setTitle(response.data.dream.title);
+      setDescription(response.data.dream.description);
+      setMainGoal(response.data.dream.main_goal);
+      setDeadline(response.data.dream.deadline);
+      setThumbnail(response.data.dream.thumbnail);
+      console.log("the benefits",response.data.dream.benefits[0]);
+      setBronze(response.data.dream.benefits[0].bronze);
+      setSilver(response.data.dream.benefits[1].silver);
+      setGold(response.data.dream.benefits[2].gold);
+
+
+      
+      setDream(response.data.dream);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getOwner = async() => {
+    try{
+      const response = await axios.get(`/api/dream?wallet=${publicKey}`);
+      //the response contains an array of dreams, if the publicKey is inside the wallet propery of any of the dreams, then the user is the owner of the dream
+      if(response.data.dreams.length > 0){
+        const isOwner = response.data.dreams.some(dream => dream.wallet == publicKey);
+
+        setIsOwner(isOwner);
+      }
+      console.log(response);
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if(id != null && id != undefined)
+    getDream();
+    getOwner();
+  }, [id]);
+
+
+  
+  
 
   
 
@@ -31,52 +86,27 @@ export default function Example() {
   
   useEffect(()=> {
     if (publicKey && !(user == null || user == {})) {
-      getProfile(publicKey);
+      // getProfile(publicKey);
     }
   }, [publicKey]);
 
  //funcion para manejar el envio del formulario
   const handleSubmit = async (e, file) => {
     e.preventDefault();
-    const wallet =  publicKey;
-    const benefits = {
-      bronze,
-      silver,
-      gold,
-    };
-    toast.loading("Convirtiendo URL a Blob...");
-        await fetch(thumbnail)
-        .then((res) => res.blob())
-        .then((myblob) => {
-           myblob.name = "blob.png";
-           file = new File([myblob], "image.png", {type: myblob.type,});
-        });
-        toast.dismiss();
-        const uploadUrl = await uploadToIpfs(file);
-        console.log(uploadUrl);
-        const thum = uploadUrl;
-        const user_id = user._id;
-
-        console.log("user_id", user);
-    const data = {
+    setLoading(true);
+    const res = await axios.put(`/api/dream/${id}`, {
       title,
       description,
-      user_id,
       main_goal,
-      wallet,
-      benefits,
+      // benefits,
       deadline,
-      thum,
-    };
-    console.log(data);
-    try {
-      const response = await axios.post("/api/dream", data);
-      console.log(response.data);
-      toast.success("Proyecto creado");
-      router.push("/user/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    });
+    console.log(res);
+    setLoading(false);
+    toast.success("Proyecto actualizado");
+    router.push(`/dream/${id}`);
+
+ 
   };
 
 
@@ -336,15 +366,21 @@ export default function Example() {
             <button
               type="button"
               className="text-sm font-semibold leading-6 text-white"
+              onClick={() => router.back()}
             >
               Cancelar
             </button>
-            <button
+            
+              {loading ? <div className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+>
+              <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-gray-900"></div>
+            </div> : <div
              onClick={handleSubmit}
               className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Guardar y Publicar
-            </button>
+              Actualizar
+              </div>
+              }
           </div>
         </form>
         <Footer />
