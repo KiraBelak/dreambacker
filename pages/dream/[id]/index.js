@@ -39,6 +39,7 @@ const relatedProducts = [
 export default function DreamPage() {
   const router = useRouter();
   const [dream, setDream] = useState(null);
+  const [isBacker, setIsBacker] = useState(false)
 
   const { id } = router.query;
   const { publicKey } = useContext(WalletContext);
@@ -52,6 +53,17 @@ export default function DreamPage() {
       console.log(error);
     }
   };
+
+  const getIsBacker = async () => {
+    try{
+      const response = await axios.get(`/api/dream/${id}/isbacker?publicKey=${publicKey}`)
+      console.log("is_backer",response.data.is_backer);
+      setIsBacker(response.data.is_backer);
+      
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   const getOwner = async () => {
     try {
@@ -73,6 +85,7 @@ export default function DreamPage() {
       getDream();
     }
     getOwner();
+    getIsBacker();
   }, [id]);
 
   if (!dream) {
@@ -207,28 +220,11 @@ export default function DreamPage() {
                   </div>
                 </div>
 
-                { backers.length > 0 &&
-                  <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-                  <div>
-                    <h3>Backers</h3>
-                    <div className="flex flex-wrap p-2">
-                      {backers.featured.map((backer, backerIdx) => (
-                        <div
-                          key={backer.id}
-                          className="flex text-sm text-white m-1"
-                        >
-                          <img
-                            src={backer.avatarSrc}
-                            alt=""
-                            className="h-10 w-10 rounded-full bg-gray-100"
-                            width={200}
-                            height={100}
-                          />
-                        </div>
-                      ))}
-                    </div>
+                { isBacker > 0 &&
+                  <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">                    
+                    <h3 className="font-bold text-xl">Ya eres un backer de este proyecto 😎</h3>
                   </div>
-                </div>}
+                }
               </div>
 
               {/* Related products */}
