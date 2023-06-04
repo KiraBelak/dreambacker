@@ -61,12 +61,9 @@ export default function Home() {
                   <div href="/">
                     <ConnectWallet />
                   </div>
-                  <Link
-                    href="/user/dashboard"
-                    className="py-2 px-4 bg-indigo-600 text-white rounded-md font-manrope"
-                  >
-                    Explorar Proyectos
-                  </Link>
+                  <p className="py-2 px-4 text-white rounded-md font-manrope">
+                    Una vez conectada podrás Explorar o Crear Proyectos{" "}
+                  </p>
                   <div className="h-screen absolute right-6">
                     <ImageCarousel />
                   </div>
