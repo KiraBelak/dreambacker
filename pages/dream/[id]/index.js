@@ -11,182 +11,12 @@ const backers = {
     {
       id: 1,
       avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     },
     {
       id: 2,
       avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 1,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
-    },
-    {
-      id: 2,
-      avatarSrc:
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     },
     // More backers...
   ],
@@ -207,7 +37,7 @@ const relatedProducts = [
   // More products...
 ];
 
-export default function Example() {
+export default function DreamPage() {
   const router = useRouter();
   const [dream, setDream] = useState(null);
 
@@ -218,7 +48,6 @@ export default function Example() {
   const getDream = async () => {
     try {
       const response = await axios.get(`/api/dream/${id}`);
-      // console.log(response.data);
       setDream(response.data.dream);
     } catch (error) {
       console.log(error);
@@ -228,12 +57,10 @@ export default function Example() {
   const getOwner = async () => {
     try {
       const response = await axios.get(`/api/dream?wallet=${publicKey}`);
-      //the response contains an array of dreams, if the publicKey is inside the wallet propery of any of the dreams, then the user is the owner of the dream
       if (response.data.dreams.length > 0) {
         const isOwner = response.data.dreams.some(
-          (dream) => dream.wallet == publicKey
+          (dream) => dream.wallet === publicKey
         );
-
         setIsOwner(isOwner);
       }
       console.log(response);
@@ -243,13 +70,21 @@ export default function Example() {
   };
 
   useEffect(() => {
-    if (id != null && id != undefined) getDream();
+    if (id != null && id !== undefined) {
+      getDream();
+    }
     getOwner();
   }, [id]);
+
+  if (!dream) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <NavBar />
+      <h1>{dream.title}</h1>
+      <p>{dream.description}</p>
       <div className="bg-black">
         <div className="p-6">
           {dream == null ? (
