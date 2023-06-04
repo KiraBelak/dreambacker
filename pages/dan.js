@@ -124,7 +124,7 @@ export default function Dan() {
                 })
 
             console.log("result",result)
-            setStatusText("NFT generado exitosamente")
+            setStatusText("Minteo Exitoso, firmando NFT")
             signNFT(result.data.result.encoded_transaction);
             // console.log('data', response.data); // displaying the response
             
@@ -135,13 +135,14 @@ export default function Dan() {
          
     }
 
-    const signNFT = async () => {
+    const signNFT = async (nft) => {
         try {
-           await axios.post("/api/signnft",{
-                publicKey: publicKey,
-                dream: dream                
+           const result = await axios.post("/api/signnft",{                
+                network,
+                nft
            });
-            
+            console.log(result);
+            setStatusText("NFT Firmado exitosamente")
 
         }catch(error) {
             console.log(error);
