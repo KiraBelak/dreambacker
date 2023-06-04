@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
@@ -373,7 +372,8 @@ export default function Example() {
                   </div>
                 </div>
 
-                <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
+                { backers.length > 0 &&
+                  <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
                   <div>
                     <h3>Backers</h3>
                     <div className="flex flex-wrap p-2">
@@ -382,7 +382,7 @@ export default function Example() {
                           key={backer.id}
                           className="flex text-sm text-white m-1"
                         >
-                          <Image
+                          <img
                             src={backer.avatarSrc}
                             alt=""
                             className="h-10 w-10 rounded-full bg-gray-100"
@@ -393,7 +393,7 @@ export default function Example() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </div>}
               </div>
 
               {/* Related products */}
@@ -413,7 +413,7 @@ export default function Example() {
                   {relatedProducts.map((product) => (
                     <div key={product.id} className="group relative">
                       <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
-                        <Image
+                        <img
                           src={product.imageSrc}
                           alt={product.imageAlt}
                           className="object-cover object-center"
