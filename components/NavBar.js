@@ -18,6 +18,14 @@ function classNames(...classes) {
 export default function Example() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
+  console.log("publicKey navbar", publicKey);
+  
+  //si la publikey es null, redirigir a la pagina principal
+  useEffect(() => {
+    if (publicKey == null) {
+      router.push("/");
+    }
+  }, [publicKey]);
 
   const signOut = () => {
     if (window) {
@@ -162,7 +170,7 @@ export default function Example() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Proyecto
+                              Proyectos
                             </Link>
                           )}
                         </Menu.Item>
@@ -175,7 +183,7 @@ export default function Example() {
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Salir 👻
+                              Salir/Desconectar Wallet
                             </p>
                           )}
                         </Menu.Item>

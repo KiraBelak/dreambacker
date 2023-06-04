@@ -40,7 +40,7 @@ export function ConnectWallet(props) {
         window.open("https://phantom.app/", "_blank");
       }, 2000);
       return;
-  }
+    }
     //si phantom esta instalado
     let phantom;
     if (provider?.isPhantom) phantom = provider;
@@ -90,54 +90,57 @@ export function ConnectWallet(props) {
   return (
     <>
       <Toaster position="bottom-center" />
-      
-          {publicKey ? (
-            <div className="flex flex-col place-items-center justify-center">
-              <div
-                className="flex flex-row place-items-center justify-center"
-                onClick={() => {
-                  setOpen(!open);
-                }}
+
+      {publicKey ? (
+        <div className="flex flex-col place-items-center justify-center">
+          <div
+            className="flex flex-row place-items-center justify-center"
+            onClick={() => {
+              setOpen(!open);
+            }}
+          >
+            <p className="text-2xl font-bold text-purple-500">
+              Tu wallet: {"  "}
+            </p>
+            <p className="text-2xl font-bold text-purple-500">
+              {publicKey.substring(0, 3) +
+                "..." +
+                publicKey.substring(publicKey.length - 7, publicKey.length)}
+            </p>
+          </div>
+          {open ? (
+            <div className="absolute top-10 mt-12 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+              <Link
+                href="/user/dashboard"
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                <p className="text-2xl font-bold text-purple-500">
-                  Tu wallet: {"  "}
-                </p>
-                <p className="text-2xl font-bold text-purple-500">
-                  {publicKey.substring(0, 3) +
-                    "..." +
-                    publicKey.substring(publicKey.length - 7, publicKey.length)}
-                </p>
-              </div>
-              {open ? (
-                <div className="absolute top-10 mt-12 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
-                  <Link
-                    href="/user/dashboard"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={() => {
-                      signOut();
-                    }}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Desconectar wallet 🥲
-                  </button>
-                </div>
-              ) : null}
+                Dashboard
+              </Link>
+              <button
+                onClick={() => {
+                  signOut();
+                }}
+                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              >
+                Desconectar Wallet
+              </button>
             </div>
-          ) : (
-            <button
-              type="submit"
-              className={"px-4 py-2 rounded-md items-cente bg-purple-500 font-manrope text-white " + props.className}
-              onClick={() => {
-                connectWallet();
-              }}
-            >
-              Conectar tu wallet 👻
-            </button>
-          )}
+          ) : null}
+        </div>
+      ) : (
+        <button
+          type="submit"
+          className={
+            "px-4 py-2 rounded-md items-cente bg-purple-500 font-manrope text-white " +
+            props.className
+          }
+          onClick={() => {
+            connectWallet();
+          }}
+        >
+          Conecta tu Wallet
+        </button>
+      )}
     </>
   );
 }
