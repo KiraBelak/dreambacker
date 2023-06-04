@@ -72,6 +72,8 @@ export default function Dan() {
                 setStatusText("user has not reached any benefits")
                 return;
             }
+
+            console.log("AQUI MERENGUES",dream);
             
             const benefitsString = JSON.stringify({
                 benefits: benefits,
