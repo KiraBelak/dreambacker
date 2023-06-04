@@ -264,7 +264,9 @@ const getBenefitPerks = (dream, amount) => {
 }
 
 
-
+if (!dream) {
+  return <div>Loading...</div>;
+}
 
   return (
     <>
