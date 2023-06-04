@@ -269,7 +269,7 @@ export default function Example() {
                   {/* Product image */}
                   <div className="lg:col-span-4 lg:row-end-1">
                     <div className="relative aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
-                      <Image
+                      <img
                         src={dream.thumbnail}
                         alt={"thumbnail"}
                         className="object-cover object-center"
