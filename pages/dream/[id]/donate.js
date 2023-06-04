@@ -43,9 +43,9 @@ export default function Example() {
   const getDream = async () => {
     try {
       const response = await axios.get(`/api/dream/${id}`);
-      // console.log(response.data);
       setReceiver(response.data.dream.wallet);
       setDream(response.data.dream);
+      
 
     } catch (error) {
       console.log(error);
@@ -138,7 +138,12 @@ export default function Example() {
       const {slot} = confirmation.value;
       console.info(`Transaction ${txid} confirmed in block ${slot}`);
       const solanaExplorerLink= `https://explorer.solana.com/tx/${txid}?cluster=${SOLANA_NETWORK}`;
-    await getNFT();
+      let collected = dream.collected + amount;
+      await  axios.put(`/api/dream/${id}`,
+      { 
+        collected: collected,
+      });
+      await getNFT();
 
       toast.success("Transaccion confirmada 👏");
       setAmount(null);
