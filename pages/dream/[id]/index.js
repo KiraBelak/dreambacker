@@ -82,8 +82,7 @@ export default function DreamPage() {
   return (
     <>
       <NavBar />
-      <h1>{dream.title}</h1>
-      <p>{dream.description}</p>
+
       <div className="bg-black">
         <div className="p-6">
           {dream == null ? (
@@ -172,7 +171,7 @@ export default function DreamPage() {
                         type="button"
                         className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                       >
-                        Donar SOL {"0.03"}
+                        Donar SOL
                       </button>
                     </Link>
                     <button
@@ -207,28 +206,29 @@ export default function DreamPage() {
                   </div>
                 </div>
 
-                { backers.length > 0 &&
+                {backers.length > 0 && (
                   <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
-                  <div>
-                    <h3>Backers</h3>
-                    <div className="flex flex-wrap p-2">
-                      {backers.featured.map((backer, backerIdx) => (
-                        <div
-                          key={backer.id}
-                          className="flex text-sm text-white m-1"
-                        >
-                          <img
-                            src={backer.avatarSrc}
-                            alt=""
-                            className="h-10 w-10 rounded-full bg-gray-100"
-                            width={200}
-                            height={100}
-                          />
-                        </div>
-                      ))}
+                    <div>
+                      <h3>Backers</h3>
+                      <div className="flex flex-wrap p-2">
+                        {backers.featured.map((backer, backerIdx) => (
+                          <div
+                            key={backer.id}
+                            className="flex text-sm text-white m-1"
+                          >
+                            <img
+                              src={backer.avatarSrc}
+                              alt=""
+                              className="h-10 w-10 rounded-full bg-gray-100"
+                              width={200}
+                              height={100}
+                            />
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>}
+                )}
               </div>
 
               {/* Related products */}
