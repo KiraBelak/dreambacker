@@ -19,7 +19,7 @@ export default function Example() {
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
   console.log("publicKey navbar", publicKey);
-  
+
   //si la publikey es null, redirigir a la pagina principal
   useEffect(() => {
     if (publicKey == null) {
@@ -105,7 +105,7 @@ export default function Example() {
 
                   <Link
                     href="/dream/index"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-indigo-500 hover:border-gray-300 hover:text-gray-700"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white  hover:text-black hover:bg-white hover:border-8 hover:border-black"
                   >
                     Proyectos
                   </Link>
@@ -116,7 +116,7 @@ export default function Example() {
                   <Link
                     href={hasProjectToEdit ? "/dream/edit" : "/dream/create"}
                     type="button"
-                    className="relative inline-flex items-center gap-x-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="relative inline-flex items-center gap-x-1.5  bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm hover:border-2 hover:border-white hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
                     {hasProjectToEdit ? "Editar Proyecto" : "Crear Proyecto"}
