@@ -35,7 +35,7 @@ export default function Example() {
             {dreams.map((dream) => (
               <div key={dream.title} className="flex flex-col-reverse">
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-center text-gray-100 border-dashed border-2 py-2 px-1">
+                  <h3 className="text-sm font-medium text-center bg-white text-black border-dashed border-2 py-2 px-1">
                     {dream.title}
                   </h3>
                   <p className="mt-2 text-sm text-gray-400">
