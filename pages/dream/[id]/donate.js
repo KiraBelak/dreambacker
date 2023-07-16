@@ -1,21 +1,13 @@
 import { Input } from "@/components/forms/fields";
 import { CheckIcon } from "@heroicons/react/20/solid";
-import { useContext, useEffect, useState } from "react";
-import { WalletContext} from "@/src/wallet";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { get } from "react-hook-form";
 import NavBar from "@/components/NavBar";
-import {
-  Connection,
-  SystemProgram,
-  Transaction,
-  PublicKey,
-  LAMPORTS_PER_SOL,
-  clusterApiUrl,
-  SendTransactionError,
-} from "@solana/web3.js";
+import { Keypair, SystemProgram, Transaction, LAMPORTS_PER_SOL } from '@solana/web3.js';
+
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const includedFeatures = [
   "Private forum access",
@@ -27,7 +19,8 @@ const includedFeatures = [
 const SOLANA_NETWORK ="devnet"
 
 export default function Example() {
-  const { publicKey } = useContext(WalletContext);
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
   const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
@@ -54,102 +47,163 @@ export default function Example() {
 
   useEffect(() => {
     if (publicKey != null && publicKey != undefined) {
-      getBalance(publicKey);
+      getBalance();
     }
   }, [publicKey]);
+
+  // useEffect(() => {
+  //   if (publicKey != null && publicKey != undefined) {
+  //     getBalance();
+  //   }
+  // }, [publicKey]);
 
   useEffect(() => {
     if(id != null && id != undefined)
     getDream();
   }, [id]);
 
-  const getBalance = async (publicKey) => {
+  const getBalance = async () => {
     try{
-      const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
-      const balance = await connection.getBalance(new PublicKey(publicKey));
+      // const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
+      const balance = await connection.getBalance(publicKey);
+      console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
-      console.log("balance", balancenew);
+      console.log("balance new", balancenew)
       setBalance(balancenew);
     } catch (err){
       console.error("error al obtener el balance", err);
       toast.error("error al obtener el balance");
     }
-
   }
+  
 
-  const handleSubmit = async () => {
-    console.log("enviando transaccion");
-    console.log("receiver", receiver);
-    console.log("amount", amount);
-    if (!receiver || !amount) {
-      toast.error("Ingresa una direccion y una cantidad");
+  const onClick = useCallback(async () => {
+    if (!publicKey) throw new WalletNotConnectedError();
+
+    const destAddress = receiver;
+    const txAmount = amount * LAMPORTS_PER_SOL; // hardcoded to 1 SOL for now
+
+    if(balance < amount ){
+      console.log("balance",balance);
+      console.log("amount",amount);
+      toast.error("You do not have enough SOL for this transaction");
       return;
     }
-    if (amount > balance) {
-      toast.error("No tienes suficiente saldo");
-      return;
-    }
-    
-    await sendTransaction(publicKey, receiver, amount);
 
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: publicKey,
+        toPubkey: destAddress,
+        lamports: txAmount,
+      })
+    );
 
+    const {
+        context: { slot: minContextSlot },
+        value: { blockhash, lastValidBlockHeight }
+    } = await connection.getLatestBlockhashAndContext();
 
-  }
-
-  const sendTransaction = async (publicKey, receiver, amount) => {
     try{
-      console.log("enviando transaccion");
-      console.log("receiver", receiver);
-      console.log("amount", amount);
-      console.log("publicKey", publicKey);
-      const provider = window?.phantom?.solana;
-      const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
-      //llaves
-      const fromPubkey = new PublicKey(publicKey);
-      const toPubkey = new PublicKey(receiver);
+      console.log("transaction", transaction );
+      console.log("connection", connection );
+      const signature = await sendTransaction(transaction, connection, { minContextSlot });
+      await connection.confirmTransaction({ blockhash, lastValidBlockHeight, signature });
 
-      //crear transaccion
-      const transaction = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey,
-          toPubkey,
-          lamports: amount * LAMPORTS_PER_SOL,
-        })
-      );
-        console.log("transaction", transaction);
-
-      //treaek0smel ultimo bloque de hash
-      const {blockhash} = await connection.getLatestBlockhash();
-      transaction.recentBlockhash = blockhash;
-      transaction.feePayer = fromPubkey;
-      //firmamos la transaccion
-      const transactionsignature = await provider.signTransaction(transaction);
-
-      //enviamos la transaccion
-      const txid = await connection.sendRawTransaction(transactionsignature.serialize());
-
-      console.info (`Transaccion ${txid} enviada`)
-      toast.success("Transaccion enviada 👏");
-
-      //esperamos la confirmacion
-      const confirmation = await connection.confirmTransaction(txid,{
+      const confirmation = await connection.confirmTransaction(signature,{
         commitment: "confirmed",
       });
+      
       const {slot} = confirmation.value;
-      console.info(`Transaction ${txid} confirmed in block ${slot}`);
-      const solanaExplorerLink= `https://explorer.solana.com/tx/${txid}?cluster=${SOLANA_NETWORK}`;
+      console.info(`Transaction ${signature} confirmed in block ${slot}`);
+      const solanaExplorerLink= `https://explorer.solana.com/tx/${signature}?cluster=${SOLANA_NETWORK}`;
       
       await getNFT();
 
       toast.success("Transaccion confirmada 👏");
       setExplorerLink(solanaExplorerLink);
-      getBalance(publicKey);
-       return;
-    } catch (err){
+      
+      // getBalance(publicKey);
+      return;
+  
+    }catch(err){
       console.error("error al enviar la transaccion", err);
       toast.error("error al enviar la transaccion");
     }
-  }
+}, [publicKey, sendTransaction, connection]);
+
+  // const handleSubmit = async () => {
+  //   console.log("enviando transaccion");
+  //   console.log("receiver", receiver);
+  //   console.log("amount", amount);
+  //   if (!receiver || !amount) {
+  //     toast.error("Ingresa una direccion y una cantidad");
+  //     return;
+  //   }
+  //   if (amount > balance) {
+  //     toast.error("No tienes suficiente saldo");
+  //     return;
+  //   }
+    
+  //   await sendTransaction(publicKey, receiver, amount);
+
+
+
+  // }
+
+  // const sendTransaction = async (publicKey, receiver, amount) => {
+  //   try{
+  //     console.log("enviando transaccion");
+  //     console.log("receiver", receiver);
+  //     console.log("amount", amount);
+  //     console.log("publicKey", publicKey);
+  //     const provider = window?.phantom?.solana;
+  //     const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
+  //     //llaves
+  //     const fromPubkey = new PublicKey(publicKey);
+  //     const toPubkey = new PublicKey(receiver);
+
+  //     //crear transaccion
+  //     const transaction = new Transaction().add(
+  //       SystemProgram.transfer({
+  //         fromPubkey,
+  //         toPubkey,
+  //         lamports: amount * LAMPORTS_PER_SOL,
+  //       })
+  //     );
+  //       console.log("transaction", transaction);
+
+  //     //treaek0smel ultimo bloque de hash
+  //     const {blockhash} = await connection.getLatestBlockhash();
+  //     transaction.recentBlockhash = blockhash;
+  //     transaction.feePayer = fromPubkey;
+  //     //firmamos la transaccion
+  //     const transactionsignature = await provider.signTransaction(transaction);
+
+  //     //enviamos la transaccion
+  //     const txid = await connection.sendRawTransaction(transactionsignature.serialize());
+
+  //     console.info (`Transaccion ${txid} enviada`)
+  //     toast.success("Transaccion enviada 👏");
+
+  //     //esperamos la confirmacion
+  //     const confirmation = await connection.confirmTransaction(txid,{
+  //       commitment: "confirmed",
+  //     });
+  //     const {slot} = confirmation.value;
+  //     console.info(`Transaction ${txid} confirmed in block ${slot}`);
+  //     const solanaExplorerLink= `https://explorer.solana.com/tx/${txid}?cluster=${SOLANA_NETWORK}`;
+      
+  //     await getNFT();
+
+  //     toast.success("Transaccion confirmada 👏");
+  //     setExplorerLink(solanaExplorerLink);
+  //     getBalance(publicKey);
+  //      return;
+  //   } catch (err){
+  //     console.error("error al enviar la transaccion", err);
+  //     toast.error("error al enviar la transaccion");
+  //   }
+  // }
 
   
 
@@ -338,9 +392,7 @@ if (dream === null) {
                 </p>
                 <button
                   className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  onClick={() => {
-                    handleSubmit();
-                  }}
+                  onClick={onClick}
                 >
                   DONAR
                 </button>

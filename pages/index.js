@@ -8,19 +8,28 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import ImageCarousel from "@/components/ImageCarousel";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
   //funcion asincrona para obtener el perfil del usuario
-  const getProfile = async (publicKey) => {
-    const wallet = publicKey;
+ 
+  const {publicKey} = useWallet();
+
+
+  useEffect(() => {
+    if (publicKey) {
+      getProfile();
+    }
+  }, [publicKey]);
+
+  const getProfile = async () => {
     toast.loading("Cargando perfil...");
     try {
-      const response = await axios.get(`/api/user/${wallet}`);
+      const response = await axios.get(`/api/user/${publicKey}`);
       console.log(response.data);
       if (response.data.profile != null) {
         toast.dismiss();
@@ -36,11 +45,6 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    if (publicKey) {
-      getProfile(publicKey);
-    }
-  }, [publicKey]);
 
   return (
     <div>
@@ -58,9 +62,9 @@ export default function Home() {
               </p>
               <div className="flex w-full justify-center items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
-                  <div href="/">
+                  
                     <ConnectWallet />
-                  </div>
+                  
                   <p className="py-2 px-4 text-white rounded-md font-manrope">
                     Una vez conectada podrás Explorar o Crear Proyectos{" "}
                   </p>

@@ -2,9 +2,10 @@ import { WalletContext } from "@/src/wallet";
 import { useContext, useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import axios from "axios";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Dan() {
-    const {publicKey} = useContext(WalletContext);
+    const {publicKey} = useWallet();
     const [dream, setDream] = useState(null);
     const [statusText, setStatusText] = useState("");
     const amount = 0.001;

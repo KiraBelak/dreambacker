@@ -6,7 +6,7 @@ import MainLayout from "@/components/layouts/MainLayout";
 
 
 export default function Dreamer(){
-    const {publicKey, setPublicKey} = useContext(WalletContext);
+    const {publicKey} = useWallet();
     const [project, setProject] = useState(null);
     
 

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import { WalletContext } from "@/src/wallet";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const backers = {
   featured: [
@@ -42,7 +43,7 @@ export default function DreamPage() {
   const [isBacker, setIsBacker] = useState(false);
 
   const { id } = router.query;
-  const { publicKey } = useContext(WalletContext);
+  const { publicKey } = useWallet();
   const [isOwner, setIsOwner] = useState(false);
 
   const getDream = async () => {
