@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react';
 import {WalletContext} from '../../src/wallet';
 import MainLayout from "@/components/layouts/MainLayout";
+import { useWallet } from '@solana/wallet-adapter-react';
 
 
 
 
 export default function Dreamer(){
-    const {publicKey, setPublicKey} = useContext(WalletContext);
+    const {publicKey} = useWallet();
     const [project, setProject] = useState(null);
     
 

@@ -10,29 +10,33 @@ import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { IoIosPerson } from "react-icons/io";
 import axios from "axios";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
-  const { publicKey, setPublicKey } = useContext(WalletContext);
+  const { publicKey, disconnect } = useWallet();
   const router = useRouter();
   console.log("publicKey navbar", publicKey);
 
-  //si la publikey es null, redirigir a la pagina principal
+  // wait to get publicKey from useWallet, if the result is null redirect to landing
+  // if not, just continue
   useEffect(() => {
     if (publicKey == null) {
       router.push("/");
     }
   }, [publicKey]);
+  
 
   const signOut = () => {
     if (window) {
       const { solana } = window;
-      window.localStorage.removeItem("publicKey");
-      setPublicKey(null);
-      solana.disconnect();
+      // window.localStorage.removeItem("publicKey");
+      // setPublicKey(null);
+      // solana.disconnect();
+      disconnect();
       toast.success("Wallet disconnected 👻");
       router.push("/");
     }
