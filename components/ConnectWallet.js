@@ -92,9 +92,9 @@ export function ConnectWallet(props) {
       <Toaster position="bottom-center" />
 
       {publicKey ? (
-        <div className="flex flex-col place-items-center justify-center">
+        <div className="flex flex-col place-items-start justify-start">
           <div
-            className="flex flex-row place-items-center justify-center"
+            className="flex flex-row place-items-start justify-start"
             onClick={() => {
               setOpen(!open);
             }}
@@ -131,7 +131,7 @@ export function ConnectWallet(props) {
         <button
           type="submit"
           className={
-            "px-4 py-2 rounded-md items-cente bg-purple-500 font-manrope text-white " +
+            "px-2 py-0 w-56 h-12 text-xl items-cente bg-white font-manrope text-black hover:duration-500 hover:bg-gray-200 hover:text-black hover:border-2 " +
             props.className
           }
           onClick={() => {

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { set } from "react-hook-form";
 
 const ImageCarousel = () => {
   const [dreams, setDreams] = useState(null);
   const [images, setImages] = useState([]);
+  const [titles, setTitles] = useState([]);
 
   const getDreams = async () => {
     try {
@@ -20,8 +22,10 @@ const ImageCarousel = () => {
   const fetchImages = async () => {
     console.log("mapeando dreams a dreamImages");
     const dreamImages = dreams.map((dream) => dream.thumbnail);
+    const dreamTitles = dreams.map((dream) => dream.title);
     console.log("dreamImages", dreamImages);
     setImages(dreamImages);
+    setTitles(dreamTitles);
   };
   // obtener las imagenes del arreglo de objetos dreams
   // cada objecto tiene una propiedad llamada thumbnail
@@ -45,12 +49,19 @@ const ImageCarousel = () => {
           <div className="flex absolute right-6 -top-6 animate-marquee-infinite">
             <div className="grid grid-cols-1 w-72 justify-around space-y-20">
               {images.map((image, index) => (
-                <img
-                  src={image}
-                  alt={`Image ${index + 1}`}
-                  key={index}
-                  className="w-full rounded-2xl"
-                />
+                <div>
+                  <img
+                    src={image}
+                    alt={`Image ${index + 1}`}
+                    key={index}
+                    className="w-full border-2 border-gray-600 border-dashed"
+                  />
+                  <div className="">
+                    <p className="text-gray-400 text-center px-2 py-1 border-gray-600 border-2 border-dashed">
+                      {titles[index]}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
