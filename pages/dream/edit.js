@@ -9,18 +9,11 @@ import { set } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/router";
-<<<<<<< HEAD
-
-
-export default function Example() {
-  const {publicKey} = useContext(WalletContext);
-=======
 import { useWallet } from "@solana/wallet-adapter-react";
 
 
 export default function Example() {
   const {publicKey} = useWallet();
->>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
   const [user, setUser] = useState({}); //user data
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

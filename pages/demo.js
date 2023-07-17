@@ -1,16 +1,10 @@
 import { useContext, useEffect } from "react";
 import { WalletContext } from "../src/wallet";
 import NavBar from "../components/NavBar";
-<<<<<<< HEAD
-
-export default function Home() {
-  const { publicKey, setPublicKey } = useContext(WalletContext);
-=======
 import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Home() {
   const { publicKey } = useWallet();
->>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
   // console.log("desde home", publicKey);
 
   const getPortfolio = async (publicKey) => {
