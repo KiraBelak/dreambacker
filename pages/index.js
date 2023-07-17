@@ -18,17 +18,17 @@ export default function Home() {
   //funcion asincrona para obtener el perfil del usuario
   const getProfile = async (publicKey) => {
     const wallet = publicKey;
-    toast.loading("Cargando perfil...");
+    toast.loading("Loading profile...");
     try {
       const response = await axios.get(`/api/user/${wallet}`);
       console.log(response.data);
       if (response.data.profile != null) {
         toast.dismiss();
-        toast.success("Perfil cargado");
+        toast.success("Profile loaded");
         router.push("/user/dashboard");
       } else {
         toast.dismiss();
-        toast.success("Crea tu perfil");
+        toast.success("Create Profile");
         router.push("/createprofile");
       }
     } catch (error) {
@@ -50,11 +50,11 @@ export default function Home() {
           <div className="hero-section">
             <div className="mx-auto flex flex-col max-w-2xl lg:mx-0">
               <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
-                Convierte sueños en realidad{" "}
+                Where Dreamers meet Backers{" "}
               </h1>
               <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600">
-                Una plataforma para apoyar proyectos y ganar recompensas, con
-                una simple donación de SOL
+                Fuel Dreams, Ignite Possibilities: Empowering Innovators through
+                Crypto Crowdfunding!
               </p>
               <div className="flex w-full justify-center items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
@@ -62,7 +62,7 @@ export default function Home() {
                     <ConnectWallet />
                   </div>
                   <p className="py-2 px-4 text-white rounded-md font-manrope">
-                    Una vez conectada podrás Explorar o Crear Proyectos{" "}
+                    Connect your wallet to explore or create projects{" "}
                   </p>
                   <div className="h-screen absolute right-6">
                     <ImageCarousel />

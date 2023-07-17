@@ -74,8 +74,8 @@ export function ConnectWallet(props) {
       const balancenew = balance / LAMPORTS_PER_SOL;
       setBalance(balancenew);
     } catch (err) {
-      console.error("error al obtener el balance", err);
-      toast.error("error al obtener el balance");
+      console.error("Error while retrieving the balance", err);
+      toast.error("Error while retrieving the balance");
     }
   };
 
@@ -122,7 +122,7 @@ export function ConnectWallet(props) {
                 }}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                Desconectar Wallet
+                Disconnect Wallet
               </button>
             </div>
           ) : null}
@@ -138,7 +138,7 @@ export function ConnectWallet(props) {
             connectWallet();
           }}
         >
-          Conecta tu Wallet
+          Connect Wallet{" "}
         </button>
       )}
     </>
