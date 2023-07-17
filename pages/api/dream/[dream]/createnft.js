@@ -3,7 +3,10 @@ import { MongoClient } from "mongodb";
 // Create a post request that attempts to make a phantom wallet transaction with the currently logged in user
 // If the transaction is successful, a registry is added to dream_backers collection
 // If the transaction is unsuccessful, do nothing
+<<<<<<< HEAD
 // const { publicKey, setPublicKey } = useContext(WalletContext);
+=======
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
 export default async function handler(req, res) {
     const { method, body, query } = req;
     

@@ -8,10 +8,15 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import ImageCarousel from "@/components/ImageCarousel";
+<<<<<<< HEAD
+=======
+import { useWallet } from "@solana/wallet-adapter-react";
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+<<<<<<< HEAD
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
 
@@ -21,6 +26,25 @@ export default function Home() {
     toast.loading("Cargando perfil...");
     try {
       const response = await axios.get(`/api/user/${wallet}`);
+=======
+  const router = useRouter();
+
+  //funcion asincrona para obtener el perfil del usuario
+ 
+  const {publicKey} = useWallet();
+
+
+  useEffect(() => {
+    if (publicKey) {
+      getProfile();
+    }
+  }, [publicKey]);
+
+  const getProfile = async () => {
+    toast.loading("Cargando perfil...");
+    try {
+      const response = await axios.get(`/api/user/${publicKey}`);
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
       console.log(response.data);
       if (response.data.profile != null) {
         toast.dismiss();
@@ -36,11 +60,14 @@ export default function Home() {
     }
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     if (publicKey) {
       getProfile(publicKey);
     }
   }, [publicKey]);
+=======
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
 
   return (
     <div>
@@ -58,9 +85,15 @@ export default function Home() {
               </p>
               <div className="flex w-full justify-center items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
+<<<<<<< HEAD
                   <div href="/">
                     <ConnectWallet />
                   </div>
+=======
+                  
+                    <ConnectWallet />
+                  
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
                   <p className="py-2 px-4 text-white rounded-md font-manrope">
                     Una vez conectada podrás Explorar o Crear Proyectos{" "}
                   </p>

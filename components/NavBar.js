@@ -10,29 +10,53 @@ import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { IoIosPerson } from "react-icons/io";
 import axios from "axios";
+<<<<<<< HEAD
+=======
+import { useWallet } from "@solana/wallet-adapter-react";
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
+<<<<<<< HEAD
   const { publicKey, setPublicKey } = useContext(WalletContext);
   const router = useRouter();
   console.log("publicKey navbar", publicKey);
 
   //si la publikey es null, redirigir a la pagina principal
+=======
+  const { publicKey, disconnect } = useWallet();
+  const router = useRouter();
+  console.log("publicKey navbar", publicKey);
+
+  // wait to get publicKey from useWallet, if the result is null redirect to landing
+  // if not, just continue
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
   useEffect(() => {
     if (publicKey == null) {
       router.push("/");
     }
   }, [publicKey]);
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
 
   const signOut = () => {
     if (window) {
       const { solana } = window;
+<<<<<<< HEAD
       window.localStorage.removeItem("publicKey");
       setPublicKey(null);
       solana.disconnect();
+=======
+      // window.localStorage.removeItem("publicKey");
+      // setPublicKey(null);
+      // solana.disconnect();
+      disconnect();
+>>>>>>> 2553d35359bae392eec86a35193b246b7d65d2ab
       toast.success("Wallet disconnected 👻");
       router.push("/");
     }
