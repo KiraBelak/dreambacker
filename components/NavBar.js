@@ -19,15 +19,18 @@ function classNames(...classes) {
 export default function Example() {
   const { publicKey, disconnect } = useWallet();
   const router = useRouter();
-  console.log("publicKey navbar", publicKey);
+  // console.log("publicKey navbar", publicKey);
 
   // wait to get publicKey from useWallet, if the result is null redirect to landing
   // if not, just continue
-  useEffect(() => {
-    if (publicKey == null) {
-      router.push("/");
-    }
-  }, [publicKey]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (publicKey == null) {
+  //       router.push("/");
+  //     }
+  //   }, 5000);
+
+  // }, [publicKey]);
 
   const signOut = () => {
     if (window) {

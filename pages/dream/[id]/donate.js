@@ -8,6 +8,7 @@ import NavBar from "@/components/NavBar";
 import { Keypair, SystemProgram, Transaction, LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { get } from "react-hook-form";
 
 const includedFeatures = [
   "Private forum access",
@@ -32,24 +33,37 @@ export default function Example() {
 
   const router = useRouter();
   const { id } = router.query;
-
-  const getDream = async () => {
-    try {
-      const response = await axios.get(`/api/dream/${id}`);
-      setReceiver(response.data.dream.wallet);
-      setDream(response.data.dream);
-      
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  var recibe = "";
 
   useEffect(() => {
     if (publicKey != null && publicKey != undefined) {
       getBalance();
     }
   }, [publicKey]);
+  
+  useEffect(() => {
+    if(id != null && id != undefined)
+    getDream();
+  }, []);
+
+  const getDream = async () => {
+    try {
+      const response = await axios.get(`/api/dream/${id}`);
+      console.log("response", response);
+      await setDream(response.data.dream);
+      await setReceiver(response.data.dream.wallet);
+      recibe = response.data.dream.wallet;
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    console.log("dream", dream);
+    console.log("receiver update", receiver);
+  }, [receiver, dream]);
+  
+ 
 
   // useEffect(() => {
   //   if (publicKey != null && publicKey != undefined) {
@@ -57,10 +71,7 @@ export default function Example() {
   //   }
   // }, [publicKey]);
 
-  useEffect(() => {
-    if(id != null && id != undefined)
-    getDream();
-  }, [id]);
+  
 
   const getBalance = async () => {
     try{
@@ -75,13 +86,26 @@ export default function Example() {
       toast.error("error al obtener el balance");
     }
   }
+  //cambiar en tiempo real el receiver
+    
   
 
   const onClick = useCallback(async () => {
     if (!publicKey) throw new WalletNotConnectedError();
 
-    const destAddress = receiver;
     const txAmount = amount * LAMPORTS_PER_SOL; // hardcoded to 1 SOL for now
+    
+    console.log("publicKey", publicKey);
+    console.log("txAmount", txAmount);
+    
+    // if (receiver == null || receiver == undefined) {
+    //   await getDream();
+    //   return;
+    // }
+    console.log("recibe", recibe);
+    console.log("receiver", dream);
+    const destAddress = recibe;
+    console.log("destAddress", destAddress);
 
     if(balance < amount ){
       console.log("balance",balance);
