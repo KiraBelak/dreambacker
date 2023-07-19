@@ -19,7 +19,7 @@ function classNames(...classes) {
 export default function Example() {
   const { publicKey, disconnect } = useWallet();
   const router = useRouter();
-  console.log("publicKey navbar", publicKey);
+  // console.log("publicKey navbar", publicKey);
 
   // wait to get publicKey from useWallet, if the result is null redirect to landing
   // if not, just continue
