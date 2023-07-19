@@ -8,9 +8,9 @@ const ImageCarousel = () => {
 
   const getDreams = async () => {
     try {
-      console.log("llamando endpoint");
+      // console.log("llamando endpoint");
       const response = await axios.get(`/api/dream`);
-      console.log("dreams", response.data);
+      // console.log("dreams", response.data);
       setDreams(response.data.dreams);
     } catch (error) {
       console.log(error);
@@ -18,9 +18,9 @@ const ImageCarousel = () => {
   };
 
   const fetchImages = async () => {
-    console.log("mapeando dreams a dreamImages");
+    // console.log("mapeando dreams a dreamImages");
     const dreamImages = dreams.map((dream) => dream.thumbnail);
-    console.log("dreamImages", dreamImages);
+    // console.log("dreamImages", dreamImages);
     setImages(dreamImages);
   };
   // obtener las imagenes del arreglo de objetos dreams
@@ -30,7 +30,7 @@ const ImageCarousel = () => {
 
   useEffect(() => {
     if (dreams == null) return;
-    console.log("llamando funcion fetchImages");
+    // console.log("llamando funcion fetchImages");
     fetchImages();
   }, [dreams]);
 
