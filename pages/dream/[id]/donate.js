@@ -39,12 +39,12 @@ export default function Example() {
   const getDream = async () => {
     try {
       const response = await axios.get(`/api/dream/${id}`);
-      console.log("response", response);
+      // console.log("response", response);
       setReceiver(response.data.dream.wallet);
       setDream(response.data.dream);      
 
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -56,7 +56,7 @@ export default function Example() {
 
   useEffect(() => {
     if(amount != null && amount != undefined){
-      console.log("amount", amount);
+      // console.log("amount", amount);
     }
   }, [amount]);
 
@@ -78,13 +78,13 @@ export default function Example() {
     try{
       // const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
       const balance = await connection.getBalance(publicKey);
-      console.log("balance", balance)
+      // console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
-      console.log("balance new", balancenew)
+      // console.log("balance new", balancenew)
 
       setBalance(balancenew);
     } catch (err){
-      console.error("error al obtener el balance", err);
+      // console.error("error al obtener el balance", err);
       toast.error("error al obtener el balance");
     }
 
@@ -104,13 +104,13 @@ export default function Example() {
     }
     
     if(balance < amount ){
-      console.log("balance",balance);
-      console.log("amount",amount);
+      // console.log("balance",balance);
+      // console.log("amount",amount);
       toast.error("You do not have enough SOL for this transaction");
       return;
     }
     
-    console.log("amount", amount);
+    // console.log("amount", amount);
 
     const transaction = new Transaction().add(
       SystemProgram.transfer({
@@ -126,8 +126,8 @@ export default function Example() {
     } = await connection.getLatestBlockhashAndContext();
 
     try{
-      console.log("transaction", transaction );
-      console.log("connection", connection );      
+      // console.log("transaction", transaction );
+      // console.log("connection", connection );      
       const signature = await sendTransaction(transaction, connection, { minContextSlot });
       
       await connection.confirmTransaction({ blockhash, lastValidBlockHeight, signature });
@@ -137,7 +137,7 @@ export default function Example() {
       });
 
       if(confirmation.err){
-        console.log("confirmation", confirmation);
+        // console.log("confirmation", confirmation);
         toast.error("Transaction cancelled.");
         return;
       }
@@ -220,14 +220,14 @@ export default function Example() {
                 }
             })
           toast.dismiss();
-        console.log("result",result)
+        // console.log("result",result)
         setStatusText("Minteo Exitoso, firmando NFT")
         toast.success("Minteo Exitoso, firmando NFT");
         signNFT(result.data.result.encoded_transaction);
         // console.log('data', response.data); // displaying the response
         
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         setStatusText(JSON.stringify(error));
     }         
 }
@@ -238,7 +238,7 @@ export default function Example() {
             network:network,
             nft:nft
       });
-        console.log(result);
+        // console.log(result);
         toast.success("Transaccion enviada y NFT recibido 👏");
         let collected = dream.collected + amount;
         await  axios.put(`/api/dream/${id}`,
@@ -254,7 +254,8 @@ export default function Example() {
         setStatusText(`NFT Firmado exitosamente https://solscan.io/tx/${result.data.result}?cluster=devnet`)
 
     }catch(error) {
-        console.log(error);
+          toast.error("Hubo algun error.")
+        // console.log(error);
     }
   }        
 
@@ -286,9 +287,9 @@ export default function Example() {
         <Toaster position="bottom-center" reverseOrder={false} />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               {dream.title}
-            </h2>
+            </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
               {dream.description}
             </p>
@@ -332,7 +333,7 @@ export default function Example() {
                   <p className="text-base font-semibold text-gray-600">
                     Apoya a {dream.title}
                   </p>
-                  <p className="mt-6 flex items-baseline justify-center gap-x-2">
+                  <div className="mt-6 flex items-baseline justify-center gap-x-2">
                     <Input
                       className="text-2xl font-bold text-right pr-2 text-gray-900 w-2/3 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md"                      
                       value={amount}
@@ -342,7 +343,7 @@ export default function Example() {
                     <span className="text-sm font-semibold leading-6 tracking-wide text-gray-600">
                       SOL
                     </span>
-                  </p>
+                  </div>
                   
                   <button
                     disabled={amount <= 0}
