@@ -11,7 +11,7 @@ export default function Example() {
     axios
       .get("/api/dream")
       .then((res) => {
-        console.log(res.data.dreams);
+        // console.log(res.data.dreams);
         setDreams(res.data.dreams);
       })
       .catch((err) => {

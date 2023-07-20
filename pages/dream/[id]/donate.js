@@ -225,7 +225,6 @@ export default function Example() {
         toast.success("Minteo Exitoso, firmando NFT");
         signNFT(result.data.result.encoded_transaction);
         // console.log('data', response.data); // displaying the response
-        
     } catch (error) {
         // console.log(error);
         setStatusText(JSON.stringify(error));

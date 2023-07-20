@@ -147,7 +147,7 @@ export default function DreamPage() {
                       <span>
                         Recolectado {parseFloat(dream.collected ?? 0)} SOL
                       </span>
-                      <p className="relative w-1/2">
+                      <div className="relative w-1/2">
                         {/* Barra porcentual de meta */}
                         <div className="relative rounded-full h-4 w-full bg-gray-100">
                           <div
@@ -166,7 +166,7 @@ export default function DreamPage() {
                             }}
                           />
                         </div>
-                      </p>
+                      </div>
                       <p>
                         Deadline {new Date(dream.deadline).toLocaleString()}
                       </p>
