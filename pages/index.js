@@ -51,14 +51,14 @@ export default function Home() {
         <div className="page-container mx-0 md:mx-20">
           <div className="hero-section">
             <div className="mx-auto flex flex-col max-w-2xl lg:mx-0">
-              <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-indigo-600 sm:mt-10 sm:text-6xl">
+              <h1 className="font-manrope mt-24 text-4xl font-bold tracking-tight text-white sm:mt-10 sm:text-6xl">
                 Convierte sueños en realidad{" "}
               </h1>
-              <p className="font-manrope mt-6 text-xl leading-8 text-indigo-600">
+              <p className="font-manrope mt-6 text-xl leading-8 text-white">
                 Una plataforma para apoyar proyectos y ganar recompensas, con
                 una simple donación de SOL
               </p>
-              <div className="flex w-full justify-center items-center">
+              <div className="flex w-full justify-start items-center">
                 <div className="mt-10 flex justify-between items-center w-2/3">
                   <ConnectWallet />
 

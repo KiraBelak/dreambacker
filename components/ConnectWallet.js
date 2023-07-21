@@ -11,6 +11,7 @@
 //   SendTransactionError,
 // } from "@solana/web3.js";
 // import Link from "next/link";
+// this comment is for pushing to deploy merge to master
 import {
   WalletModalProvider,
   WalletDisconnectButton,

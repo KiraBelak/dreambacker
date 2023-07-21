@@ -113,7 +113,7 @@ export default function DreamPage() {
               <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 {/* Product image */}
                 <div className="lg:col-span-4 lg:row-end-1">
-                  <div className="relative aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
+                  <div className="relative aspect-h-3 aspect-w-4 overflow-hidden bg-gray-100">
                     <img
                       src={dream.thumbnail}
                       alt={"thumbnail"}
@@ -184,26 +184,26 @@ export default function DreamPage() {
                     <Link href={`/dream/${id}/donate`}>
                       <button
                         type="button"
-                        className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                        className="flex w-full items-center justify-center border border-transparent bg-white px-8 py-3 text-base font-medium text-black hover:bg-black hover:text-white hover:border-2 hover:border-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                       >
                         Donar SOL
                       </button>
                     </Link>
                     <button
                       type="button"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      className="flex w-full items-center justify-center  px-8 py-3 text-base font-medium bg-graybacker text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                     >
                       Otra cantidad{" "}
                     </button>
                   </div>
 
-                  <div className="mt-10 border-t border-gray-200 pt-10">
-                    <h3 className="text-sm font-medium text-white">
+                  <div className="mt-10 bg-white pt-1">
+                    <h3 className="text-lg px-2 font-semibold text-black">
                       Beneficios
                     </h3>
                     {dream.benefits.map((benefit, benefitIdx) => (
-                      <div key={benefitIdx} className="mt-6">
-                        <h4 className="text-sm font-medium text-white">
+                      <div key={benefitIdx} className="mt-6 px-2">
+                        <h4 className="text-sm font-medium text-black">
                           Donación mínima de {benefit.price} SOL
                         </h4>
                         <ul>
@@ -238,7 +238,7 @@ export default function DreamPage() {
                   </h2>
                   <a
                     href="#"
-                    className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    className="whitespace-nowrap text-sm font-medium text-white hover:text-indigo-500"
                   >
                     Ver todos <span aria-hidden="true"> &rarr;</span>
                   </a>
