@@ -49,7 +49,7 @@ const ImageCarousel = () => {
           <div className="flex absolute right-6 -top-6 animate-marquee-infinite">
             <div className="grid grid-cols-1 w-72 justify-around space-y-20">
               {images.map((image, index) => (
-                <div>
+                <div key={index}>
                   <img
                     src={image}
                     alt={`Image ${index + 1}`}
