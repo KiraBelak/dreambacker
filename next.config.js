@@ -20,9 +20,13 @@ module.exports = {
       {
         protocol: "https",
         hostname: "ipfs-2.thirdwebcdn.com",
-        port: ""
-      }
+        port: "",
+      },
     ],
+  },
+  i18n: {
+    locales: ["en", "es"],
+    defaultLocale: "en",
   },
 };
 

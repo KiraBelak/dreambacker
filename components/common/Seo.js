@@ -1,8 +1,7 @@
 import { NextSeo } from "next-seo";
 
 const Seo = (props) => {
-  const title =
-    "Empower Dreams with dreambacker - The Leading Crypto Crowdfunding Platform";
+  const title = "dreambacker - The Leading Crypto Crowdfunding Platform";
   const description =
     "Fueling innovation and turning dreams into reality through our leading crypto crowdfunding platform. Join us today!";
 

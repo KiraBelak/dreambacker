@@ -103,7 +103,7 @@ export default function DreamPage() {
             <div className="flex justify-center items-center h-screen">
               <div className="grid grid-cols-1 justify-items-center space-y-4">
                 <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
-                <span>Cargando datos del servidor...</span>
+                <span>Loading server data...</span>
               </div>
             </div>
           ) : (
@@ -125,7 +125,7 @@ export default function DreamPage() {
                         href={`/dream/${dream._id}/edit`}
                         className="absolute inset-0 bg-white h-11 w-28 text-center rounded-full text-black items-center p-2"
                       >
-                        ✏ Editar
+                        ✏ Edit
                       </Link>
                     )}
                   </div>
@@ -140,11 +140,11 @@ export default function DreamPage() {
                       </h1>
                       <p>
                         <span className="text-lg tracking-tight text-white sm:text-xl">
-                          Meta {parseFloat(dream.main_goal)} SOL
+                          Goal {parseFloat(dream.main_goal)} SOL
                         </span>
                       </p>
                       <span>
-                        Recolectado {parseFloat(dream.collected ?? 0)} SOL
+                        Collected {parseFloat(dream.collected ?? 0)} SOL
                       </span>
                       <p className="relative w-1/2">
                         {/* Barra porcentual de meta */}
@@ -170,7 +170,7 @@ export default function DreamPage() {
                         Deadline {new Date(dream.deadline).toLocaleString()}
                       </p>
                       <p className="mt-2 text-sm text-white">
-                        Última actualización{" "}
+                        Last updated{" "}
                         <time dateTime={dream.updated_at}>
                           {new Date(dream.updated_at).toLocaleString()}
                         </time>
@@ -185,25 +185,23 @@ export default function DreamPage() {
                         type="button"
                         className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                       >
-                        Donar SOL
+                        Donate SOL
                       </button>
                     </Link>
                     <button
                       type="button"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                     >
-                      Otra cantidad{" "}
+                      Another amount{" "}
                     </button>
                   </div>
 
                   <div className="mt-10 border-t border-gray-200 pt-10">
-                    <h3 className="text-sm font-medium text-white">
-                      Beneficios
-                    </h3>
+                    <h3 className="text-sm font-medium text-white">Benefits</h3>
                     {dream.benefits.map((benefit, benefitIdx) => (
                       <div key={benefitIdx} className="mt-6">
                         <h4 className="text-sm font-medium text-white">
-                          Donación mínima de {benefit.price} SOL
+                          Minimum donation of {benefit.price} SOL
                         </h4>
                         <ul>
                           {benefit.perks.map((perk, perkIdx) => (
@@ -223,7 +221,7 @@ export default function DreamPage() {
                 {isBacker > 0 && (
                   <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
                     <h3 className="font-bold text-xl">
-                      Ya eres un backer de este proyecto 😎
+                      You are now a Backer of this project 😎
                     </h3>
                   </div>
                 )}
@@ -233,13 +231,13 @@ export default function DreamPage() {
               <div className="mx-auto mt-24 max-w-2xl sm:mt-32 lg:max-w-none">
                 <div className="flex items-center justify-between space-x-4">
                   <h2 className="text-lg font-medium text-white">
-                    Otros proyectos{" "}
+                    Other projects{" "}
                   </h2>
                   <a
                     href="#"
                     className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500"
                   >
-                    Ver todos <span aria-hidden="true"> &rarr;</span>
+                    See all <span aria-hidden="true"> &rarr;</span>
                   </a>
                 </div>
                 <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
