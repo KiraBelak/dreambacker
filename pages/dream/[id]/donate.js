@@ -279,9 +279,6 @@ export default function Example() {
     return null;
   }
 
-    return null;
-  };
-
   if (dream === null) {
     return <div>Loading...</div>;
   }
