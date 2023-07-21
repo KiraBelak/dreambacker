@@ -9,9 +9,10 @@ import { set } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Example() {
-  const { publicKey } = useContext(WalletContext);
+  const { publicKey } = useWallet();
   const [user, setUser] = useState({}); //user data
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -337,7 +338,7 @@ export default function Example() {
             onClick={handleSubmit}
             className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
           >
-            SAve and Publish{" "}
+            Save and Publish{" "}
           </button>
         </div>
       </form>

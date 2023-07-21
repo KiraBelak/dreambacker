@@ -9,9 +9,10 @@ import { set } from "react-hook-form";
 import { Toaster, toast } from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 export default function Example() {
-  const { publicKey } = useContext(WalletContext);
+  const { publicKey } = useWallet();
   const [user, setUser] = useState({}); //user data
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +28,7 @@ export default function Example() {
   const { mutateAsync: upload } = useStorageUpload();
 
   const uploadToIpfs = async (file) => {
-    toast.loading("Subiendo imagen a IPFS");
+    toast.loading("Uploading image to IPFS");
     console.log("file", file);
     const uploadUrl = await upload({
       data: [file],
@@ -37,24 +38,24 @@ export default function Example() {
       },
     });
     toast.dismiss();
-    toast.success("Imagen subida a IPFS");
+    toast.success("Image uploaded to IPFS");
     console.log(uploadUrl);
     return uploadUrl[0];
   };
   const getProfile = async (publicKey) => {
     const wallet = publicKey;
-    toast.loading("Cargando perfil...");
+    toast.loading("Loading profile...");
     try {
       const response = await axios.get(`/api/user/${wallet}`);
       // console.log("response");
       if (response.data != null) {
         toast.dismiss();
-        toast.success("Perfil cargado");
+        toast.success("Profile loaded");
         console.log(response.data.profile);
         setUser(response.data.profile);
       } else {
         toast.dismiss();
-        toast.success("Crea tu perfil");
+        toast.success("Create your profile");
         router.push("/createprofile");
       }
     } catch (error) {
@@ -118,7 +119,7 @@ export default function Example() {
       <NavBar />
       <Toaster position="bottom-center" />
       <form>
-        <div className="space-y-12 m-6">
+        <div className="space-y-12 m-6 lg:px-60">
           <div className="border-b border-white/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-white">
               Crear un nuevo proyecto{" "}
@@ -506,21 +507,20 @@ export default function Example() {
                 </fieldset>
               </div>
             </div> */}
-        </div>
-
-        <div className="mt-6 mr-6 flex items-center justify-end gap-x-6">
-          <button
-            type="button"
-            className="text-sm font-semibold leading-6 text-white"
-          >
-            Cancelar
-          </button>
-          <button
-            onClick={handleSubmit}
-            className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-          >
-            Guardar y Publicar
-          </button>
+          <div className="mt-6 mr-6 flex items-center justify-end gap-x-6">
+            <button
+              type="button"
+              className="px-4 py-1 text-sm font-semibold leading-6 text-red-500 hover:text-red-600 hover:border-2 hover:border-dashed hover:border-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+            >
+              Cancelar
+            </button>
+            <button
+              onClick={handleSubmit}
+              className=" bg-white px-3 py-2 text-sm font-semibold text-black  hover:bg-black hover:border-2  hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            >
+              Guardar y Publicar
+            </button>
+          </div>
         </div>
       </form>
       <Footer />

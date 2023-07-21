@@ -10,31 +10,34 @@ import { useRouter } from "next/router";
 import { toast, Toaster } from "react-hot-toast";
 import { IoIosPerson } from "react-icons/io";
 import axios from "axios";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Example() {
-  const { publicKey, setPublicKey } = useContext(WalletContext);
+  const { publicKey, disconnect } = useWallet();
   const router = useRouter();
-  console.log("publicKey navbar", publicKey);
+  // console.log("publicKey navbar", publicKey);
 
-  //si la publikey es null, redirigir a la pagina principal
-  useEffect(() => {
-    if (publicKey == null) {
-      router.push("/");
-    }
+  // wait to get publicKey from useWallet, if the result is null redirect to landing
+  // if not, just continue
+  useEffect(() => {    
+    // if (publicKey == null) {
+    //   router.push("/");
+    // }
   }, [publicKey]);
 
   const signOut = () => {
     if (window) {
       const { solana } = window;
-      window.localStorage.removeItem("publicKey");
-      setPublicKey(null);
-      solana.disconnect();
+      // window.localStorage.removeItem("publicKey");
+      // setPublicKey(null);
+      // solana.disconnect();
+      disconnect();
       toast.success("Wallet disconnected 👻");
-      router.push("/");
+      // router.push("/");
     }
   };
 
@@ -58,7 +61,7 @@ export default function Example() {
   }, []);
 
   return (
-    <Disclosure as="nav" className="bg-black shadow">
+    <Disclosure as="nav" className="bg-graybacker shadow">
       {({ open }) => (
         <>
           <Toaster position="bottom-center" reverseOrder={false} />
@@ -123,73 +126,77 @@ export default function Example() {
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        <span className="sr-only">Open user menu</span>
-                        <IoIosPerson className="h-8 w-8 rounded-full text-black" />
-                        {/* <image
-                          className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                          alt=""
-                          width={40}
-                          height={40}
-                        /> */}
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/user/dashboard"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Dashboard{" "}
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/projects"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Proyectos
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <p
-                              onClick={() => signOut()}
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Salir/Desconectar Wallet
-                            </p>
-                          )}
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
+                  { publicKey == null ? (
+                    <ConnectWallet />
+                  ): (
+
+                    <Menu as="div" className="relative ml-3">
+                      <div>
+                        <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                          <span className="sr-only">Open user menu</span>
+                          <IoIosPerson className="h-8 w-8 rounded-full text-black" />
+                          {/* <image
+                            className="h-8 w-8 rounded-full"
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt=""
+                            width={40}
+                            height={40}
+                          /> */}
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-200"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/user/dashboard"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Dashboard{" "}
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/projects"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Proyectos
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <p
+                                onClick={() => signOut()}
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Salir/Desconectar Wallet
+                              </p>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  )}
                 </div>
               </div>
             </div>
@@ -204,7 +211,7 @@ export default function Example() {
               <Disclosure.Button
                 as="a"
                 href="#"
-                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700 sm:pl-5 sm:pr-6"
+                className="block border-l-4 border-gray-400 bg-white py-2 pl-3 pr-4 text-base font-medium text-black sm:pl-5 sm:pr-6"
               >
                 Dashboard
               </Disclosure.Button>
@@ -222,57 +229,6 @@ export default function Example() {
               >
                 Projects
               </Disclosure.Button>
-            </div>
-            <div className="border-t border-gray-200 pb-3 pt-4">
-              <div className="flex items-center px-4 sm:px-6">
-                <div className="flex-shrink-0">
-                  <Image
-                    className="h-10 w-10 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                    width={40}
-                    height={40}
-                  />
-                </div>
-                <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">
-                    Tom Cook
-                  </div>
-                  <div className="text-sm font-medium text-gray-500">
-                    tom@example.com
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-              </div>
-              <div className="mt-3 space-y-1">
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                >
-                  Your Profile
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                >
-                  Settings
-                </Disclosure.Button>
-                <Disclosure.Button
-                  as="a"
-                  href="#"
-                  className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800 sm:px-6"
-                >
-                  Sign out
-                </Disclosure.Button>
-              </div>
             </div>
           </Disclosure.Panel>
         </>

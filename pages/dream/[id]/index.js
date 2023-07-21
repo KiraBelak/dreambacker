@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import { WalletContext } from "@/src/wallet";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const backers = {
   featured: [
@@ -42,7 +43,7 @@ export default function DreamPage() {
   const [isBacker, setIsBacker] = useState(false);
 
   const { id } = router.query;
-  const { publicKey } = useContext(WalletContext);
+  const { publicKey } = useWallet();
   const [isOwner, setIsOwner] = useState(false);
 
   const getDream = async () => {
@@ -112,7 +113,7 @@ export default function DreamPage() {
               <div className="lg:grid lg:grid-cols-7 lg:grid-rows-1 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
                 {/* Product image */}
                 <div className="lg:col-span-4 lg:row-end-1">
-                  <div className="relative aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
+                  <div className="relative aspect-h-3 aspect-w-4 overflow-hidden bg-gray-100">
                     <img
                       src={dream.thumbnail}
                       alt={"thumbnail"}
@@ -146,7 +147,7 @@ export default function DreamPage() {
                       <span>
                         Collected {parseFloat(dream.collected ?? 0)} SOL
                       </span>
-                      <p className="relative w-1/2">
+                      <div className="relative w-1/2">
                         {/* Barra porcentual de meta */}
                         <div className="relative rounded-full h-4 w-full bg-gray-100">
                           <div
@@ -165,7 +166,7 @@ export default function DreamPage() {
                             }}
                           />
                         </div>
-                      </p>
+                      </div>
                       <p>
                         Deadline {new Date(dream.deadline).toLocaleString()}
                       </p>
@@ -183,14 +184,14 @@ export default function DreamPage() {
                     <Link href={`/dream/${id}/donate`}>
                       <button
                         type="button"
-                        className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                        className="flex w-full items-center justify-center border border-transparent bg-white px-8 py-3 text-base font-medium text-black hover:bg-black hover:text-white hover:border-2 hover:border-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                       >
                         Donate SOL
                       </button>
                     </Link>
                     <button
                       type="button"
-                      className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-50 px-8 py-3 text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      className="flex w-full items-center justify-center  px-8 py-3 text-base font-medium bg-graybacker text-white hover:bg-white hover:text-black focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                     >
                       Another amount{" "}
                     </button>
@@ -235,7 +236,7 @@ export default function DreamPage() {
                   </h2>
                   <a
                     href="#"
-                    className="whitespace-nowrap text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                    className="whitespace-nowrap text-sm font-medium text-white hover:text-indigo-500"
                   >
                     See all <span aria-hidden="true"> &rarr;</span>
                   </a>

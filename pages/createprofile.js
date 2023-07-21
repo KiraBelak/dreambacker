@@ -4,8 +4,9 @@ import { ConnectWallet } from "@/components/ConnectWallet";
 import { WalletContext } from "@/src/wallet";
 import { Toaster, toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useWallet } from "@solana/wallet-adapter-react";
 const ProfileForm = () => {
-  const { publicKey } = useContext(WalletContext);
+  const { publicKey } = useWallet();
   const [nickname, setNickname] = useState("");
   const router = useRouter();
 
