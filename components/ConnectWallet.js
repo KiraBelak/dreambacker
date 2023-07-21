@@ -106,7 +106,17 @@ export function ConnectWallet(props) {
 
   return (
     <WalletModalProvider>
-      <DynamicWalletMultiButton style={{ width: "100%", height: "100%" }} />
+      <DynamicWalletMultiButton
+        style={{
+          width: "100%",
+          height: "100%",
+          background: "white",
+          color: "black",
+          borderRadius: "0px",
+          border: "none",
+          paddingLeft: "70px",
+        }}
+      />
 
       {/* <WalletDisconnectButton /> */}
     </WalletModalProvider>
