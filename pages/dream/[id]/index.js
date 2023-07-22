@@ -197,8 +197,8 @@ export default function DreamPage() {
                     </button>
                   </div>
 
-                  <div className="mt-10 bg-white pt-1">
-                    <h3 className="text-lg px-2 font-semibold text-black">
+                  <div className="mt-10 bg-white pt-2 px-2">
+                    <h3 className="text-lg px-2 text-center w-36 font-semibold text-white bg-black">
                       Beneficios
                     </h3>
                     {dream.benefits.map((benefit, benefitIdx) => (
