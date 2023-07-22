@@ -17,7 +17,7 @@ const includedFeatures = [
   "Official member t-shirt",
 ];
 
-const SOLANA_NETWORK ="devnet"
+const SOLANA_NETWORK = "devnet";
 
 export default function Example() {
 
@@ -30,8 +30,8 @@ export default function Example() {
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
   const [statusText, setStatusText] = useState("");
-  const shyft_api_key = "q4OzU_8-cc89oq-R"
-  const network = process.env.CHAIN_NETWORK ?? "devnet"
+  const shyft_api_key = "q4OzU_8-cc89oq-R";
+  const network = process.env.CHAIN_NETWORK ?? "devnet";
 
   const router = useRouter();
   const { id } = router.query;
@@ -70,8 +70,7 @@ export default function Example() {
 
 
   useEffect(() => {
-    if(id != null && id != undefined)
-    getDream();
+    if (id != null && id != undefined) getDream();
   }, [id]);
 
   const getBalance = async () => {
@@ -149,7 +148,7 @@ export default function Example() {
       
       await getNFT();
 
-      toast.success("Transaccion confirmada 👏");
+      toast.success("Transaction confirmed 👏");
       setExplorerLink(solanaExplorerLink);
       return;
     }catch(err){
@@ -163,13 +162,19 @@ export default function Example() {
 
   const getNFT = async () => {
     try {
-        setStatusText("dream obtained")
-        // Build SHYFT's bodyParams with the information provided
+      setStatusText("dream obtained");
+      // Build SHYFT's bodyParams with the information provided
 
-        toast.loading("generando NFT")
+      toast.loading("generating NFT");
 
-        const benefits = getBenefitPerks(dream, amount);
+      const benefits = getBenefitPerks(dream, amount);
 
+      //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
+      setStatusText("benefits obtained " + JSON.stringify(benefits));
+      if (!benefits) {
+        setStatusText("user has not reached any benefits");
+        return;
+      }
 
         //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
         setStatusText("beneficios obtenidos "+JSON.stringify(benefits));
@@ -273,7 +278,6 @@ export default function Example() {
     
     return null;
   }
-
 
   if (dream === null) {
     return <div>Loading...</div>;

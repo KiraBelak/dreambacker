@@ -85,7 +85,7 @@ export default function Example() {
                     <span className="sr-only">Workflow</span>
                     <Image
                       className="block h-8 w-auto lg:hidden"
-                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
+                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689556793/DreamBacker/db_logo_jhbegi.png"
                       alt="logo"
                       width={300}
                       height={200}
@@ -96,7 +96,7 @@ export default function Example() {
                     <span className="sr-only">Workflow</span>
                     <Image
                       className="hidden h-8 w-auto lg:block"
-                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
+                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689556793/DreamBacker/db_logo_jhbegi.png"
                       alt="logo"
                       width={300}
                       height={200}

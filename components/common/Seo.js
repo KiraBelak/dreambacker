@@ -1,10 +1,12 @@
 import { NextSeo } from "next-seo";
 
 const Seo = (props) => {
-  const title = "DreamBacker";
-  const description = "Crowdfunding";
-  const url = "";
-  const openGraphUrl = "";
+  const title = "dreambacker - The Leading Crypto Crowdfunding Platform";
+  const description =
+    "Fueling innovation and turning dreams into reality through our leading crypto crowdfunding platform. Join us today!";
+
+  const url = "https://www.dreambacker.tech/";
+  const openGraphUrl = "https://www.dreambacker.tech/";
   return (
     <NextSeo
       title={title}
@@ -16,14 +18,14 @@ const Seo = (props) => {
         description,
         images: [
           {
-            url: "https://res.cloudinary.com/todoenminutos/image/upload/w_800,h_600,c_fill/v1653181513/Todo%20en%20Minutos%20Productos/57433830_padded_logo_floptp.pnga",
+            url: "https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689557058/DreamBacker/Disen%CC%83o_sin_ti%CC%81tulo_1_bgf6ob.png",
             width: 800,
             height: 600,
-            alt: "Todo en Minutos",
+            alt: "dreambacker",
             type: "image/png",
           },
         ],
-        site_name: "todoenminutos.com",
+        site_name: "dreambacker.tech",
       }}
     />
   );

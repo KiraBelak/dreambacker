@@ -28,7 +28,7 @@ export default function Example() {
   const { mutateAsync: upload } = useStorageUpload();
 
   const uploadToIpfs = async (file) => {
-    toast.loading("Subiendo imagen a IPFS");
+    toast.loading("Uploading image to IPFS");
     console.log("file", file);
     const uploadUrl = await upload({
       data: [file],
@@ -38,24 +38,24 @@ export default function Example() {
       },
     });
     toast.dismiss();
-    toast.success("Imagen subida a IPFS");
+    toast.success("Image uploaded to IPFS");
     console.log(uploadUrl);
     return uploadUrl[0];
   };
   const getProfile = async (publicKey) => {
     const wallet = publicKey;
-    toast.loading("Cargando perfil...");
+    toast.loading("Loading profile...");
     try {
       const response = await axios.get(`/api/user/${wallet}`);
       // console.log("response");
       if (response.data != null) {
         toast.dismiss();
-        toast.success("Perfil cargado");
+        toast.success("Profile loaded");
         console.log(response.data.profile);
         setUser(response.data.profile);
       } else {
         toast.dismiss();
-        toast.success("Crea tu perfil");
+        toast.success("Create your profile");
         router.push("/createprofile");
       }
     } catch (error) {

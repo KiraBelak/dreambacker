@@ -1,0 +1,15 @@
+{
+    "common": {
+      "welcome": "Welcome",
+      "submit": "Submit",
+      "cancel": "Cancel"
+    },
+    "home": {
+      "title": "Home",
+      "description": "Welcome to our crowdfunding platform!"
+    },
+    "project": {
+      "title": "Project",
+      "back": "Back this project"
+    }
+  }
