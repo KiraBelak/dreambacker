@@ -246,7 +246,7 @@ export default function DreamPage() {
                 <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
                   {relatedProducts.map((product) => (
                     <div key={product.id} className="group relative">
-                      <div className="aspect-h-3 aspect-w-4 overflow-hidden rounded-lg bg-gray-100">
+                      <div className="aspect-h-3 aspect-w-4 overflow-hidden  bg-gray-100">
                         <img
                           src={product.imageSrc}
                           alt={product.imageAlt}
