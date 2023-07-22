@@ -3,7 +3,6 @@ import NavBar from "@/components/NavBar";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
-import { WalletContext } from "@/src/wallet";
 import { useWallet } from "@solana/wallet-adapter-react";
 
 const backers = {
