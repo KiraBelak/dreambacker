@@ -23,7 +23,7 @@ export default function Example() {
 
   // wait to get publicKey from useWallet, if the result is null redirect to landing
   // if not, just continue
-  useEffect(() => {    
+  useEffect(() => {
     // if (publicKey == null) {
     //   router.push("/");
     // }
@@ -126,10 +126,9 @@ export default function Example() {
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
-                  { publicKey == null ? (
+                  {publicKey == null ? (
                     <ConnectWallet />
-                  ): (
-
+                  ) : (
                     <Menu as="div" className="relative ml-3">
                       <div>
                         <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -153,14 +152,14 @@ export default function Example() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
                               <Link
                                 href="/user/dashboard"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? "bg-black" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 hover:text-white"
                                 )}
                               >
                                 Dashboard{" "}
@@ -172,8 +171,8 @@ export default function Example() {
                               <Link
                                 href="/projects"
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? "bg-black" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 hover:text-white"
                                 )}
                               >
                                 Proyectos
@@ -185,8 +184,8 @@ export default function Example() {
                               <p
                                 onClick={() => signOut()}
                                 className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  active ? "bg-black" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 hover:text-white"
                                 )}
                               >
                                 Salir/Desconectar Wallet
