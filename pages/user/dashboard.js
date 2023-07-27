@@ -3,6 +3,7 @@ import NavBar from "@/components/NavBar";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Loading from "@/components/common/Loading";
 
 export default function Example() {
   const [dreams, setDreams] = useState([]);
@@ -24,12 +25,7 @@ export default function Example() {
       <NavBar />
       <div className="mx-auto min-h-screen max-w-2xl px-4 pb-20 sm:px-6 sm:pb-32 lg:max-w-7xl lg:px-8">
         {dreams.length == 0 ? (
-          <div className="flex justify-center items-center h-screen">
-            <div className="grid grid-cols-1 justify-items-center space-y-4">
-              <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-white"></div>
-              <span className="text-white">Loading server data...</span>
-            </div>
-          </div>
+          <Loading />
         ) : (
           <div className="mt-11 grid grid-cols-1 items-start gap-x-6 gap-y-16 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
             {dreams.map((dream) => (
