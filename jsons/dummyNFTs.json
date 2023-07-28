@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "NFT 1",
+    "description": "NFT 1",
+    "project": "Project 1",
+    "image": "https://dummyimage.com/420x260",
+    "price": 100,
+    "owner": "0x123456789",
+    "status": "Pending",
+    "benefits": ["Benefit 1", "Benefit 2"]
+  },
+  {
+    "id": 2,
+    "name": "NFT 2",
+    "description": "NFT 2",
+    "project": "Project 2",
+    "image": "https://dummyimage.com/420x260",
+    "price": 100,
+    "owner": "0x123456789",
+    "status": "Claimed",
+    "benefits": ["Benefit 2", "Benefit 3"]
+  },
+  {
+    "id": 3,
+    "name": "NFT 3",
+    "description": "NFT 3",
+    "project": "Project 3",
+    "image": "https://dummyimage.com/420x260",
+    "price": 200,
+    "owner": "0x987654321",
+    "status": "Pending",
+    "benefits": ["Benefit 1"]
+  },
+  {
+    "id": 4,
+    "name": "NFT 4",
+    "description": "NFT 4",
+    "project": "Project 4",
+    "image": "https://dummyimage.com/420x260",
+    "price": 150,
+    "owner": "0x987654321",
+    "status": "Claimed",
+    "benefits": ["Benefit 3"]
+  },
+  {
+    "id": 5,
+    "name": "NFT 5",
+    "description": "NFT 5",
+    "project": "Project 5",
+    "image": "https://dummyimage.com/420x260",
+    "price": 300,
+    "owner": "0x123456789",
+    "status": "Pending",
+    "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"]
+  },
+  {
+    "id": 6,
+    "name": "NFT 6",
+    "description": "NFT 6",
+    "project": "Project 6",
+    "image": "https://dummyimage.com/420x260",
+    "price": 250,
+    "owner": "0x987654321",
+    "status": "Claimed",
+    "benefits": ["Benefit 1", "Benefit 2"]
+  },
+  {
+    "id": 7,
+    "name": "NFT 7",
+    "description": "NFT 7",
+    "project": "Project 7",
+    "image": "https://dummyimage.com/420x260",
+    "price": 175,
+    "owner": "0x123456789",
+    "status": "Pending",
+    "benefits": ["Benefit 2"]
+  },
+  {
+    "id": 8,
+    "name": "NFT 8",
+    "description": "NFT 8",
+    "project": "Project 8",
+    "image": "https://dummyimage.com/420x260",
+    "price": 225,
+    "owner": "0x987654321",
+    "status": "Claimed",
+    "benefits": ["Benefit 1", "Benefit 3"]
+  },
+  {
+    "id": 9,
+    "name": "NFT 9",
+    "description": "NFT 9",
+    "project": "Project 9",
+    "image": "https://dummyimage.com/420x260",
+    "price": 275,
+    "owner": "0x123456789",
+    "status": "Pending",
+    "benefits": ["Benefit 3"]
+  },
+  {
+    "id": 10,
+    "name": "NFT 10",
+    "description": "NFT 10",
+    "project": "Project 10",
+    "image": "https://dummyimage.com/420x260",
+    "price": 200,
+    "owner": "0x987654321",
+    "status": "Claimed",
+    "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"]
+  }
+]

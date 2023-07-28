@@ -22,6 +22,11 @@ module.exports = {
         hostname: "ipfs-2.thirdwebcdn.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "dummyimage.com",
+        port: "",
+      },
     ],
   },
   i18n: {

@@ -79,7 +79,7 @@ export default function Example() {
       { silver, price: 0.01, perks: ["Plata jelly time"] },
       { gold, price: 0.1, perks: ["Oro jelly time"] },
     ];
-    toast.loading("Convirtiendo URL a Blob...");
+    toast.loading("Converting URL to Blob...");
     await fetch(thumbnail)
       .then((res) => res.blob())
       .then((myblob) => {
@@ -107,7 +107,7 @@ export default function Example() {
     try {
       const response = await axios.post("/api/dream", data);
       console.log(response.data);
-      toast.success("Proyecto creado");
+      toast.success("Project created");
       router.push("/user/dashboard");
     } catch (error) {
       console.log(error);
@@ -122,11 +122,11 @@ export default function Example() {
         <div className="space-y-12 m-6 lg:px-60">
           <div className="border-b border-white/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-white">
-              Crear un nuevo proyecto{" "}
+              Create new project{" "}
             </h2>
             <p className="mt-1 text-sm leading-6 text-white">
-              Esta información será mostrada publicamente así que toma tu
-              precaución con la información que compartes aquí.
+              This information will be displayed publicly, so be cautious about
+              the information you share here.
             </p>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -135,7 +135,7 @@ export default function Example() {
                   htmlFor="username"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Nombre del Proyecto
+                  Project Name{" "}
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500">
@@ -147,7 +147,7 @@ export default function Example() {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-white focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Mi Proyecto"
+                      placeholder="My Proyect"
                     />
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function Example() {
                   htmlFor="about"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Descripción
+                  Description
                 </label>
                 <div className="mt-2">
                   <textarea
@@ -169,7 +169,7 @@ export default function Example() {
                     rows={3}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                     defaultValue={""}
-                    placeholder="Describe claramente tu proyecto y lo que quieres lograr."
+                    placeholder="Clearly describe your project and what you want to achieve."
                   />
                 </div>
               </div>
@@ -189,7 +189,7 @@ export default function Example() {
                       htmlFor="cover-photo"
                       className="block text-sm font-medium leading-6 text-white"
                     >
-                      Portada{" "}
+                      Cover{" "}
                     </label>
                     <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white/25 px-6 py-10">
                       <div className="text-center">
@@ -202,7 +202,7 @@ export default function Example() {
                             htmlFor="file-upload"
                             className="relative cursor-pointer rounded-md bg-gray-900 font-semibold text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 focus-within:ring-offset-gray-900 hover:text-indigo-500"
                           >
-                            <span>Sube un archivo</span>
+                            <span>Upload file</span>
                             <input
                               id="file-upload"
                               name="file-upload"
@@ -226,7 +226,7 @@ export default function Example() {
                           </label>
                         </div>
                         <p className="text-xs leading-5 text-white">
-                          PNG, JPG, GIF hasta 10MB
+                          PNG, JPG, GIF up to 10MB
                         </p>
                       </div>
                     </div>
@@ -238,7 +238,7 @@ export default function Example() {
 
           <div className="border-b border-white/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-white">
-              Información del Proyecto{" "}
+              Project Information{" "}
             </h2>
 
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -247,7 +247,7 @@ export default function Example() {
                   htmlFor="first-name"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Meta Monetaria{" "}
+                  Monetary Goal{" "}
                 </label>
                 <div className="mt-2">
                   <input
@@ -268,7 +268,7 @@ export default function Example() {
                   htmlFor="email"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Dirección de Wallet{" "}
+                  Wallet Adress{" "}
                 </label>
                 <div className="mt-2">
                   <input
@@ -279,7 +279,7 @@ export default function Example() {
                     disabled
                     value={publicKey}
                     className="block w-full rounded-md border-0 bg-white/5 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                    placeholder="tu Wallet ya está conectada"
+                    placeholder="Wallet Connected"
                   />
                 </div>
               </div>
@@ -289,7 +289,7 @@ export default function Example() {
                   htmlFor="country"
                   className="block text-sm font-medium leading-6 text-white"
                 >
-                  Fecha Límite /Duración de Campaña
+                  Deadline / Campaign Duration
                 </label>
                 <div className="mt-2">
                   <input
@@ -374,151 +374,18 @@ export default function Example() {
             </div>
           </div>
 
-          {/* <div className="border-b border-white/10 pb-12 m-4">
-              <h2 className="text-base font-semibold leading-7 text-white">
-                Notifications
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-gray-400"></p>
-
-              <div className="mt-10 space-y-10">
-                <fieldset>
-                  <legend className="text-sm font-semibold leading-6 text-white">
-                    By Email
-                  </legend>
-                  <div className="mt-6 space-y-6">
-                    <div className="relative flex gap-x-3">
-                      <div className="flex h-6 items-center">
-                        <input
-                          id="comments"
-                          name="comments"
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                        />
-                      </div>
-                      <div className="text-sm leading-6">
-                        <label
-                          htmlFor="comments"
-                          className="font-medium text-white"
-                        >
-                          Comments
-                        </label>
-                        <p className="text-gray-400">
-                          Get notified when someones posts a comment on a
-                          posting.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="relative flex gap-x-3">
-                      <div className="flex h-6 items-center">
-                        <input
-                          id="candidates"
-                          name="candidates"
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                        />
-                      </div>
-                      <div className="text-sm leading-6">
-                        <label
-                          htmlFor="candidates"
-                          className="font-medium text-white"
-                        >
-                          Candidates
-                        </label>
-                        <p className="text-gray-400">
-                          Get notified when a candidate applies for a job.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="relative flex gap-x-3">
-                      <div className="flex h-6 items-center">
-                        <input
-                          id="offers"
-                          name="offers"
-                          type="checkbox"
-                          className="h-4 w-4 rounded border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                        />
-                      </div>
-                      <div className="text-sm leading-6">
-                        <label
-                          htmlFor="offers"
-                          className="font-medium text-white"
-                        >
-                          Offers
-                        </label>
-                        <p className="text-gray-400">
-                          Get notified when a candidate accepts or rejects an
-                          offer.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend className="text-sm font-semibold leading-6 text-white">
-                    Push Notifications
-                  </legend>
-                  <p className="mt-1 text-sm leading-6 text-gray-400">
-                    These are delivered via SMS to your mobile phone.
-                  </p>
-                  <div className="mt-6 space-y-6">
-                    <div className="flex items-center gap-x-3">
-                      <input
-                        id="push-everything"
-                        name="push-notifications"
-                        type="radio"
-                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                      />
-                      <label
-                        htmlFor="push-everything"
-                        className="block text-sm font-medium leading-6 text-white"
-                      >
-                        Everything
-                      </label>
-                    </div>
-                    <div className="flex items-center gap-x-3">
-                      <input
-                        id="push-email"
-                        name="push-notifications"
-                        type="radio"
-                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                      />
-                      <label
-                        htmlFor="push-email"
-                        className="block text-sm font-medium leading-6 text-white"
-                      >
-                        Same as email
-                      </label>
-                    </div>
-                    <div className="flex items-center gap-x-3">
-                      <input
-                        id="push-nothing"
-                        name="push-notifications"
-                        type="radio"
-                        className="h-4 w-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
-                      />
-                      <label
-                        htmlFor="push-nothing"
-                        className="block text-sm font-medium leading-6 text-white"
-                      >
-                        No push notifications
-                      </label>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-            </div> */}
           <div className="mt-6 mr-6 flex items-center justify-end gap-x-6">
             <button
               type="button"
               className="px-4 py-1 text-sm font-semibold leading-6 text-red-500 hover:text-red-600 hover:border-2 hover:border-dashed hover:border-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
             >
-              Cancelar
+              Cancel
             </button>
             <button
               onClick={handleSubmit}
               className=" bg-white px-3 py-2 text-sm font-semibold text-black  hover:bg-black hover:border-2  hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
             >
-              Guardar y Publicar
+              Save and Publish{" "}
             </button>
           </div>
         </div>

@@ -233,12 +233,12 @@ export default function DreamPage() {
                   <h2 className="text-lg font-medium text-white">
                     Other projects{" "}
                   </h2>
-                  <a
-                    href="#"
+                  <Link
+                    href="/user/dashboard"
                     className="whitespace-nowrap text-sm font-medium text-white hover:text-indigo-500"
                   >
                     See all <span aria-hidden="true"> &rarr;</span>
-                  </a>
+                  </Link>
                 </div>
                 <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
                   {relatedProducts.map((product) => (
