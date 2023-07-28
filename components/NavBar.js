@@ -110,7 +110,7 @@ export default function Example() {
                     href="/user/dashboard"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white  hover:text-black hover:bg-white hover:border-8 hover:border-black"
                   >
-                    Proyectos
+                    Projects
                   </Link>
                 </div>
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
@@ -132,7 +132,7 @@ export default function Example() {
                     className="relative inline-flex items-center gap-x-1.5  bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm hover:border-2 hover:border-white hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                    {hasProjectToEdit ? "Editar Proyecto" : "Crear Proyecto"}
+                    {hasProjectToEdit ? "Edit Project" : "Create Project"}
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
@@ -185,7 +185,7 @@ export default function Example() {
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                Proyectos
+                                Projects
                               </Link>
                             )}
                           </Menu.Item>
@@ -198,7 +198,7 @@ export default function Example() {
                                   "block px-4 py-2 text-sm text-gray-700"
                                 )}
                               >
-                                Salir/Desconectar Wallet
+                                Disconnect Wallet
                               </p>
                             )}
                           </Menu.Item>

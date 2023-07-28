@@ -26,7 +26,7 @@ export default function Home() {
   }, [publicKey]);
 
   const getProfile = async () => {
-    toast.loading("Cargando perfil...");
+    toast.loading("Loading profile...");
     try {
       const response = await axios.get(`/api/user/${publicKey}`);
       console.log(response.data);

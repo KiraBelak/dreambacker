@@ -234,7 +234,7 @@ export default function DreamPage() {
                     Other projects{" "}
                   </h2>
                   <a
-                    href="#"
+                    href="/user/dashboard"
                     className="whitespace-nowrap text-sm font-medium text-white hover:text-indigo-500"
                   >
                     See all <span aria-hidden="true"> &rarr;</span>
