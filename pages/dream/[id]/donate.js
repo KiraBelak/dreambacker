@@ -30,6 +30,7 @@ export default function Example() {
   const [statusText, setStatusText] = useState("");
   const shyft_api_key = "q4OzU_8-cc89oq-R";
   const network = process.env.CHAIN_NETWORK ?? "devnet";
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const { id } = router.query;
@@ -83,8 +84,10 @@ export default function Example() {
   };
 
   const onClick = async () => {
+    setLoading(true);
+
     if (!publicKey) throw new WalletNotConnectedError();
-    if (!receiver) throw new Error("receiver is null");
+    if (!receiver) throw new Error("Receiver is null");
 
     if (amount <= 0) {
       toast.error("You must enter a valid amount");
@@ -155,22 +158,22 @@ export default function Example() {
 
   const getNFT = async () => {
     try {
-      setStatusText("dream obtained");
+      setStatusText("Dream obtained");
       // Build SHYFT's bodyParams with the information provided
 
-      toast.loading("generating NFT");
+      toast.loading("Generating NFT");
 
       const benefits = getBenefitPerks(dream, amount);
 
       //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
-      setStatusText("benefits obtained " + JSON.stringify(benefits));
+      setStatusText("Benefits obtained " + JSON.stringify(benefits));
       if (!benefits) {
-        setStatusText("user has not reached any benefits");
+        setStatusText("User has not reached any benefits");
         return;
       }
 
       //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
-      setStatusText("beneficios obtenidos " + JSON.stringify(benefits));
+      setStatusText("Benefits obtained " + JSON.stringify(benefits));
       if (!benefits) {
         setStatusText("Sorry but you are not eligible for any benefits or NFT");
         return;
@@ -203,7 +206,7 @@ export default function Example() {
       // formdata.append('service_charge', '{ "receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe",  "token": "DjMA5cCK95X333t7SgkpsG5vC9wMk7u9JV4w8qipvFE8",  "amount": 0.01}');
 
       // create a blob from dream.thumbnail which is a URL for an IPFS image
-      toast.success("generando NFT");
+      toast.success("Generating NFT");
       await fetch(dream.thumbnail)
         .then((res) => res.blob())
         .then((blob) => {
@@ -251,7 +254,7 @@ export default function Example() {
       }, 3000);
 
       setStatusText(
-        `NFT Firmado exitosamente https://solscan.io/tx/${result.data.result}?cluster=devnet`
+        `NFT signed succesfully https://solscan.io/tx/${result.data.result}?cluster=devnet`
       );
     } catch (error) {
       toast.error("An eror occurred.");
@@ -296,17 +299,17 @@ export default function Example() {
           <div className="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
             <div className="p-8 sm:p-10 lg:flex-auto">
               <h3 className="text-2xl font-bold tracking-tight text-gray-900">
-                👏 Donacion Voluntaria ✌️
+                👏 Voluntary Donation ✌️
               </h3>
               <p className="mt-6 text-base leading-7 text-gray-600">
-                Eres libre de donar la cantidad que desees, tu donación será
-                destinada al proyecto que has elegido. Tu donación no implica la
-                adquisición de acciones ni participación en los proyectos pero
-                te da acceso a beneficios exclusivos.
+                You are free to donate the amount you wish; your donation will
+                be allocated to the project you have chosen. Your donation does
+                not imply the acquisition of shares or participation in the
+                projects, but it grants you access to exclusive benefits.
               </p>
               <div className="mt-10 flex items-center gap-x-4">
                 <h4 className="flex-none text-sm font-semibold leading-6 text-indigo-600">
-                  Beneficios
+                  Benefits
                 </h4>
                 <div className="h-px flex-auto bg-gray-100" />
               </div>
@@ -329,7 +332,7 @@ export default function Example() {
               <div className="rounded-2xl bg-gray-50 py-10 text-center ring-1 ring-inset ring-gray-900/5 lg:flex lg:flex-col lg:justify-center lg:py-16">
                 <div className="mx-auto max-w-xs px-8">
                   <p className="text-base font-semibold text-gray-600">
-                    Apoya a {dream.title}
+                    Support {dream.title}
                   </p>
                   <div className="mt-6 flex items-baseline justify-center gap-x-2">
                     <Input
@@ -344,12 +347,13 @@ export default function Example() {
                   </div>
 
                   <button
-                    disabled={amount <= 0}
+                    disabled={(amount <= 0, loading)}
+                    type="submit"
                     className="mt-10 block w-full rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
                     disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={onClick}
                   >
-                    DONATE
+                    {loading ? "Loading..." : " DONATE"}
                   </button>
                 </div>
               </div>
@@ -357,16 +361,16 @@ export default function Example() {
           </div>
           <div className="p-10">
             <p className=" mt-2 text-lg leading-8 text-gray-600">
-              Al realizar una donación con Solana, estás realizando una
-              contribución voluntaria para apoyar proyectos y causas que te
-              interesan. Tu donación no implica la adquisición de acciones ni
-              participación en los proyectos financiados.
+              When you make a donation with Solana, you are making a voluntary
+              contribution to support projects and causes that interest you.
+              Your donation does not imply the acquisition of shares or
+              participation in the funded projects.
             </p>
             <p className=" mt-2 text-lg leading-8 text-gray-600">
-              Utilizamos la tecnología blockchain de Solana para garantizar la
-              seguridad y transparencia de tus donaciones. Las transacciones con
-              Solana son rápidas y seguras, lo que te brinda tranquilidad al
-              realizar tu contribución.
+              We use Solana {`&#39`} s blockchain technology to ensure the security and
+              transparency of your donations. Transactions with Solana are fast
+              and secure, providing you with peace of mind when making your
+              contribution.
             </p>
           </div>
         </div>
