@@ -13,8 +13,8 @@ const Header = () => {
             <Link href="/">
               <Image
                 className="h-30 w-auto"
-                src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
-                alt="logo"
+                src="https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689556793/DreamBacker/db_logo_jhbegi.png"
+                alt="dreambacker logo"
                 width={500}
                 height={500}
               />

@@ -85,7 +85,7 @@ export default function Example() {
                     <span className="sr-only">Workflow</span>
                     <Image
                       className="block h-8 w-auto lg:hidden"
-                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
+                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689556793/DreamBacker/db_logo_jhbegi.png"
                       alt="logo"
                       width={300}
                       height={200}
@@ -96,7 +96,7 @@ export default function Example() {
                     <span className="sr-only">Workflow</span>
                     <Image
                       className="hidden h-8 w-auto lg:block"
-                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/c_crop,h_106,w_500/v1685746064/DreamBacker/DreamBacker_-_Logo_qc9fp7.png"
+                      src="https://res.cloudinary.com/dzdqwcqj0/image/upload/v1689556793/DreamBacker/db_logo_jhbegi.png"
                       alt="logo"
                       width={300}
                       height={200}
@@ -107,10 +107,20 @@ export default function Example() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
 
                   <Link
-                    href="/dream/index"
+                    href="/user/dashboard"
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white  hover:text-black hover:bg-white hover:border-8 hover:border-black"
                   >
-                    Proyectos
+                    Projects
+                  </Link>
+                </div>
+                <div className="hidden md:ml-6 md:flex md:space-x-8">
+                  {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+
+                  <Link
+                    href="/user/claim"
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white  hover:text-black hover:bg-white hover:border-8 hover:border-black"
+                  >
+                    NFTs
                   </Link>
                 </div>
               </div>
@@ -122,7 +132,7 @@ export default function Example() {
                     className="relative inline-flex items-center gap-x-1.5  bg-white px-3 py-2 text-sm font-semibold text-black shadow-sm hover:border-2 hover:border-white hover:bg-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     <PlusIcon className="-ml-0.5 h-5 w-5" aria-hidden="true" />
-                    {hasProjectToEdit ? "Editar Proyecto" : "Crear Proyecto"}
+                    {hasProjectToEdit ? "Edit Project" : "Create Project"}
                   </Link>
                 </div>
                 <div className="hidden md:ml-4 md:flex md:flex-shrink-0 md:items-center">
@@ -169,13 +179,13 @@ export default function Example() {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                href="/projects"
+                                href="/user/dashboard"
                                 className={classNames(
                                   active ? "bg-black" : "",
                                   "block px-4 py-2 text-sm text-gray-700 hover:text-white"
                                 )}
                               >
-                                Proyectos
+                                Projects
                               </Link>
                             )}
                           </Menu.Item>
@@ -188,7 +198,7 @@ export default function Example() {
                                   "block px-4 py-2 text-sm text-gray-700 hover:text-white"
                                 )}
                               >
-                                Salir/Desconectar Wallet
+                                Disconnect Wallet
                               </p>
                             )}
                           </Menu.Item>

@@ -1,0 +1,81 @@
+{
+  "Where Dreamers meet Backers": "Donde los soñadores se encuentran con los patrocinadores",
+  "Fuel Dreams, Ignite Possibilities: Empowering Innovators through Crypto Crowdfunding!":
+    "Alimenta sueños, enciende posibilidades: ¡Empoderando innovadores a través del crowdfunding cripto!",
+  "Connect your wallet to explore or create projects":
+    "Conecta tu billetera para explorar o crear proyectos",
+  "Create a username": "Crea un nombre de usuario",
+  "Save": "Guardar",
+  "Write your username": "Escribe tu nombre de usuario",
+  "Loading server data...": "Cargando datos del servidor...",
+
+  "components": {
+    "NavBar": {
+      "projectInfo": "Información del Proyecto",
+      "description": "Descripción",
+      "uploadFile": "Subir archivo",
+      "orDragDrop": "o arrastrar y soltar aquí",
+      "fileFormat": "PNG, JPG, GIF hasta 10MB",
+      "monetaryGoal": "Meta Monetaria",
+      "walletAddress": "Dirección de Billetera",
+      "deadline": "Fecha Límite / Duración de la Campaña",
+      "bronze": "Bronce",
+      "silver": "Plata",
+      "gold": "Oro",
+      "cancel": "Cancelar",
+      "saveAndPublish": "Guardar y Publicar"
+    },
+    "Footer": {
+      "rightsReserved": "Todos los derechos reservados"
+    }
+  },
+  "pages": {
+    "example": {
+      "publicInfo": "Esta información se mostrará públicamente, así que ten precaución con la información que compartas aquí.",
+      "projectDetails": "Detalles del Proyecto",
+      "uploadImage": "Portada",
+      "uploadImageInfo": "PNG, JPG, GIF hasta 10MB",
+      "uploadImageDragDrop": "o arrastra y suelta aquí",
+      "uploadImageText": "Subir un archivo",
+      "monetaryGoal": "Meta Monetaria",
+      "walletAddress": "Dirección de Billetera",
+      "deadline": "Fecha Límite / Duración de la Campaña",
+      "bronze": "Bronce",
+      "silver": "Plata",
+      "gold": "Oro",
+      "cancel": "Cancelar",
+      "saveAndPublish": "Guardar y Publicar"
+    }
+  },
+  "example": {
+    "import": {
+      "import": {
+        "Input": "@/components/forms/fields",
+        "CheckIcon": "@heroicons/react/20/solid",
+        "useContext": "react",
+        "useEffect": "react",
+        "useState": "react",
+        "WalletContext": "@/src/wallet",
+        "axios": "axios",
+        "toast": "react-hot-toast",
+        "Toaster": "react-hot-toast",
+        "useRouter": "next/router",
+        "get": "react-hook-form",
+        "NavBar": "@/components/NavBar",
+        "Connection": "@solana/web3.js",
+        "SystemProgram": "@solana/web3.js",
+        "Transaction": "@solana/web3.js",
+        "PublicKey": "@solana/web3.js",
+        "LAMPORTS_PER_SOL": "@solana/web3.js",
+        "clusterApiUrl": "@solana/web3.js",
+        "SendTransactionError": "@solana/web3.js"
+      },
+      "content": "// Add your translations here if needed"
+    },
+    "message": "You are free to donate any amount you wish. Your donation will be allocated to the project you have chosen. Your donation does not imply the acquisition of shares or participation in the projects, but it grants you access to exclusive benefits.",
+    "message2": "When making a donation with Solana, you are making a voluntary contribution to support projects and causes that interest you. Your donation does not imply the acquisition of shares or participation in the funded projects.",
+    "message3": "We utilize Solana's blockchain technology to ensure the security and transparency of your donations. Transactions with Solana are fast and secure, providing you with peace of mind when making your contribution.",
+    "example_code": "import { Input } from \"@/components/forms/fields\";\nimport { CheckIcon } from \"@heroicons/react/20/solid\";\nimport { useContext, useEffect, useState } from \"react\";\nimport { WalletContext } from \"@/src/wallet\";\nimport axios from \"axios\";\nimport { toast, Toaster } from \"react-hot-toast\";\nimport { useRouter } from \"next/router\";\nimport { get } from \"react-hook-form\";\nimport NavBar from \"@/components/NavBar\";\nimport {\n  Connection,\n  SystemProgram,\n  Transaction,\n  PublicKey,\n  LAMPORTS_PER_SOL,\n  clusterApiUrl,\n  SendTransactionError,\n} from \"@solana/web3.js\";\n\n// Rest of the code here"
+  }
+}
+
