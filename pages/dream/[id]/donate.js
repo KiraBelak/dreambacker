@@ -367,7 +367,7 @@ export default function Example() {
               participation in the funded projects.
             </p>
             <p className=" mt-2 text-lg leading-8 text-gray-600">
-              We use Solana's blockchain technology to ensure the security and
+              We use Solana {`&#39`} s blockchain technology to ensure the security and
               transparency of your donations. Transactions with Solana are fast
               and secure, providing you with peace of mind when making your
               contribution.
