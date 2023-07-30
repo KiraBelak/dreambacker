@@ -104,7 +104,7 @@ export default function Example() {
 
                     <div className="prose prose-sm mt-4 text-gray-500">
                       <ul role="list">
-                      {(selectedNFT?.benefits > 1) && selectedNFT?.benefits?.map((item, index) => (
+                      {(selectedNFT?.benefits.length > 1) && selectedNFT?.benefits?.map((item, index) => (
                           <li key={index}>{item}</li>
                         ))}
                       {(selectedNFT?.benefits?.length === 1) && <li>{selectedNFT?.benefits[0]}</li>
