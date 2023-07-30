@@ -35,6 +35,11 @@ export default function Example() {
         setLoading(false);
         return;
       }
+
+      if (nft.status === "claimed") {
+        router.push("/user/dashboard");
+      }
+
       setSelectedNFT(nft);
       setLoading(false);
     };

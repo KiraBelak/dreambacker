@@ -22,12 +22,21 @@ const NFTCard = ({ nft }) => {
           status: {nft.status}
         </p>
         {/* // Boton para reclamar el NFT */}
-        <Link
-          href={`/user/claim/${nft.id}`}
-          className="flex text-sm font-medium text-center items-center justify-center bg-white text-black border-dashed border-2 py-2 px-1 hover:bg-black hover:text-white"
-        >
-          Claim
-        </Link>
+        {nft.status === "claimed" ? (
+          <Link
+            href={`/dream/${nft.dream._id}`}
+            className="flex text-sm font-medium text-center items-center justify-center bg-white text-black border-dashed border-2 py-2 px-1 "
+          >
+            Dream page
+          </Link>
+        ) : (
+          <Link
+            href={`/user/claim/${nft.id}`}
+            className="flex text-sm font-medium text-center items-center justify-center bg-white text-black border-dashed border-2 py-2 px-1 hover:bg-black hover:text-white"
+          >
+            Claim
+          </Link>
+        )}
       </div>
     </div>
   );
