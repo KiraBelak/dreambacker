@@ -33,7 +33,7 @@ export default async function handler(req, res) {
                     "owner": body.owner,
                     "status": body.status,
                     "benefits": body.benefits,
-                    "date":body.date
+                    "date":date
                 }
                 
                 const result = await nfts.insertOne(newNft);
