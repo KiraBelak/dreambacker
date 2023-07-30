@@ -5,12 +5,13 @@ import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 import axios from "axios";
 import { getNFT } from "@/lib/claimnft";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 
 export default function Example() {
   const router = useRouter();
   const [selectedNFT, setSelectedNFT] = useState({});
+  const [mintedNFT, setMintedNFT] = useState(null);
   const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -22,11 +23,6 @@ export default function Example() {
   useEffect(() => {
     // console.log("id", id);
     if (!id) return;
-    // TODO: Call the API endpoint to get the NFT data instead of dummyData
-    // const nft = dummyData.find((nft) => nft.id === id);
-    // console.log("nft", nft);
-    // console.log("nft", nft);
-    // setLoading(false);
 
     if (!wallet.connected || !id) return;
     const getNFTData = async () => {
@@ -38,6 +34,11 @@ export default function Example() {
         setLoading(false);
         return;
       }
+
+      if (nft.status === "claimed") {
+        router.push("/user/dashboard");
+      }
+
       setSelectedNFT(nft);
       setLoading(false);
     };
@@ -47,8 +48,7 @@ export default function Example() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("selectedNFT", selectedNFT);
-    getNFT(selectedNFT, setStatusText, wallet, connection);
+    getNFT(selectedNFT, wallet, connection);
   };
 
   return (

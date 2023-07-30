@@ -39,7 +39,7 @@ export default async function handler(req, res) {
         };
 
         const result = await nfts.insertOne(newNft);
-        res.status(201).json({ message: "NFT created", nft: result.ops });
+        res.status(201).json({ message: "NFT created", nft_id: body.id });
       }
 
       break;

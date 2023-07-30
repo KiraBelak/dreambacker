@@ -9,32 +9,21 @@ export default async function handler(req, res) {
   const nfts = db.collection("nft");
 
   switch (method) {
-    case "GET":
-      // Retrieve the nft with their wallet address
+    case "PUT":
+      // Updated the status to claimed
       {
         const { wallet, nft } = query;
-        console.log("nft_id => ", nft);
-        const nftData = await nfts.findOne({ owner: wallet, id: nft });
-        res.status(200).json({ nft: nftData });
-      }
-      break;
-    case "PUT":
-      // Update the user's nft
-      {
-        const { wallet, query } = query;
         const updatedNft = {
-          name: body.name,
-          description: body.description,
-          image: body.image,
+          status: "claimed", // 'claimed'
           updated_at: new Date(),
         };
 
         const result = await nfts.updateOne(
-          { owner: wallet, id: query },
+          { owner: wallet, id: nft },
           { $set: updatedNft }
         );
 
-        res.status(201).json({ message: "NFT updated", nft: updatedNft });
+        res.status(201).json({ message: "NFT claimed!", nft: updatedNft });
       }
 
       break;
