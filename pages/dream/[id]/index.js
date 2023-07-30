@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
+import { Toaster, toast } from "react-hot-toast";
 
 const backers = {
   featured: [
@@ -50,7 +51,8 @@ export default function DreamPage() {
       const response = await axios.get(`/api/dream/${id}`);
       setDream(response.data.dream);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error("Error al cargar el proyecto");
     }
   };
 
@@ -59,7 +61,7 @@ export default function DreamPage() {
       const response = await axios.get(
         `/api/dream/${id}/isbacker?publicKey=${publicKey}`
       );
-      console.log("is_backer", response.data.is_backer);
+      // console.log("is_backer", response.data.is_backer);
       setIsBacker(response.data.is_backer);
     } catch (error) {
       console.log(error);
@@ -75,9 +77,10 @@ export default function DreamPage() {
         );
         setIsOwner(isOwner);
       }
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error("Error al cargar el proyecto");
     }
   };
 
@@ -96,6 +99,7 @@ export default function DreamPage() {
   return (
     <>
       <NavBar />
+      <Toaster position="bottom-center" reverseOrder={false} />
 
       <div className="bg-black">
         <div className="p-6">

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 import axios from "axios";
-
 import { getNFT } from "@/lib/claimnft";
 import { Toaster } from "react-hot-toast";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -22,7 +21,7 @@ export default function Example() {
   const { connection } = useConnection();
 
   useEffect(() => {
-    console.log("id", id);
+    // console.log("id", id);
     if (!id) return;
 
     if (!wallet.connected || !id) return;

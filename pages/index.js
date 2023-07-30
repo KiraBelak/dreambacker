@@ -29,7 +29,7 @@ export default function Home() {
     toast.loading("Loading profile...");
     try {
       const response = await axios.get(`/api/user/${publicKey}`);
-      console.log(response.data);
+      // console.log(response.data);
       if (response.data.profile != null) {
         toast.dismiss();
         toast.success("Profile loaded");
