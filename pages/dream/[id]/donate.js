@@ -6,7 +6,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import NavBar from "@/components/NavBar";
 import { SystemProgram, Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
-
+import { v4 as uuidv4 } from 'uuid';
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const includedFeatures = [
@@ -110,6 +110,7 @@ export default function Example() {
         lamports: amount * LAMPORTS_PER_SOL,
       })
     );
+    // console.log("transaction", transaction);
 
     const {
       context: { slot: minContextSlot },
@@ -117,11 +118,13 @@ export default function Example() {
     } = await connection.getLatestBlockhashAndContext();
 
     try {
+      toast.loading("Sending transaction");
       // console.log("transaction", transaction );
       // console.log("connection", connection );
       const signature = await sendTransaction(transaction, connection, {
         minContextSlot,
       });
+      // console.log("signature", signature);
 
       await connection.confirmTransaction({
         blockhash,
@@ -129,24 +132,41 @@ export default function Example() {
         signature,
       });
 
+      // console.log("signature", signature);
+
       const confirmation = await connection.confirmTransaction(signature, {
         commitment: "confirmed",
       });
 
+      // console.log("confirmation", confirmation);
+
       if (confirmation.err) {
         // console.log("confirmation", confirmation);
+        toast.dismiss();
         toast.error("Transaction cancelled.");
         return;
       }
 
       const { slot } = confirmation.value;
-      console.info(`Transaction ${signature} confirmed in block ${slot}`);
+      // console.info(`Transaction ${signature} confirmed in block ${slot}`);
       const solanaExplorerLink = `https://explorer.solana.com/tx/${signature}?cluster=${SOLANA_NETWORK}`;
+      // console.log("solanaExplorerLink", solanaExplorerLink);
+      // await getNFT();
 
-      await getNFT();
-
-      toast.success("Transaction confirmed 👏");
       setExplorerLink(solanaExplorerLink);
+
+     const ret= await registerNFT();
+    //  console.log(ret)
+      setTimeout(() => {
+        toast.dismiss();
+        toast.success("Transaction confirmed.");
+        if (ret===true){
+          toast.success("your nft is waiting for you")
+          router.push("/user/claim")
+        }
+      }, 1000);
+
+
       return;
     } catch (err) {
       // console.error("Error: ", err.message);
@@ -156,6 +176,70 @@ export default function Example() {
     }
   };
 
+  const registerNFT = async () => {
+    try {
+      const benefits = getBenefitPerks(dream, amount);
+
+      //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
+      setStatusText("Benefits obtained " + JSON.stringify(benefits));
+      if (!benefits) {
+        setStatusText("User has not reached any benefits");
+        toast.error("User has not reached any benefits");
+        return;
+      }
+
+      //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
+      setStatusText("Benefits obtained " + JSON.stringify(benefits));
+      if (!benefits) {
+        setStatusText("Sorry but you are not eligible for any benefits or NFT");
+        toast.error("Sorry but you are not eligible for any benefits or NFT");
+        return;
+      }
+
+      // toast.success("beneficios obtenidos");
+      const benefitsString = JSON.stringify({
+        benefits: benefits,
+        dream: dream,
+        amount: amount,
+        backed_at: new Date().toISOString(),
+      });
+      // toast.success("benefits obtain " + benefitsString);
+      //logic to create the NFT claim
+      // "id": 1,
+    // "name": "NFT 1",
+    // "description": "NFT 1",
+    // "project": "Project 1",
+    // "image": "https://dummyimage.com/420x260",
+    // "price": 100,
+    // "owner": "0x123456789",
+    // "status": "Pending",
+    // "benefits": ["Benefit 1", "Benefit 2"]
+      //create id with uuidv4
+
+      const bodyParams = {
+        "id": uuidv4(),
+        "name": dream.title,
+        "description": dream.description,
+        "project": dream.title,
+        "image": dream.thumbnail,
+        "price": amount,
+        "owner": publicKey,
+        "status": "Pending",
+        "benefits": benefits,
+      };
+
+      // console.log("bodyParams", bodyParams);
+      const nft = await axios.post("/api/claim", bodyParams)
+      // console.log("nft", nft)
+      if (nft.status=201){
+        return true
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+      // console.log("the dream", dream)
   const getNFT = async () => {
     try {
       setStatusText("Dream obtained");
