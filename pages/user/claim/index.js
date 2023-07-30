@@ -11,12 +11,13 @@ const ClaimIndex = () => {
 
   useEffect(() => {
     if (!wallet.connected) return;
-    // const getNftPendientes = async () => {
-    //   const { data } = await axios.get("/api/user/claim");
-    //   setNftPendientes(data.nft);
-    // };
-    // getNftPendientes();
-    setNftPendientes(dummyData);
+    const getNftPendientes = async () => {
+      const { publicKey } = wallet;
+      const { data } = await axios.get(`/api/claim?wallet=${publicKey}`);
+      setNftPendientes(data.nfts);
+    };
+    getNftPendientes();
+    // setNftPendientes(dummyData);
   }, [wallet]);
 
   return (
@@ -42,7 +43,9 @@ const ClaimIndex = () => {
               <div className="container px-5 py-10 mx-auto">
                 <div className="flex flex-wrap -m-4">
                   {nftPendientes.length > 0 ? (
-                    nftPendientes.map((nft, i) => <NFTCard key={i} nft={nft} />)
+                    nftPendientes.map((nft, index) => (
+                      <NFTCard key={nft._id} nft={nft} />
+                    ))
                   ) : (
                     //pagina de no hay NFT pendientes con boton para ver los proyectos disponibles
                     <div className="container">
