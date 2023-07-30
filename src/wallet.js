@@ -14,15 +14,19 @@ export const Wallet = ({ children }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
   const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
 
+  const OMNIA_RPC = process.env.NEXT_PUBLIC_RPC_ENDPOINT;
+
+  // const network = OMNIA_RPC;
   const network =
     SOLANA_NETWORK === "devnet"
       ? WalletAdapterNetwork.Devnet
       : WalletAdapterNetwork.Mainnet;
 
-      console.log("network", network);
+  // console.log("network", network);
 
   // You can also provide a custom RPC endpoint.
-  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  // const endpoint = useMemo(() => clusterApiUrl(network), [OMNIA_RPC]);
+  const endpoint = useMemo(() => OMNIA_RPC);
 
   const wallets = useMemo(
     () => [
