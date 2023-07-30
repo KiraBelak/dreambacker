@@ -17,6 +17,7 @@ const includedFeatures = [
 ];
 
 const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
+// console.log("SOLANA_NETWORK", SOLANA_NETWORK);
 
 export default function Example() {
   const { connection } = useConnection();
@@ -74,7 +75,8 @@ export default function Example() {
       const balance = await connection.getBalance(publicKey);
       // console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
-      // console.log("balance new", balancenew)
+      console.log("balance new", balancenew)
+      
 
       setBalance(balancenew);
     } catch (err) {
