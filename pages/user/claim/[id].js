@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import dummyData from "@/jsons/dummyNFTs.json";
 import { useRouter } from "next/router";
-import LoadingCircle from "@/components/common/LoadingCircle";
 import Loading from "@/components/common/Loading";
+
+import { mintNFT } from "@lib/claimnft";
 
 export default function Example() {
   const router = useRouter();
