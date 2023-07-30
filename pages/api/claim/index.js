@@ -34,6 +34,7 @@ export default async function handler(req, res) {
           owner: body.owner,
           status: body.status,
           benefits: body.benefits,
+          dream: body.dream,
           date: date,
         };
 

@@ -226,6 +226,7 @@ export default function Example() {
         "owner": publicKey,
         "status": "Pending",
         "benefits": benefits,
+        "dream": dream,
       };
 
       // console.log("bodyParams", bodyParams);
