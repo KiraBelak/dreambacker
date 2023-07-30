@@ -12,9 +12,10 @@ export default async function handler(req, res) {
     case "GET":
       // Retrieve the nft with their wallet address
       {
-        const { wallet } = query;
-        const nft = await nfts.findOne({ owner: wallet });
-        res.status(200).json({ nft: nft });
+        const { wallet, nft } = query;
+        console.log("nft_id => ", nft);
+        const nftData = await nfts.findOne({ owner: wallet, id: nft });
+        res.status(200).json({ nft: nftData });
       }
       break;
     case "PUT":

@@ -6,9 +6,9 @@ import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 import axios from "axios";
 
-import { mintNFT, getNFT } from "@/lib/claimnft";
+import { getNFT } from "@/lib/claimnft";
 import { Toaster, toast } from "react-hot-toast";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
 
 export default function Example() {
   const router = useRouter();
@@ -18,6 +18,8 @@ export default function Example() {
   const [notFound, setNotFound] = useState(false);
   const [statusText, setStatusText] = useState("");
   const wallet = useWallet();
+  const { publicKey } = wallet;
+  const { connection } = useConnection();
 
   useEffect(() => {
     console.log("id", id);
@@ -35,6 +37,7 @@ export default function Example() {
       const { nft } = data;
       if (!nft) {
         setNotFound(true);
+        setLoading(false);
         return;
       }
       setSelectedNFT(nft);
@@ -47,7 +50,7 @@ export default function Example() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("selectedNFT", selectedNFT);
-    getNFT(selectedNFT, setStatusText);
+    getNFT(selectedNFT, setStatusText, wallet, connection);
   };
 
   return (

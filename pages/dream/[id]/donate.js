@@ -6,7 +6,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import NavBar from "@/components/NavBar";
 import { SystemProgram, Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const includedFeatures = [
@@ -28,7 +28,7 @@ export default function Example() {
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
   const [statusText, setStatusText] = useState("");
-  const shyft_api_key = "q4OzU_8-cc89oq-R";
+
   const network = process.env.CHAIN_NETWORK ?? "devnet";
   const [loading, setLoading] = useState(false);
 
@@ -155,17 +155,16 @@ export default function Example() {
 
       setExplorerLink(solanaExplorerLink);
 
-     const ret= await registerNFT();
-    //  console.log(ret)
+      const ret = await registerNFT();
+      //  console.log(ret)
       setTimeout(() => {
         toast.dismiss();
         toast.success("Transaction confirmed.");
-        if (ret===true){
-          toast.success("your nft is waiting for you")
-          router.push("/user/claim")
+        if (ret === true) {
+          toast.success("your nft is waiting for you");
+          router.push("/user/claim");
         }
       }, 1000);
-
 
       return;
     } catch (err) {
@@ -206,42 +205,40 @@ export default function Example() {
       // toast.success("benefits obtain " + benefitsString);
       //logic to create the NFT claim
       // "id": 1,
-    // "name": "NFT 1",
-    // "description": "NFT 1",
-    // "project": "Project 1",
-    // "image": "https://dummyimage.com/420x260",
-    // "price": 100,
-    // "owner": "0x123456789",
-    // "status": "Pending",
-    // "benefits": ["Benefit 1", "Benefit 2"]
+      // "name": "NFT 1",
+      // "description": "NFT 1",
+      // "project": "Project 1",
+      // "image": "https://dummyimage.com/420x260",
+      // "price": 100,
+      // "owner": "0x123456789",
+      // "status": "Pending",
+      // "benefits": ["Benefit 1", "Benefit 2"]
       //create id with uuidv4
 
       const bodyParams = {
-        "id": uuidv4(),
-        "name": dream.title,
-        "description": dream.description,
-        "project": dream.title,
-        "image": dream.thumbnail,
-        "price": amount,
-        "owner": publicKey,
-        "status": "Pending",
-        "benefits": benefits,
-        "dream": dream,
+        id: uuidv4(),
+        name: dream.title,
+        description: dream.description,
+        project: dream.title,
+        image: dream.thumbnail,
+        price: amount,
+        owner: publicKey,
+        status: "Pending",
+        benefits: benefits,
+        dream: dream,
       };
 
       // console.log("bodyParams", bodyParams);
-      const nft = await axios.post("/api/claim", bodyParams)
+      const nft = await axios.post("/api/claim", bodyParams);
       // console.log("nft", nft)
-      if (nft.status=201){
-        return true
+      if ((nft.status = 201)) {
+        return true;
       }
-
     } catch (error) {
       console.log(error);
     }
   };
-      // console.log("the dream", dream)
- 
+  // console.log("the dream", dream)
 
   const getBenefitPerks = (dream, amount) => {
     const { benefits } = dream;
@@ -348,10 +345,10 @@ export default function Example() {
               participation in the funded projects.
             </p>
             <p className=" mt-2 text-lg leading-8 text-gray-600">
-              We use Solana {`&#39`} s blockchain technology to ensure the security and
-              transparency of your donations. Transactions with Solana are fast
-              and secure, providing you with peace of mind when making your
-              contribution.
+              We use Solana {`&#39`} s blockchain technology to ensure the
+              security and transparency of your donations. Transactions with
+              Solana are fast and secure, providing you with peace of mind when
+              making your contribution.
             </p>
           </div>
         </div>
