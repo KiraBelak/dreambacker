@@ -25,8 +25,8 @@ export const Wallet = ({ children }) => {
   // console.log("network", network);
 
   // You can also provide a custom RPC endpoint.
-  // const endpoint = useMemo(() => clusterApiUrl(network), [OMNIA_RPC]);
-  const endpoint = useMemo(() => OMNIA_RPC);
+  const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  // const endpoint = useMemo(() => OMNIA_RPC);
 
   const wallets = useMemo(
     () => [
