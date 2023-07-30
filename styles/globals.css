@@ -1,5 +1,5 @@
 /* Manrope Font import */
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -27,4 +27,12 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.twoLines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

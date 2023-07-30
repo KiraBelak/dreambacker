@@ -15,11 +15,11 @@ const NFTCard = ({ nft }) => {
       </a>
       <div className="mt-2">
         <h3 className="text-gray-400 title-font mb-1 text-lg">{nft.project}</h3>
-        <h2 className="text-gray-400 title-font text-lg font-medium">
+        <p className="text-gray-400 title-font font-medium twoLines">
           {nft.description}
-        </h2>
+        </p>
         <p className="text-gray-400 title-font text-lg font-medium mb-2">
-          {nft.status}
+          status: {nft.status}
         </p>
         {/* // Boton para reclamar el NFT */}
         <Link
