@@ -5,7 +5,8 @@ import dummyData from "@/jsons/dummyNFTs.json";
 import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 
-import { mintNFT } from "@lib/claimnft";
+import { mintNFT } from "@/lib/claimnft";
+import { Toaster } from "react-hot-toast";
 
 export default function Example() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Example() {
 
   return (
     <>
+    <Toaster position="bottom-center" reverseOrder={false} />
       <NavBar />
       {loading ? (
         <Loading />
@@ -96,8 +98,8 @@ export default function Example() {
                       }}
                     />
                   </div>
-
-                  <div className="mt-8 border-t border-gray-200 pt-8">
+{/* Aqui van los benefits */}
+                  {/* <div className="mt-8 border-t border-gray-200 pt-8">
                     <h2 className="text-sm font-medium text-gray-900">
                       Benefits:
                     </h2>
@@ -107,15 +109,11 @@ export default function Example() {
                       {(selectedNFT?.benefits.length > 1) && selectedNFT?.benefits?.map((item, index) => (
                           <li key={index}>{item}</li>
                         ))}
-                      {(selectedNFT?.benefits?.length === 1) && <li>{selectedNFT?.benefits[0]}</li>
+                      {(selectedNFT?.benefits?.length === 1) && <li>{selectedNFT?.benefits}</li>
                       }
-
-                        {/* {selectedNFT?.benefits?.map((item, index) => (
-                          <li key={index}>{item}</li>
-                        ))} */}
                       </ul>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
