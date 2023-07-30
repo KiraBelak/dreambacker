@@ -17,7 +17,8 @@ export default function Example() {
     console.log("id", id);
     if (!id) return;
     // TODO: Call the API endpoint to get the NFT data instead of dummyData
-    const nft = dummyData.find((nft) => nft.id === parseInt(id));
+    const nft = dummyData.find((nft) => nft.id === id);
+    console.log("nft", nft);
     setLoading(false);
     if (!nft) {
       setNotFound(true);
@@ -102,9 +103,15 @@ export default function Example() {
 
                     <div className="prose prose-sm mt-4 text-gray-500">
                       <ul role="list">
-                        {selectedNFT?.benefits?.map((item, index) => (
+                      {(selectedNFT?.benefits.length > 1) && selectedNFT?.benefits?.map((item, index) => (
                           <li key={index}>{item}</li>
                         ))}
+                      {(selectedNFT?.benefits?.length === 1) && <li>{selectedNFT?.benefits[0]}</li>
+                      }
+
+                        {/* {selectedNFT?.benefits?.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))} */}
                       </ul>
                     </div>
                   </div>

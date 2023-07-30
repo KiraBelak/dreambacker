@@ -108,5 +108,27 @@
     "owner": "0x987654321",
     "status": "Claimed",
     "benefits": ["Benefit 1", "Benefit 2", "Benefit 3"]
+  },{
+    "_id": {
+      "$oid": "64c5def268d77be2799f1e5f"
+    },
+    "id": "3cab2d50-ce02-42ee-b3c5-8fe6612fadde",
+    "name": "CommuniTax",
+    "description": "Potatoes and gravy",
+    "image": "https://ipfs-2.thirdwebcdn.com/ipfs/QmPYi2eeAtyceXEmN1y277o5QyUXGiacPD6qkwZ94w59CZ",
+    "project": "CommuniTax",
+    "price": "0.001",
+    "owner": "2YUKnUiWo65hxd5t7gKCiwuomzSJ9ksb2fg2NUHFCKE2",
+    "status": "Pending",
+    "benefits": {
+      "bronze": "POTA",
+      "price": 0.001,
+      "perks": [
+        "Bronce jelly time"
+      ]
+    },
+    "date": {
+      "$date": "2023-07-30T03:54:26.327Z"
+    }
   }
 ]

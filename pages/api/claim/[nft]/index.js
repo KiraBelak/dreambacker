@@ -23,16 +23,20 @@ export default async function handler(req, res) {
                 // console.log(body);
                 // console.log(query);
                 const date = new Date();
-                const {wallet} = query;
-                const newNft = { 
-                    owner: wallet,
-                    name: body.name,
-                    description: body.description,
-                    image: body.image,
-                    created_at: date,
-                    updated_at: date,
+                console.log("this is body", body)
+                const newNft ={
+                    "id": body.id,
+                    "name": body.name,
+                    "description": body.description,
+                    "image": body.image,
+                    "project":body.name,
+                    "price": body.price,
+                    "owner": body.owner,
+                    "status": body.status,
+                    "benefits": body.benefits,
+                    "date":date
                 }
-    
+                
                 const result = await nfts.insertOne(newNft);
                 res.status(201).json({message:"NFT created", nft: result.ops});
             }
