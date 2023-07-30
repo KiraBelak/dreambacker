@@ -155,14 +155,14 @@ export default function Example() {
 
       setExplorerLink(solanaExplorerLink);
 
-      const ret = await registerNFT();
-      //  console.log(ret)
+      const res = await registerNFT();
+
       setTimeout(() => {
         toast.dismiss();
         toast.success("Transaction confirmed.");
-        if (ret === true) {
+        if (res.nft_id) {
           toast.success("your nft is waiting for you");
-          router.push("/user/claim");
+          router.push(`/user/claim/${res.nft_id}`);
         }
       }, 1000);
 
@@ -232,7 +232,7 @@ export default function Example() {
       const nft = await axios.post("/api/claim", bodyParams);
       // console.log("nft", nft)
       if ((nft.status = 201)) {
-        return true;
+        return nft.data;
       }
     } catch (error) {
       console.log(error);
