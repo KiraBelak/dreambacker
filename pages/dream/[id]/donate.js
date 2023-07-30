@@ -17,6 +17,7 @@ const includedFeatures = [
 ];
 
 const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
+// console.log("SOLANA_NETWORK", SOLANA_NETWORK);
 
 export default function Example() {
   const { connection } = useConnection();
@@ -70,11 +71,12 @@ export default function Example() {
 
   const getBalance = async () => {
     try {
-      // const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
+      const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
       const balance = await connection.getBalance(publicKey);
       // console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
-      // console.log("balance new", balancenew)
+      console.log("balance new", balancenew)
+      
 
       setBalance(balancenew);
     } catch (err) {
@@ -82,6 +84,8 @@ export default function Example() {
       toast.error("Error retrieving balance");
     }
   };
+
+  console.log("balance", balance);
 
   const onClick = async () => {
     setLoading(true);
