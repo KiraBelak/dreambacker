@@ -71,7 +71,7 @@ export default function Example() {
 
   const getBalance = async () => {
     try {
-      const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
+      // const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
       const balance = await connection.getBalance(publicKey);
       // console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
@@ -84,8 +84,6 @@ export default function Example() {
       toast.error("Error retrieving balance");
     }
   };
-
-  console.log("balance", balance);
 
   const onClick = async () => {
     setLoading(true);
