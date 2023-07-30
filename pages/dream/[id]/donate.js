@@ -6,7 +6,7 @@ import { toast, Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import NavBar from "@/components/NavBar";
 import { SystemProgram, Transaction, LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 const includedFeatures = [
@@ -16,20 +16,20 @@ const includedFeatures = [
   "Official member t-shirt",
 ];
 
-const SOLANA_NETWORK = "devnet";
+const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
 
 export default function Example() {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
-
+  
   const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
   const [statusText, setStatusText] = useState("");
-  const shyft_api_key = "q4OzU_8-cc89oq-R";
-  const network = process.env.CHAIN_NETWORK ?? "devnet";
+  
+  const network = SOLANA_NETWORK
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -155,17 +155,16 @@ export default function Example() {
 
       setExplorerLink(solanaExplorerLink);
 
-     const ret= await registerNFT();
-    //  console.log(ret)
+      const ret = await registerNFT();
+      //  console.log(ret)
       setTimeout(() => {
         toast.dismiss();
         toast.success("Transaction confirmed.");
-        if (ret===true){
-          toast.success("your nft is waiting for you")
-          router.push("/user/claim")
+        if (ret === true) {
+          toast.success("your nft is waiting for you");
+          router.push("/user/claim");
         }
       }, 1000);
-
 
       return;
     } catch (err) {
@@ -206,145 +205,41 @@ export default function Example() {
       // toast.success("benefits obtain " + benefitsString);
       //logic to create the NFT claim
       // "id": 1,
-    // "name": "NFT 1",
-    // "description": "NFT 1",
-    // "project": "Project 1",
-    // "image": "https://dummyimage.com/420x260",
-    // "price": 100,
-    // "owner": "0x123456789",
-    // "status": "Pending",
-    // "benefits": ["Benefit 1", "Benefit 2"]
+      // "name": "NFT 1",
+      // "description": "NFT 1",
+      // "project": "Project 1",
+      // "image": "https://dummyimage.com/420x260",
+      // "price": 100,
+      // "owner": "0x123456789",
+      // "status": "Pending",
+      // "benefits": ["Benefit 1", "Benefit 2"]
       //create id with uuidv4
 
       const bodyParams = {
-        "id": uuidv4(),
-        "name": dream.title,
-        "description": dream.description,
-        "project": dream.title,
-        "image": dream.thumbnail,
-        "price": amount,
-        "owner": publicKey,
-        "status": "Pending",
-        "benefits": benefits,
+        id: uuidv4(),
+        name: dream.title,
+        description: dream.description,
+        project: dream.title,
+        image: dream.thumbnail,
+        price: amount,
+        owner: publicKey,
+        status: "Pending",
+        benefits: benefits,
+        dream: dream,
       };
 
       // console.log("bodyParams", bodyParams);
-      const nft = await axios.post("/api/claim", bodyParams)
+      const nft = await axios.post("/api/claim", bodyParams);
       // console.log("nft", nft)
-      if (nft.status=201){
-        return true
+      if ((nft.status = 201)) {
+        return true;
       }
-
-    } catch (error) {
-      console.log(error);
-    }
-  };
-      // console.log("the dream", dream)
-  const getNFT = async () => {
-    try {
-      setStatusText("Dream obtained");
-      // Build SHYFT's bodyParams with the information provided
-
-      toast.loading("Generating NFT");
-
-      const benefits = getBenefitPerks(dream, amount);
-
-      //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
-      setStatusText("Benefits obtained " + JSON.stringify(benefits));
-      if (!benefits) {
-        setStatusText("User has not reached any benefits");
-        return;
-      }
-
-      //if benefits is null then return a 200 response with a message saying that the user has not reached any benefits
-      setStatusText("Benefits obtained " + JSON.stringify(benefits));
-      if (!benefits) {
-        setStatusText("Sorry but you are not eligible for any benefits or NFT");
-        return;
-      }
-
-      // toast.success("beneficios obtenidos");
-      const benefitsString = JSON.stringify({
-        benefits: benefits,
-        dream: dream,
-        amount: amount,
-        backed_at: new Date().toISOString(),
-      });
-
-      var myHeaders = new Headers();
-      myHeaders.append("x-api-key", shyft_api_key);
-      myHeaders.append("Content-Type", "multipart/form-data");
-
-      var formdata = new FormData();
-      formdata.append("network", network);
-      formdata.append("wallet", "7APHQNvmRUXGto4PGZWmdW72wZ1DD17MaBmhhz9vt7Sp");
-      formdata.append("name", dream.title);
-      formdata.append("symbol", "DrB");
-      formdata.append("description", dream.description);
-      formdata.append("attributes", benefitsString);
-      formdata.append("external_url", "https://shyft.to");
-      formdata.append("receiver", publicKey);
-      // formdata.append("max_supply", "0");
-      // formdata.append("royalty", "5");
-      // formdata.append("file", fileInput.files[0], "index.png");
-      // formdata.append('service_charge', '{ "receiver": "499qpPLdqgvVeGvvNjsWi27QHpC8GPkPfuL5Cn2DtZJe",  "token": "DjMA5cCK95X333t7SgkpsG5vC9wMk7u9JV4w8qipvFE8",  "amount": 0.01}');
-
-      // create a blob from dream.thumbnail which is a URL for an IPFS image
-      toast.success("Generating NFT");
-      await fetch(dream.thumbnail)
-        .then((res) => res.blob())
-        .then((blob) => {
-          formdata.append("file", blob);
-        });
-      toast.success("NFT generated");
-      // setStatusText("Generando NFT")
-      const result = await axios.post(
-        "https://api.shyft.to/sol/v1/nft/create_detach",
-        formdata,
-        {
-          headers: {
-            "x-api-key": shyft_api_key,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      toast.dismiss();
-      // console.log("result",result)
-      setStatusText("Succesfully Minted, signing NFT");
-      toast.success("Succesfully Minted, signing NFT");
-      signNFT(result.data.result.encoded_transaction);
-      // console.log('data', response.data); // displaying the response
     } catch (error) {
       // console.log(error);
-      setStatusText(JSON.stringify(error));
+      toast.error("Error creating NFT");
     }
   };
-
-  const signNFT = async (nft) => {
-    try {
-      const result = await axios.post("/api/signnft", {
-        network: network,
-        nft: nft,
-      });
-      // console.log(result);
-      toast.success("Transaction sent, NFT received 👏");
-      let collected = dream.collected + amount;
-      await axios.put(`/api/dream/${id}`, {
-        collected: collected,
-      });
-      //esperamos 3 segundos y router push a la pagina de nft
-      setTimeout(() => {
-        router.push("/user/dashboard");
-      }, 3000);
-
-      setStatusText(
-        `NFT signed succesfully https://solscan.io/tx/${result.data.result}?cluster=devnet`
-      );
-    } catch (error) {
-      toast.error("An eror occurred.");
-      // console.log(error);
-    }
-  };
+  // console.log("the dream", dream)
 
   const getBenefitPerks = (dream, amount) => {
     const { benefits } = dream;
@@ -451,10 +346,10 @@ export default function Example() {
               participation in the funded projects.
             </p>
             <p className=" mt-2 text-lg leading-8 text-gray-600">
-              We use Solana {`&#39`} s blockchain technology to ensure the security and
-              transparency of your donations. Transactions with Solana are fast
-              and secure, providing you with peace of mind when making your
-              contribution.
+              We use Solana {`&#39`} s blockchain technology to ensure the
+              security and transparency of your donations. Transactions with
+              Solana are fast and secure, providing you with peace of mind when
+              making your contribution.
             </p>
           </div>
         </div>

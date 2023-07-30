@@ -13,8 +13,8 @@ export default async function handler(req, res) {
       // Retrieve the nft with their wallet address
       {
         const { wallet } = query;
-        const nft = await nfts.findOne({ owner: wallet });
-        res.status(200).json({ nft: nft });
+        const nftsList = await nfts.find({ owner: wallet }).toArray();
+        res.status(200).json({ nfts: nftsList });
       }
       break;
     case "POST":
@@ -34,31 +34,12 @@ export default async function handler(req, res) {
           owner: body.owner,
           status: body.status,
           benefits: body.benefits,
+          dream: body.dream,
           date: date,
         };
 
         const result = await nfts.insertOne(newNft);
         res.status(201).json({ message: "NFT created", nft: result.ops });
-      }
-
-      break;
-    case "PUT":
-      // Update the user's nft
-      {
-        const { wallet } = query;
-        const updatedNft = {
-          name: body.name,
-          description: body.description,
-          image: body.image,
-          updated_at: new Date(),
-        };
-
-        const result = await nfts.updateOne(
-          { owner: wallet },
-          { $set: updatedNft }
-        );
-
-        res.status(201).json({ message: "NFT updated", nft: updatedNft });
       }
 
       break;
