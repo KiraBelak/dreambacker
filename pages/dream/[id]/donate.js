@@ -16,20 +16,20 @@ const includedFeatures = [
   "Official member t-shirt",
 ];
 
-const SOLANA_NETWORK = "devnet";
+const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
 
 export default function Example() {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
-
+  
   const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
   const [statusText, setStatusText] = useState("");
-
-  const network = process.env.CHAIN_NETWORK ?? "devnet";
+  
+  const network = SOLANA_NETWORK
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -235,7 +235,8 @@ export default function Example() {
         return true;
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error("Error creating NFT");
     }
   };
   // console.log("the dream", dream)

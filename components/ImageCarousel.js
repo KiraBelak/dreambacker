@@ -23,7 +23,7 @@ const ImageCarousel = () => {
     // console.log("mapeando dreams a dreamImages");
     const dreamImages = dreams.map((dream) => dream.thumbnail);
     const dreamTitles = dreams.map((dream) => dream.title);
-    console.log("dreamImages", dreamImages);
+    // console.log("dreamImages", dreamImages);
     setImages(dreamImages);
     setTitles(dreamTitles);
   };

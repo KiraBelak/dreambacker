@@ -1,11 +1,9 @@
 import NavBar from "@/components/NavBar";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import dummyData from "@/jsons/dummyNFTs.json";
 import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 import axios from "axios";
-
 import { getNFT } from "@/lib/claimnft";
 import { Toaster, toast } from "react-hot-toast";
 import { useWallet, useConnection } from "@solana/wallet-adapter-react";
@@ -22,7 +20,7 @@ export default function Example() {
   const { connection } = useConnection();
 
   useEffect(() => {
-    console.log("id", id);
+    // console.log("id", id);
     if (!id) return;
     // TODO: Call the API endpoint to get the NFT data instead of dummyData
     // const nft = dummyData.find((nft) => nft.id === id);
