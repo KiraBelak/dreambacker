@@ -5,8 +5,8 @@ import dummyData from "@/jsons/dummyNFTs.json";
 import { useRouter } from "next/router";
 import Loading from "@/components/common/Loading";
 
-import { mintNFT } from "@/lib/claimnft";
-import { Toaster } from "react-hot-toast";
+import { mintNFT, getNFT } from "@/lib/claimnft";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Example() {
   const router = useRouter();
@@ -14,6 +14,7 @@ export default function Example() {
   const { id } = router.query;
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [statusText, setStatusText] = useState("");
 
   useEffect(() => {
     console.log("id", id);
@@ -28,6 +29,16 @@ export default function Example() {
     }
     setSelectedNFT(nft);
   }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("selectedNFT", selectedNFT);
+    getNFT(selectedNFT, setStatusText);
+    
+  };
+
+
+
 
   return (
     <>
@@ -79,12 +90,14 @@ export default function Example() {
 
                 <div className="mt-8 lg:col-span-5">
                   <button
-                    type="submit"
+                    onClick={handleSubmit}
                     className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     Redeem
                   </button>
-
+                  <p className="mt-4 text-center text-sm text-gray-500">
+                    {statusText}
+                  </p>
                   {/* Product details */}
                   <div className="mt-10">
                     <h2 className="text-sm font-medium text-gray-900">
