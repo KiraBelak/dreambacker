@@ -93,6 +93,7 @@ export default function Example() {
                       className={"lg:col-span-2 lg:row-span-2"}
                       width={4200}
                       height={2600}
+                      unoptimized={true}
                     />
                   </div>
                 </div>
