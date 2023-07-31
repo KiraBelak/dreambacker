@@ -24,6 +24,11 @@ module.exports = {
       },
       {
         protocol: "https",
+        hostname: "ipfs.cf-ipfs.com",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "dummyimage.com",
         port: "",
       },
