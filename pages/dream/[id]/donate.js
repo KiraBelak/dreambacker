@@ -69,6 +69,17 @@ export default function Example() {
     if (id != null && id != undefined) getDream();
   }, [id]);
 
+  const updateDreamGoal = async (amount) => {
+    try {
+      const response = await axios.put(
+        `/api/dream/${id}/updategoal?amount=${amount}`
+      );
+      console.log("Goal Updated =>", response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const getBalance = async () => {
     try {
       // const connection = new Connection(clusterApiUrl(SOLANA_NETWORK), "confirmed");
@@ -157,7 +168,7 @@ export default function Example() {
       setExplorerLink(solanaExplorerLink);
 
       const res = await registerNFT();
-
+      const updateGoal = await updateDreamGoal(amount);
       setTimeout(() => {
         toast.dismiss();
         toast.success("Transaction confirmed.");

@@ -27,6 +27,12 @@ module.exports = {
         hostname: "dummyimage.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname:
+          "bafybeifqunwldzb3qnchjyzytjp3eyvny5p3b3r5i7syn7cyli6ihe3q4u.ipfs.cf-ipfs.com",
+        port: "",
+      },
     ],
   },
   i18n: {

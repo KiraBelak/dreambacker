@@ -51,17 +51,18 @@ export default function DreamPage() {
       const response = await axios.get(`/api/dream/${id}`);
       setDream(response.data.dream);
     } catch (error) {
-      // console.log(error);
+      console.erro(error);
       toast.error("Error al cargar el proyecto");
     }
   };
 
   const getIsBacker = async () => {
+    if (dream == null) return;
     try {
       const response = await axios.get(
-        `/api/dream/${id}/isbacker?publicKey=${publicKey}`
+        `/api/dream/${dream._id}/isbacker?publicKey=${publicKey}`
       );
-      // console.log("is_backer", response.data.is_backer);
+      console.log("is_backer", response.data.is_backer);
       setIsBacker(response.data.is_backer);
     } catch (error) {
       console.log(error);
@@ -77,9 +78,8 @@ export default function DreamPage() {
         );
         setIsOwner(isOwner);
       }
-      // console.log(response);
     } catch (error) {
-      // console.log(error);
+      console.error(error);
       toast.error("Error al cargar el proyecto");
     }
   };
@@ -88,9 +88,17 @@ export default function DreamPage() {
     if (id != null && id !== undefined) {
       getDream();
     }
-    getOwner();
-    getIsBacker();
   }, [id]);
+
+  useEffect(() => {
+    if (
+      (dream != null || dream !== undefined) &&
+      (publicKey != null || publicKey !== undefined)
+    ) {
+      getOwner();
+      getIsBacker();
+    }
+  }, [dream, publicKey]);
 
   if (!dream) {
     return <div>Loading...</div>;
@@ -202,7 +210,7 @@ export default function DreamPage() {
 
                   <div className="mt-10 bg-white pt-2 px-2">
                     <h3 className="text-lg px-2 text-center w-36 font-semibold text-white bg-black">
-                    Benefits
+                      Benefits
                     </h3>
                     {dream.benefits.map((benefit, benefitIdx) => (
                       <div key={benefitIdx} className="mt-6">
