@@ -22,15 +22,15 @@ const SOLANA_NETWORK = process.env.NEXT_PUBLIC_CHAIN_NETWORK;
 export default function Example() {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
-  
+
   const [dream, setDream] = useState(null);
   const [receiver, setReceiver] = useState(null);
   const [amount, setAmount] = useState(0);
   const [balance, setBalance] = useState(0);
   const [explorerLink, setExplorerLink] = useState(null);
   const [statusText, setStatusText] = useState("");
-  
-  const network = SOLANA_NETWORK
+
+  const network = SOLANA_NETWORK;
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -75,8 +75,7 @@ export default function Example() {
       const balance = await connection.getBalance(publicKey);
       // console.log("balance", balance)
       const balancenew = balance / LAMPORTS_PER_SOL;
-      console.log("balance new", balancenew)
-      
+      console.log("balance new", balancenew);
 
       setBalance(balancenew);
     } catch (err) {
